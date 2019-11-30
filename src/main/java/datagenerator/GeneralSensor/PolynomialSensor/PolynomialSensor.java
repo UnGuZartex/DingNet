@@ -1,43 +1,34 @@
-package datagenerator.PolynomialSensor;
+package datagenerator.GeneralSensor.PolynomialSensor;
 
-import datagenerator.SensorDataGenerator;
+import datagenerator.GeneralSensor.Sensor;
 import datagenerator.iaqsensor.TimeUnit;
 import util.Pair;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class PolynomialSensor implements SensorDataGenerator {
-    private List<Double> polynomialCoefficients;
-    private Double NoiseFactor;
+public class PolynomialSensor extends Sensor {
+    private List<Double> polynomialCoefficients  = new ArrayList<Double>();
+    private Double NoiseFactor = 0.0;
     private TimeUnit timeUnit;
+    private Random random = new Random();
 
 
     public PolynomialSensor() {
-        polynomialCoefficients.add(0.0);
+        polynomialCoefficients.add(random.nextDouble());
+        timeUnit = TimeUnit.SECONDS;
     }
 
     @Override
     public byte[] generateData(int x, int y, LocalTime time) {
 
         double dataAtTime = evaluatePolynomial(time);
-        return new byte[]{(byte) dataAtTime};
+        System.out.println("data: " + dataAtTime);
+        return new byte[]{(byte)dataAtTime};
     }
 
-    @Override
-    public byte[] generateData(Pair<Integer, Integer> pos, LocalTime time) {
-        return generateData(pos.getLeft(), pos.getRight(), time);
-    }
-
-    @Override
-    public double nonStaticDataGeneration(double x, double y) {
-        return 0;
-    }
-
-    @Override
-    public void reset() {
-
-    }
 
     private double evaluatePolynomial(LocalTime time) {
         double timeToEvaluate = timeUnit.convertFromNano(time.toNanoOfDay());

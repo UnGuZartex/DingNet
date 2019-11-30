@@ -1,7 +1,7 @@
 package iot.networkentity;
 
 import datagenerator.*;
-import datagenerator.PolynomialSensor.PolynomialSensor;
+import datagenerator.GeneralSensor.PolynomialSensor.PolynomialSensor;
 import datagenerator.iaqsensor.IAQDataGeneratorSingleton;
 import util.Pair;
 
