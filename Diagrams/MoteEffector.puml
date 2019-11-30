@@ -1,0 +1,9 @@
+@startuml
+MoteEffector -> MQTTServer : doXOnMote(mote)
+MQTTServer -> Gateway : sendMACCommand()
+Gateway -> Mote : send(messageWithMacCommands)
+Mote -> Mote : executes command
+Mote --> Gateway : send(messageWithMacCommandResponse)
+Gateway --> MQTTServer : confirmation()
+
+@enduml

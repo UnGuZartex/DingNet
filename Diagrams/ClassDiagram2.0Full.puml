@@ -1,0 +1,468 @@
+@startuml
+Package DingNetDomain{
+Package IotDomain{
+Class Environment{
+- motes : LinkedList<Mote>
+- gateways : LinkedList<Gateway>
+- MQTTServer : MQTTServer
+- regionMap : RegionMap
+- wayPoints : LinkedHashSet<GeoPosition>
++ <<constructor>> Environment(Region region, GeoPosition mapOrigin,
+ LinkedHashSet<GeoPosition> wayPoints)
+
++ addWayPoint(GeoPosition wayPoint) : void
+
++ isValidMap(RegionMap regionMap) : Boolean
+
+
+}
+
+Environment "1" <--> "0...n"NetworkEntity : has
+
+Environment -> "1" RegionMap : contains
+
+Class RegionMap{
+    - regions : Region[][]
+    - final mapOrigin : GeoPosition
+    - Size : Integer
+    - final maxXpos : Integer
+    - final maxYpos : Integer
+
+    + isValidXpos(Integer xpos) : Boolean
+
+    + isValidYpos(Integer ypos) : Boolean
+
+    + getMapCenter() : GeoPosition
+
+    + toLongitude(Integer xPos) : Double
+    + toLatitude(Integer yPos) :  Double
+
+    + toMapXCoordinate(GeoPosition geoPosition) : Integer
+    + toMapYCoordinate(GeoPosition geoPosition) : Integer
+
+    + {static} distance(double lat1, double lon1, double lat2, double lon2) : double
+}
+
+RegionMap -> "0...n" Region : contains
+
+Class Region{
+    - characteristic : Characteristic
+}
+
+
+
+Abstract Class NetworkEntity{
+- isTransmitting : Boolean
+- powerSettingHistory : LinkedList<List<Integer>>
+- spreadingFactorHistory : LinkedList<List<Integer>>
+- final EUI : Long
+- xPos : Integer
+- yPos :  Integer
+- environment : Environment
+- transmissionPower : Integer
+- final transmissionPowerThreshold : Double
+- receivedTransmissions : LinkedList<LinkedHashMap<LoraTransmission,Boolean>>
+- sentTransmissions :  LinkedList<LinkedList<LoraTransmission>>
+- enabled : Boolean
+- SF : Integer
++ <<constructor>> NetworkEntity(Long EUI, Integer xPos, Integer yPos, Environment environment,
+Integer transmissionPower, Integer SF, Double transmissionPowerThreshold)
+
++ getPowerSettingHistory(Integer run) : List<Integer>
++ getSpreadingFactorHistory(Integer run) : List<Integer>
+
++ getSentTransmissions(Integer run) : LinkedList<LoraTransmission>
++ getAllReceivedTransmissions(Integer run) : LinkedHashMap<LoraTransmission,Boolean>
++ getReceivedTransmissions(Integer run) : LinkedList<LoraTransmission>
+
++ {static} isValidTransmissionPower(Integer transmissionPower) : boolean
++ {static} isValidSF(Integer SF) : Boolean
+
++ receiveTransmission(LoraTransmission transmission) : void
++ handleMacCommands(LoraWanPacket packet) : void
+# abstract OnReceive(Byte[] packet, Long senderEUI, Long designatedReceiver) : void
+# loraSend(LoraWanPacket message) : void
++ collision(LoraTransmission a, LoraTransmission b) : Boolean
++ packetStrengthHighEnough(LoraTransmission packet) : Boolean
++ getUsedEnergy(Integer run) : LinkedList<Double>
+
+}
+
+NetworkEntity <|-- Mote
+
+
+Class Mote{
+- moteSensors : LinkedList<MoteSensor>
+- connection : LinkedList<GeoPosition>
+- energyLevel : Integer
+- samplingRate : Integer
+- numberOfRequests : Integer
+- movementSpeed : Double
+- startTime : LocalTime
+- genericFeedBackLoop: GenericFeedBackLoop
+
++ <<constructor>> Mote(Long DevEUI, Integer xPos, Integer yPos, Environment environment, Integer transmissionPower,
+  {method}Integer SF, LinkedList<MoteSensor> moteSensors, Integer energyLevel, LinkedList<GeoPosition> connection,
+  Integer samplingRate, Double movementSpeed, Integer startOffset)
+
++ <<constructor>> Mote(Long DevEUI, Integer xPos, Integer yPos, Environment environment, Integer transmissionPower,
+ {method} Integer SF, LinkedList<MoteSensor> moteSensors, Integer energyLevel, LinkedList<GeoPosition> connection,
+ Integer samplingRate, Double movementSpeed)
+
+# OnReceive(Byte[] packet, Long senderEUI, Long designatedReceiver) : void
+
++ OverTheAirActivation() : void
+
++ sendToGateWay(Byte[] data, HashMap<MacCommand,Byte[]> macCommands) : void
+
++ shouldSend() : boolean
+
++ moveMote( GeoPosition position) : Boolean
+}
+
+NetworkEntity <|-- Gateway
+
+Class Gateway{
+- subscribedMoteProbes : LinkedList<MoteProbe>
++ <<constructor>> public Gateway(Long gatewayEUI, Integer xPos, Integer yPos, Environment environment,
+  Integer transmissionPower, Integer SF)
+
+# OnReceive(Byte[] packet, Long senderEUI, Long designatedReceiver) : void
+
+}
+
+Region -->"1" Characteristic
+
+Enum Characteristic{
+Forest
+City
+Plain
+__
+- final pathLossExponent : double
+- final referenceDistance : double
+- final shadowFading : double
+- final color : Color
+__
++ <<constructor>> Characteristic(double pathLossExponent, double referenceDistance, double shadowFading, Color color)
+}
+
+Environment --> "1" InputProfile : has
+
+Environment "1" --> "1" MQTTServer : has
+
+
+
+Gateway "0...n" <-> "1" MQTTServer : communicates with
+
+Class InputProfile{
+- name : String
+- qualityOfServiceProfile : QualityOfService
+- numberOfRuns : Integer
+- probabilitiesForMotes : HashMap<Integer,Double>
+- probabilitiesForGateways : HashMap<Integer,Double>
+- regionProbabilities : HashMap<Integer,Double>
+- xmlSource : Document
+
++ <<constructor>> InputProfile(String name, QualityOfService qualityOfServiceProfile, Integer numberOfRuns,
+ {method}HashMap<Integer, Double> probabilitiesForMotes, HashMap<Integer, Double> probabilitiesForGateways,
+ HashMap<Integer, Double> regionProbabilities, Element xmlSource, MainGUI gui)
+
+- updateFile() : void
+}
+
+Simulation "1" <--> "1" Environment : uses
+
+Class Simulation{
+- clock : Clock
+- environment : Environment
+
++<<constructor>> Simulation(Environment environment)
+}
+
+Simulation "1" --() "1" SimulationPresenter : Communicates with
+
+Simulator "1" --() "1" DataPresenter : Communicates with
+
+Environment "1" --() "1" EnvironmentPresenter : Communicates with
+
+Simulator --> "0...n" Simulation : manages
+Simulation --> "1" Clock : uses
+Class Simulator{
+- activeSimulation : Simulation
+- runSimulations : List<Simulation>
++<<constructor>> Simulator()
+
++ singleRun(Integer speed) : void
++ run() : void
+
++ reset() : void
++ addRun() : void
+}
+
+Class Clock{
+- clock : LocalTime
+- events : HashList<LocalTime,Consumer<Boolean>>
+
++ getTime() :  LocalTime
++ tick(long milliSeconds) : void
++ resetClock() : void
++ planEvent(LocalTime time,Consumer<Boolean> consumer)
+
+}
+
+Class LoraWanPacket{
+- final payload : Byte[]
+- final header : Boolean
+- final lowDataRateOptimization : Boolean
+- final codingRate : double
+- final amountOfPreambleSymbols : Integer
+- final length : Integer
+- final macCommands : LinkedList<MacCommand>
+- final designatedReceiverEUI : Long
+- final senderEUI : Long
++ <<constructor>> LoraWanPacket(Long senderEUI, Long designatedReceiverEUI, Byte[] payload, Boolean header,
+ Boolean lowDataRateOptimization, Integer amountOfPreambleSymbols, double codingRate, LinkedList<MacCommand> macCommands)
++ <<constructor>> public LoraWanPacket(Long senderEUI, Long designatedReceiverEUI, Byte[] payload,
+ LinkedList<MacCommand> macCommands)
+}
+
+LoraTransmission --> "2" NetworkEntity : has
+LoraTransmission --> "1" Environment : moves in
+LoraTransmission --> "1" LoraWanPacket : contains
+
+
+Class LoraTransmission{
+- final sender NetworkEntity
+- final receiver : NetworkEntity
+- transmissionPower : Double
+- final bandwidth : Integer
+- final spreadingFactor : Integer
+- xPos : Integer
+- yPos : Integer
+- final environment : Environment
+- final content : LoraWanPacket
+- final random : Random
+- final departureTime : LocalTime
+- final timeOnAir : Double
+- usedPath : LinkedList<Pair<Integer,Integer>>
+
++ <<constructor>> LoraTransmission(NetworkEntity sender, NetworkEntity receiver, Integer transmissionPower,
+  Integer bandwidth, Integer spreadingFactor, LoraWanPacket content)
+- {static} isValidTransmissionPower(double transmissionPower) : boolean
+- {static} isValidBandwidth(Integer bandwidth) : boolean
+- {static} isValidSpreadingFactor(Integer spreadingFactor) : boolean
++ depart() : void
+- moveTo(Integer xPos, Integer yPos) : void
+- static isValidContent(LoraWanPacket content) : Boolean
+- addToUsedPath(Pair<Integer,Integer> pair) : void
+}
+
+Class MQTTServer{
+- buffer : HashMap<Long,LinkedList<BufferPair<LinkedList<Byte>,Long>>>
+- subscriptions : HashMap<Long, HashMap<Long,Integer>>
++ <<constructor>> MQTTServer()
++ publish(LinkedList<Byte> message, Long deviceEUI, Long applicationEUI, Long gatewayEUI) : void
++ subscribe(Long applicationEUI, Long deviceEUI) : void
++ isSubscribed(Long applicationEUI, Long deviceEUI) : Boolean
++ hasNext(Long applicationEUI, Long deviceEUI) : Boolean
++ getNext(Long applicationEUI, Long deviceEUI) : LinkedList<Byte>
++ getData(Long applicationEUI, Long deviceEUI) : LinkedList<LinkedList<Byte>>
+}
+
+Package Instrumentation{
+
+MQTTServer "1" <--> "0...n" MoteProbe : uses
+MQTTServer "1" <--> "0...n" MoteEffector : uses
+
+Class MoteEffector{
++ <<Constructor>> MoteEffector()
++ setPower(Mote mote, Integer power) : void
++ setSpreadingFactor(Mote mote, Integer spreadingFactor) : void
++ setSamplingRate(Mote mote, Integer samplingRate) : void
++ setMovementSpeed(Mote mote, Double movementSpeed) : void
++ setEnergyLevel(Mote mote, Integer energyLevel) : void
+}
+
+Class MoteProbe{
+- genericFeedbackLoop : GenericFeedbackLoop
++ <<Constructor>> MoteProbe()
++ getHighestReceivedSignal(Mote mote) : Double
++ getSpreadingFactor(NetworkEntity mote) : Integer
++ getShortestDistanceToGateway(Mote mote) : Double
++ getPowerSetting(NetworkEntity mote) : Integer
++ trigger(Gateway gateway, Long devEUI) : void
+}
+
+}
+
+}
+
+Package SelfAdaptation{
+Package AdaptationGoals{
+
+QualityOfService -> "0..n" AdaptationGoal : has
+Class QualityOfService{
++ <<constructor>> QualityOfService(List<AdaptationGoal> adaptationGoals)
+- adaptationGoals : List<AdaptationGoal>
+}
+
+Abstract Class AdaptationGoal
+IntervalAdaptationGoal --|> AdaptationGoal
+ThresholdAdaptationGoal --|> AdaptationGoal
+Abstract Class IntervalAdaptationGoal{
+- final lowerBoundary : Double
+- final upperBoundary : Double
+
++<<Constructor>> IntervalAdaptationGoal(Double lowerBoundary, Double upperBoundary)
+}
+Abstract Class ThresholdAdaptationGoal{
+- final threshold : Double
++<<Constructor>> ThresholdAdaptationGoal(Double threshold)
+}
+}
+Package FeedbackLoop{
+
+Knowledge -> FeedbackLoopGatewayBuffer : uses
+
+Class FeedbackLoopGatewayBuffer{
+- gatewayBuffer : HashMap<Mote,LinkedList<LinkedList<Pair<Gateway, LoraTransmission>>>>
++ <<Constructor>> FeedbackLoopGatewayBuffer()
++ add(Mote mote, Gateway gateway) : void
++ hasReceivedAllSignals(Mote mote) : boolean
++ getReceivedSignals(Mote mote) : LinkedList<LoraTransmission>
+}
+
+GenericFeedbackLoop "1" <-- "0,1" Simulation : uses
+
+GenericFeedbackLoop "1" --> "1" Monitor : has
+GenericFeedbackLoop "1" --> "1" Analyser : has
+GenericFeedbackLoop "1" --> "1" Planner : has
+GenericFeedbackLoop "1" --> "1" Effector : has
+GenericFeedbackLoop "1" --> "1" Knowledge : has
+Abstract Class GenericFeedbackLoop{
+- name : String
+- monitor : Monitor
+- analyser : Analyser
+- planner : Planner
+- effector : Effector
+- knowledge : Knowledge
+- active : Boolean
++ {abstract} adapt(Mote mote, Gateway dataGateway) : void
++ start() : void
++ stop() : void
++ isActive() : Boolean
++ <<Constructor>> GenericFeedbackLoop(String name)
+}
+Monitor "1" -> "1" Analyser : cooperates with
+Abstract Class Monitor{
+}
+Analyser "1" -> "1" Planner : cooperates with
+Abstract Class Analyser{
+}
+Planner "1" -> "1" Effector : cooperates with
+Abstract Class Planner{
+}
+Abstract Class Effector{
+}
+Knowledge "1" <-- "1" Monitor : uses
+Knowledge "1" <-- "1" Analyser : uses
+Knowledge "1" <-- "1" Planner : uses
+Knowledge "1" <-- "1" Effector : uses
+Abstract Class Knowledge{
+}
+
+ReliableEfficientDistanceGateway --|> GenericFeedbackLoop
+
+Effector --> MoteEffector : uses
+Monitor --> MoteProbe : uses
+
+
+Class ReliableEfficientDistanceGateway{
+- reliableDistanceGatewayBuffers : HashMap<Mote,LinkedList<Double>>
+- gatewayBuffer : FeedbackLoopGatewayBuffer
++ <<Constructor>> ReliableEfficientDistanceGateway()
++ adapt(Mote mote, Gateway dataGateway) : void
+}
+
+GenericFeedbackLoop "0...n"-"1" QualityOfService: uses
+
+ReliableEfficientSignalGateway --|> GenericFeedbackLoop
+Class ReliableEfficientSignalGateway{
++ <<Constructor>> ReliableEfficientSignalGateway(QualityOfService qualityOfService)
+- reliableMinPowerBuffers : HashMap<Mote, LinkedList<Double>>
+- gatewayBuffer : FeedbackLoopGatewayBuffer
+- qualityOfService : QualityOfService
++ getLowerBound() : Double
++ getUpperBound() : Double
++ adapt(Mote mote, Gateway dataGateway) : void
+}
+
+}
+
+
+}
+Package SensorDataGenerators{
+SensorDataGenerator <-- Mote : uses
+Interface SensorDataGenerator{
++generateData(Integer x, Integer y, LocalTime time): Byte
+}
+CarbonDioxideDataGenerator -|> SensorDataGenerator
+Class CarbonDioxideDataGenerator{
++ generateData(Integer x, Integer y, LocalTime time): Byte
+}
+
+OzoneDataGenerator --|> SensorDataGenerator
+Class OzoneDataGenerator{
++ generateData(Integer x, Integer y, LocalTime time): Byte
+}
+
+ParticulateMatterDataGenerator --|> SensorDataGenerator
+Class ParticulateMatterDataGenerator{
++ generateData(Integer x, Integer y, LocalTime time): Byte
+}
+
+SootDataGenerator --|> SensorDataGenerator
+Class SootDataGenerator{
++ generateData(Integer x, Integer y, LocalTime time): Byte
+}
+
+}
+}
+
+package Presenter{
+
+Class SimulationPresenter{
+- Class AnimationTimerTask extends TimerTask
+}
+Class EnvironmentPresenter
+Class DataPresenter
+
+Simulation "1" ()-- "1" SimulationPresenter : Communicates with
+
+Simulator "1" ()-- "1" DataPresenter : Communicates with
+
+Environment "1" ()-- "1" EnvironmentPresenter : Communicates with
+
+GUIHandler "1" ()-- "1" SimulationPresenter : Communicates with
+
+GUIHandler "1" ()-- "1" DataPresenter : Communicates with
+
+GUIHandler "1" ()-- "1" EnvironmentPresenter : Communicates with
+
+
+}
+
+package DingNetGUI{
+
+GUIHandler "1" --() "1" SimulationPresenter : Communicates with
+
+GUIHandler "1" --() "1" DataPresenter : Communicates with
+
+GUIHandler "1" --() "1" EnvironmentPresenter : Communicates with
+
+
+Class GUIHandler
+Abstract Class GUICommands
+Class GUIClasses
+}
+@enduml

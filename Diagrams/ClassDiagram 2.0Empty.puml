@@ -1,0 +1,250 @@
+@startuml
+Package DingNetDomain{
+Package IotDomain{
+Class Environment{
+}
+
+Environment "1" <--> "0...n"NetworkEntity : has
+
+Environment -> "1" RegionMap : contains
+
+Class RegionMap{
+}
+
+RegionMap -> "0...n" Region : contains
+
+Class Region{
+    - characteristic : Characteristic
+}
+
+
+
+Abstract Class NetworkEntity{
+}
+
+NetworkEntity <|-- Mote
+
+
+Class Mote{
+
+}
+
+NetworkEntity <|-- Gateway
+
+Class Gateway{
+
+}
+
+Region -->"1" Characteristic
+
+Enum Characteristic{
+Forest
+City
+Plain
+}
+
+Environment --> "1" InputProfile : has
+
+Environment "1" --> "1" MQTTServer : has
+
+
+
+Gateway "0...n" <-> "1" MQTTServer : communicates with
+
+Class InputProfile{
+
+}
+
+Simulation "1" <--> "1" Environment : uses
+
+Class Simulation{
+}
+
+Simulation "1" --() "1" SimulationPresenter : Communicates with
+
+Simulator "1" --() "1" DataPresenter : Communicates with
+
+Environment "1" --() "1" EnvironmentPresenter : Communicates with
+
+Simulator --> "0...n" Simulation : manages
+Simulation --> "1" Clock : uses
+Class Simulator{
+
+}
+
+Class Clock{
+
+}
+
+Class LoraWanPacket{
+
+}
+
+LoraTransmission --> "2" NetworkEntity : has
+LoraTransmission --> "1" Environment : moves in
+LoraTransmission --> "1" LoraWanPacket : contains
+
+
+Class LoraTransmission{
+
+}
+
+Class MQTTServer{
+
+}
+
+Package Instrumentation{
+
+MQTTServer "1" <--> "0...n" MoteProbe : uses
+MQTTServer "1" <--> "0...n" MoteEffector : uses
+
+Class MoteEffector{
+
+}
+
+Class MoteProbe{
+
+}
+
+}
+
+}
+
+Package SelfAdaptation{
+Package AdaptationGoals{
+
+QualityOfService -> "0..n" AdaptationGoal : has
+Class QualityOfService{
+
+}
+
+Abstract Class AdaptationGoal
+IntervalAdaptationGoal --|> AdaptationGoal
+ThresholdAdaptationGoal --|> AdaptationGoal
+Abstract Class IntervalAdaptationGoal{
+
+}
+Abstract Class ThresholdAdaptationGoal{
+
+}
+}
+Package FeedbackLoop{
+
+Knowledge -> FeedbackLoopGatewayBuffer : uses
+
+Class FeedbackLoopGatewayBuffer{
+
+}
+
+GenericFeedbackLoop "1" <-- "0,1" Simulation : uses
+
+GenericFeedbackLoop "1" --> "1" Monitor : has
+GenericFeedbackLoop "1" --> "1" Analyser : has
+GenericFeedbackLoop "1" --> "1" Planner : has
+GenericFeedbackLoop "1" --> "1" Effector : has
+GenericFeedbackLoop "1" --> "1" Knowledge : has
+Abstract Class GenericFeedbackLoop{
+
+}
+Monitor "1" -> "1" Analyser : cooperates with
+Abstract Class Monitor{
+}
+Analyser "1" -> "1" Planner : cooperates with
+Abstract Class Analyser{
+}
+Planner "1" -> "1" Effector : cooperates with
+Abstract Class Planner{
+}
+Abstract Class Effector{
+}
+Knowledge "1" <-- "1" Monitor : uses
+Knowledge "1" <-- "1" Analyser : uses
+Knowledge "1" <-- "1" Planner : uses
+Knowledge "1" <-- "1" Effector : uses
+Abstract Class Knowledge{
+}
+
+ReliableEfficientDistanceGateway --|> GenericFeedbackLoop
+
+Effector --> MoteEffector : uses
+Monitor --> MoteProbe : uses
+
+
+Class ReliableEfficientDistanceGateway{
+}
+
+GenericFeedbackLoop "0...n"-"1" QualityOfService: uses
+
+ReliableEfficientSignalGateway --|> GenericFeedbackLoop
+Class ReliableEfficientSignalGateway{
+
+}
+
+}
+
+
+}
+Package SensorDataGenerators{
+SensorDataGenerator <-- Mote : uses
+Interface SensorDataGenerator{
+
+}
+CarbonDioxideDataGenerator -|> SensorDataGenerator
+Class CarbonDioxideDataGenerator{
+
+}
+
+OzoneDataGenerator --|> SensorDataGenerator
+Class OzoneDataGenerator{
+
+}
+
+ParticulateMatterDataGenerator --|> SensorDataGenerator
+Class ParticulateMatterDataGenerator{
+
+}
+
+SootDataGenerator --|> SensorDataGenerator
+Class SootDataGenerator{
+
+}
+
+}
+}
+
+package Presenter{
+
+Class SimulationPresenter{
+}
+Class EnvironmentPresenter
+Class DataPresenter
+
+Simulation "1" ()-- "1" SimulationPresenter : Communicates with
+
+Simulator "1" ()-- "1" DataPresenter : Communicates with
+
+Environment "1" ()-- "1" EnvironmentPresenter : Communicates with
+
+GUIHandler "1" ()-- "1" SimulationPresenter : Communicates with
+
+GUIHandler "1" ()-- "1" DataPresenter : Communicates with
+
+GUIHandler "1" ()-- "1" EnvironmentPresenter : Communicates with
+
+
+}
+
+package DingNetGUI{
+
+GUIHandler "1" --() "1" SimulationPresenter : Communicates with
+
+GUIHandler "1" --() "1" DataPresenter : Communicates with
+
+GUIHandler "1" --() "1" EnvironmentPresenter : Communicates with
+
+
+Class GUIHandler
+Abstract Class GUICommands
+Class GUIClasses
+}
+@enduml

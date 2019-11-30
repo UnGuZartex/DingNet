@@ -1,0 +1,18 @@
+[IAQSensor]
+row = 10
+columns = 10
+defaultLevel = "GOOD"
+timeUnit = "SECONDS"
+
+[[IAQSensor.cell]]
+    cellNumber = 62
+    level = "MODERATE"
+    fromTime = 0
+[[IAQSensor.cell]]
+    cellNumber = 63
+    level = "MODERATE"
+    fromTime = 0
+[[IAQSensor.cell]]
+    cellNumber = 63
+    level = "POOR"
+    fromTime = 120

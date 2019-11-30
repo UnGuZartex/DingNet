@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+    <map>
+        <region>
+            <origin>
+                <latitude>50.853718</latitude>
+                <longitude>4.673155</longitude>
+            </origin>
+            <size>
+                <width>2773</width>
+                <height>2773</height>
+            </size>
+        </region>
+    </map>
+    <characteristics>
+        <regionProperty numberOfZones="49"/>
+        <row>Forest-Forest-Plain-Plain-City-City-City</row>
+        <row>Forest-Forest-Plain-Plain-City-City-City</row>
+        <row>Forest-Forest-Plain-Plain-City-City-City</row>
+        <row>Forest-Forest-Plain-Plain-City-City-City</row>
+        <row>Forest-Forest-City-Plain-City-City-City</row>
+        <row>City-Forest-Plain-Plain-City-City-City</row>
+        <row>City-Forest-Plain-Plain-City-City-City</row>
+    </characteristics>
+    <motes>
+        <mote>
+            <devEUI>17900769297804672070</devEUI>
+            <location>
+                <waypoint id="1"/>
+            </location>
+            <transmissionPower>10</transmissionPower>
+            <spreadingFactor>12</spreadingFactor>
+            <energyLevel>20</energyLevel>
+            <movementSpeed>1.0</movementSpeed>
+            <startMovementOffset>1</startMovementOffset>
+            <periodSendingPacket>20</periodSendingPacket>
+            <startSendingOffset>1</startSendingOffset>
+            <sensors>
+                <sensor SensorType="CARBON_DIOXIDE"/>
+            </sensors>
+            <path>
+                <connection id="1"/>
+                <connection id="8"/>
+                <connection id="12"/>
+            </path>
+        </mote>
+    </motes>
+    <gateways>
+        <gateway>
+            <devEUI>5792344105298610975</devEUI>
+            <location>
+                <xPos>617</xPos>
+                <yPos>668</yPos>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>12</spreadingFactor>
+        </gateway>
+        <gateway>
+            <devEUI>3516439820262681922</devEUI>
+            <location>
+                <xPos>340</xPos>
+                <yPos>1119</yPos>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>12</spreadingFactor>
+        </gateway>
+        <gateway>
+            <devEUI>81363316787501275</devEUI>
+            <location>
+                <xPos>344</xPos>
+                <yPos>1502</yPos>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>12</spreadingFactor>
+        </gateway>
+        <gateway>
+            <devEUI>4158607583867835776</devEUI>
+            <location>
+                <xPos>227</xPos>
+                <yPos>328</yPos>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>12</spreadingFactor>
+        </gateway>
+        <gateway>
+            <devEUI>16017550582712713394</devEUI>
+            <location>
+                <xPos>2168</xPos>
+                <yPos>1937</yPos>
+            </location>
+            <transmissionPower>0</transmissionPower>
+            <spreadingFactor>12</spreadingFactor>
+        </gateway>
+    </gateways>
+    <wayPoints>
+        <wayPoint id="1">50.85602037408037,4.6758475277166465</wayPoint>
+        <wayPoint id="2">50.86003154142352,4.683355264911097</wayPoint>
+        <wayPoint id="3">50.862639699561434,4.680263843719599</wayPoint>
+        <wayPoint id="4">50.8636649755191,4.680605752108007</wayPoint>
+        <wayPoint id="5">50.865778482975685,4.681033137515625</wayPoint>
+        <wayPoint id="6">50.86794595232479,4.680092889577101</wayPoint>
+        <wayPoint id="7">50.86773010475475,4.678711010182462</wayPoint>
+        <wayPoint id="8">50.86968172653381,4.676659560075795</wayPoint>
+        <wayPoint id="9">50.86131,4.685673</wayPoint>
+        <wayPoint id="10">50.861044,4.686012</wayPoint>
+        <wayPoint id="11">50.862842,4.690616</wayPoint>
+        <wayPoint id="12">50.859172,4.688349</wayPoint>
+        <wayPoint id="13">50.866325,4.694462</wayPoint>
+    </wayPoints>
+    <connections>
+        <connection dst="2" id="1" src="1"/>
+        <connection dst="3" id="2" src="2"/>
+        <connection dst="4" id="3" src="3"/>
+        <connection dst="5" id="4" src="4"/>
+        <connection dst="6" id="5" src="5"/>
+        <connection dst="7" id="6" src="6"/>
+        <connection dst="8" id="7" src="7"/>
+        <connection dst="9" id="8" src="2"/>
+        <connection dst="10" id="9" src="9"/>
+        <connection dst="11" id="10" src="10"/>
+        <connection dst="12" id="11" src="10"/>
+        <connection dst="13" id="12" src="9"/>
+    </connections>
+</configuration>

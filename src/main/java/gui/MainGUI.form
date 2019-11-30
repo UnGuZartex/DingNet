@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.MainGUI">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1843" height="1000"/>
+    </constraints>
+    <properties>
+      <minimumSize width="1500" height="1000"/>
+      <preferredSize width="1500" height="1000"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <toolbar id="5e0b1" binding="configurationToolBar">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="20"/>
+          </grid>
+        </constraints>
+        <properties>
+          <floatable value="false"/>
+          <rollover value="true"/>
+        </properties>
+        <clientProperties>
+          <JToolBar.isRollover class="java.lang.Boolean" value="true"/>
+        </clientProperties>
+        <border type="none"/>
+        <children>
+          <component id="9c029" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <text value="Configuration:"/>
+            </properties>
+          </component>
+          <component id="11990" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="55d0e" class="javax.swing.JButton" binding="openConfigurationButton">
+            <constraints/>
+            <properties>
+              <text value="Open"/>
+            </properties>
+          </component>
+          <component id="a88b1" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="7a382" class="javax.swing.JButton" binding="saveConfigurationButton">
+            <constraints/>
+            <properties>
+              <text value="Save"/>
+            </properties>
+          </component>
+          <component id="af774" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="9e69d" class="javax.swing.JButton" binding="configureButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Configure"/>
+            </properties>
+          </component>
+          <hspacer id="ab4fa">
+            <constraints/>
+          </hspacer>
+          <component id="5e7c3" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="e8ff9" class="javax.swing.JButton" binding="helpButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Help"/>
+            </properties>
+          </component>
+          <hspacer id="9b945">
+            <constraints/>
+          </hspacer>
+          <component id="48c4d" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="fb542" class="javax.swing.JButton" binding="aboutButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="About"/>
+            </properties>
+          </component>
+          <hspacer id="bd08d">
+            <constraints/>
+          </hspacer>
+        </children>
+      </toolbar>
+      <splitpane id="a237f" binding="mainWindowSplitPane">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="200"/>
+          </grid>
+        </constraints>
+        <properties>
+          <dividerLocation value="600"/>
+          <orientation value="0"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <splitpane id="75459" binding="mapAndLegendListSplitPane">
+            <constraints>
+              <splitpane position="left"/>
+            </constraints>
+            <properties>
+              <minimumSize width="1500" height="300"/>
+              <preferredSize width="1500" height="600"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="85a33" binding="legendPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <splitpane position="left"/>
+                </constraints>
+                <properties>
+                  <minimumSize width="-1" height="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <scrollpane id="46b69" binding="entitiesPane">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="250" height="-1"/>
+                        <maximum-size width="250" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <horizontalScrollBarPolicy value="31"/>
+                      <verticalScrollBarPolicy value="22"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="f1aa4" binding="entitesPanel" layout-manager="GridBagLayout">
+                        <constraints/>
+                        <properties/>
+                        <border type="none"/>
+                        <children/>
+                      </grid>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="b8001" binding="mapPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <splitpane position="right"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <toolbar id="f44a6">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="-1" height="20"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <floatable value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="5f06b" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <text value="Map"/>
+                        </properties>
+                      </component>
+                      <component id="6b6b1" class="javax.swing.JToolBar$Separator">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                      <hspacer id="bc78d">
+                        <constraints/>
+                      </hspacer>
+                      <component id="6f190" class="javax.swing.JLabel">
+                        <constraints/>
+                        <properties>
+                          <text value="Center:"/>
+                        </properties>
+                      </component>
+                      <component id="e203c" class="javax.swing.JLabel" binding="centerLabel">
+                        <constraints/>
+                        <properties>
+                          <text value=""/>
+                        </properties>
+                      </component>
+                      <hspacer id="d6d52">
+                        <constraints/>
+                      </hspacer>
+                    </children>
+                  </toolbar>
+                  <grid id="935e3" binding="map" layout-manager="BorderLayout" hgap="0" vgap="0">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="400" height="200"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <background color="-4473925"/>
+                      <foreground color="-12828863"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <vspacer id="28084">
+                    <constraints>
+                      <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                        <minimum-size width="-1" height="250"/>
+                      </grid>
+                    </constraints>
+                  </vspacer>
+                </children>
+              </grid>
+            </children>
+          </splitpane>
+          <grid id="47632" binding="runAndStatisticsPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties>
+              <minimumSize width="1500" height="35"/>
+              <preferredSize width="1500" height="400"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <splitpane id="86803" binding="statisticsSplitPane">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="200" height="200"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <dividerLocation value="450"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <grid id="32e80" binding="inputProfilePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <splitpane position="left"/>
+                    </constraints>
+                    <properties>
+                      <minimumSize width="465" height="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="10e7b" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="0" left="0" bottom="0" right="0"/>
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <grid id="986f3" binding="console" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                            <margin top="0" left="5" bottom="0" right="0"/>
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                <preferred-size width="200" height="200"/>
+                                <maximum-size width="-1" height="400"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <background color="-4473925"/>
+                              <foreground color="-12828863"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <scrollpane id="65f02">
+                                <constraints>
+                                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                    <minimum-size width="250" height="-1"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <verticalScrollBarPolicy value="20"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <grid id="463b9" binding="InputProfilePanel" layout-manager="GridBagLayout">
+                                    <constraints/>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                </children>
+                              </scrollpane>
+                            </children>
+                          </grid>
+                          <grid id="862ae" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                            <margin top="5" left="5" bottom="20" right="0"/>
+                            <constraints>
+                              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                <minimum-size width="250" height="-1"/>
+                                <maximum-size width="-1" height="150"/>
+                              </grid>
+                            </constraints>
+                            <properties/>
+                            <border type="none"/>
+                            <children>
+                              <toolbar id="9af5">
+                                <constraints>
+                                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                    <preferred-size width="-1" height="20"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <floatable value="false"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="7c152" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Adaptation Goals:"/>
+                                    </properties>
+                                  </component>
+                                </children>
+                              </toolbar>
+                              <grid id="75591" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                                <margin top="0" left="0" bottom="0" right="0"/>
+                                <constraints>
+                                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                </constraints>
+                                <properties/>
+                                <border type="none"/>
+                                <children>
+                                  <grid id="5d9df" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                                    <margin top="0" left="0" bottom="0" right="0"/>
+                                    <constraints>
+                                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                                        <minimum-size width="400" height="-1"/>
+                                      </grid>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children>
+                                      <grid id="f58d5" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                                        <margin top="2" left="3" bottom="0" right="3"/>
+                                        <constraints>
+                                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                            <maximum-size width="-1" height="36"/>
+                                          </grid>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children>
+                                          <component id="8660f" class="javax.swing.JLabel">
+                                            <constraints>
+                                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Reliable communication:"/>
+                                            </properties>
+                                          </component>
+                                          <hspacer id="b3e36">
+                                            <constraints>
+                                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                          </hspacer>
+                                          <component id="402eb" class="javax.swing.JLabel" binding="relComLabel">
+                                            <constraints>
+                                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Interval: [-48,-42]"/>
+                                            </properties>
+                                          </component>
+                                          <component id="dfae5" class="javax.swing.JButton" binding="editRelComButton">
+                                            <constraints>
+                                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Edit"/>
+                                            </properties>
+                                          </component>
+                                          <component id="57a53" class="javax.swing.JLabel">
+                                            <constraints>
+                                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="dB"/>
+                                            </properties>
+                                          </component>
+                                        </children>
+                                      </grid>
+                                      <grid id="73bb8" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                                        <margin top="2" left="3" bottom="0" right="3"/>
+                                        <constraints>
+                                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                            <preferred-size width="262" height="36"/>
+                                            <maximum-size width="-1" height="36"/>
+                                          </grid>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children>
+                                          <component id="62d24" class="javax.swing.JLabel">
+                                            <constraints>
+                                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Energy consumption:"/>
+                                            </properties>
+                                          </component>
+                                          <component id="5e272" class="javax.swing.JLabel" binding="enConLabel">
+                                            <constraints>
+                                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Threshold: 100"/>
+                                            </properties>
+                                          </component>
+                                          <component id="d15a" class="javax.swing.JButton" binding="editEnConButton">
+                                            <constraints>
+                                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Edit"/>
+                                            </properties>
+                                          </component>
+                                          <hspacer id="6c21b">
+                                            <constraints>
+                                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                          </hspacer>
+                                          <component id="4d92a" class="javax.swing.JLabel">
+                                            <constraints>
+                                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="mJ/min"/>
+                                            </properties>
+                                          </component>
+                                        </children>
+                                      </grid>
+                                      <grid id="adf65" layout-manager="GridLayoutManager" row-count="1" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                                        <margin top="2" left="3" bottom="0" right="3"/>
+                                        <constraints>
+                                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                            <preferred-size width="262" height="36"/>
+                                            <maximum-size width="-1" height="36"/>
+                                          </grid>
+                                        </constraints>
+                                        <properties/>
+                                        <border type="none"/>
+                                        <children>
+                                          <component id="6d3e9" class="javax.swing.JLabel">
+                                            <constraints>
+                                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Collision Bound: "/>
+                                            </properties>
+                                          </component>
+                                          <component id="d09b0" class="javax.swing.JLabel" binding="colBoundLabel">
+                                            <constraints>
+                                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Threshold: 10"/>
+                                            </properties>
+                                          </component>
+                                          <component id="e711d" class="javax.swing.JButton" binding="editColBoundButton">
+                                            <constraints>
+                                              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="Edit"/>
+                                            </properties>
+                                          </component>
+                                          <hspacer id="9d49b">
+                                            <constraints>
+                                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                          </hspacer>
+                                          <component id="1639d" class="javax.swing.JLabel">
+                                            <constraints>
+                                              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="%"/>
+                                            </properties>
+                                          </component>
+                                        </children>
+                                      </grid>
+                                    </children>
+                                  </grid>
+                                </children>
+                              </grid>
+                            </children>
+                          </grid>
+                          <toolbar id="b5b7f">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                <preferred-size width="-1" height="20"/>
+                              </grid>
+                            </constraints>
+                            <properties>
+                              <floatable value="false"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="cd548" class="javax.swing.JLabel">
+                                <constraints/>
+                                <properties>
+                                  <text value="Input Profile"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </toolbar>
+                        </children>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="f4529" binding="statisticsPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <splitpane position="right"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <splitpane id="a2a5a">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                            <preferred-size width="200" height="200"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <dividerLocation value="650"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <grid id="e53b7" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                            <margin top="0" left="0" bottom="0" right="0"/>
+                            <constraints>
+                              <splitpane position="left"/>
+                            </constraints>
+                            <properties/>
+                            <border type="none"/>
+                            <children>
+                              <tabbedpane id="7822c" binding="tabbedPaneGraphs">
+                                <constraints>
+                                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                    <preferred-size width="250" height="400"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <background color="-4473925"/>
+                                  <foreground color="-12828863"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <grid id="b9221" binding="receivedPowerGraph" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Received Power"/>
+                                    </constraints>
+                                    <properties>
+                                      <background color="-4473925"/>
+                                      <foreground color="-12828863"/>
+                                    </properties>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                  <grid id="d0edb" binding="powerSettingGraph" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Power Setting"/>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                  <grid id="7f48a" binding="distanceToGatewayGraph" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Distance To Gateway"/>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                  <grid id="c8d5b" binding="spreadingFactorGraph" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Spreading Factor"/>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                  <grid id="37f0c" binding="usedEnergyGraph" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Used Energy"/>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                </children>
+                              </tabbedpane>
+                              <toolbar id="45048">
+                                <constraints>
+                                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                    <preferred-size width="-1" height="20"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <floatable value="false"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="5a744" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="5dd1c" class="javax.swing.JButton" binding="moteCharacteristicsButton">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Mote"/>
+                                    </properties>
+                                  </component>
+                                  <component id="b635c" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="dd316" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Selected: "/>
+                                    </properties>
+                                  </component>
+                                  <component id="e08f6" class="javax.swing.JLabel" binding="moteCharacteristicsLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value=""/>
+                                    </properties>
+                                  </component>
+                                  <component id="a000b" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value=" "/>
+                                    </properties>
+                                  </component>
+                                  <component id="b4f17" class="javax.swing.JButton" binding="resultsButton" default-binding="true">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Results"/>
+                                    </properties>
+                                  </component>
+                                  <hspacer id="ee65">
+                                    <constraints/>
+                                  </hspacer>
+                                </children>
+                              </toolbar>
+                            </children>
+                          </grid>
+                          <grid id="37750" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                            <margin top="0" left="0" bottom="0" right="0"/>
+                            <constraints>
+                              <splitpane position="right"/>
+                            </constraints>
+                            <properties/>
+                            <border type="none"/>
+                            <children>
+                              <toolbar id="e5bce">
+                                <constraints>
+                                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                    <preferred-size width="-1" height="20"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <floatable value="false"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="757cd" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="a6c26" class="javax.swing.JButton" binding="moteApplicationButton">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Mote"/>
+                                    </properties>
+                                  </component>
+                                  <component id="41162" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="9c9d6" class="javax.swing.JButton" binding="regionButton" default-binding="true">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Region"/>
+                                    </properties>
+                                  </component>
+                                  <component id="b8cc6" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="4e7f3" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Selected: "/>
+                                    </properties>
+                                  </component>
+                                  <component id="b6e64" class="javax.swing.JLabel" binding="moteApplicationLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value=""/>
+                                    </properties>
+                                  </component>
+                                  <hspacer id="4da1d">
+                                    <constraints/>
+                                  </hspacer>
+                                </children>
+                              </toolbar>
+                              <tabbedpane id="1462c" binding="tabbedPane1" default-binding="true">
+                                <constraints>
+                                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                    <preferred-size width="200" height="200"/>
+                                  </grid>
+                                </constraints>
+                                <properties/>
+                                <border type="none"/>
+                                <children>
+                                  <grid id="31f1d" binding="particulateMatterPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Particulate matter"/>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                  <grid id="c8a07" binding="carbonDioxideField" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Carbon dioxide"/>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                  <grid id="d349a" binding="sootPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Soot"/>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                  <grid id="ff44c" binding="ozonePanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+                                    <constraints>
+                                      <tabbedpane title="Ozone"/>
+                                    </constraints>
+                                    <properties/>
+                                    <border type="none"/>
+                                    <children/>
+                                  </grid>
+                                </children>
+                              </tabbedpane>
+                            </children>
+                          </grid>
+                        </children>
+                      </splitpane>
+                    </children>
+                  </grid>
+                </children>
+              </splitpane>
+              <grid id="f02a5" binding="simulationPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <grid id="21cc2" binding="resultsPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <toolbar id="4d8ae">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="-1" height="35"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <floatable value="false"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="deabc" class="javax.swing.JToolBar$Separator">
+                            <constraints/>
+                            <properties/>
+                          </component>
+                          <component id="5b6f5" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <text value="Experimental results:  "/>
+                            </properties>
+                          </component>
+                          <component id="57999" class="javax.swing.JButton" binding="simulationSaveButton">
+                            <constraints/>
+                            <properties>
+                              <text value="Save"/>
+                            </properties>
+                          </component>
+                          <component id="3c60" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <text value="  "/>
+                            </properties>
+                          </component>
+                          <component id="17c89" class="javax.swing.JButton" binding="clearButton" default-binding="true">
+                            <constraints/>
+                            <properties>
+                              <text value="Clear"/>
+                            </properties>
+                          </component>
+                          <component id="61583" class="javax.swing.JToolBar$Separator">
+                            <constraints/>
+                            <properties/>
+                          </component>
+                          <hspacer id="4122d">
+                            <constraints/>
+                          </hspacer>
+                        </children>
+                      </toolbar>
+                    </children>
+                  </grid>
+                  <grid id="4df66" binding="runPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <preferred-size width="-1" height="35"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <toolbar id="575a8" binding="toolBarAdaptation">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                            <preferred-size width="-1" height="20"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <borderPainted value="true"/>
+                          <floatable value="false"/>
+                          <rollover value="true"/>
+                        </properties>
+                        <clientProperties>
+                          <JToolBar.isRollover class="java.lang.Boolean" value="true"/>
+                        </clientProperties>
+                        <border type="none"/>
+                        <children>
+                          <component id="79393" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <text value="Simulation  "/>
+                            </properties>
+                          </component>
+                          <component id="2af12" class="javax.swing.JComboBox" binding="adaptationComboBox">
+                            <constraints/>
+                            <properties/>
+                          </component>
+                          <component id="1fdab" class="javax.swing.JToolBar$Separator">
+                            <constraints/>
+                            <properties/>
+                          </component>
+                          <grid id="f4345" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
+                            <margin top="0" left="0" bottom="0" right="0"/>
+                            <constraints/>
+                            <properties/>
+                            <border type="none"/>
+                            <children>
+                              <toolbar id="6b81c" binding="toolBarMultiRun">
+                                <constraints>
+                                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                                    <preferred-size width="-1" height="35"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <floatable value="false"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="5bf37" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="9483a" class="javax.swing.JButton" binding="totalRunButton" default-binding="true">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Total Run"/>
+                                    </properties>
+                                  </component>
+                                  <component id="f69e2" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="  "/>
+                                    </properties>
+                                  </component>
+                                  <component id="a1d55" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Progress: "/>
+                                    </properties>
+                                  </component>
+                                  <component id="191e8" class="javax.swing.JProgressBar" binding="totalRunProgressBar">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="47a11" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="e9a24" class="javax.swing.JLabel" binding="progressLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="0/0"/>
+                                    </properties>
+                                  </component>
+                                  <component id="924a2" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                </children>
+                              </toolbar>
+                              <toolbar id="7f943" binding="toolBarSingleRun">
+                                <constraints>
+                                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                                    <preferred-size width="-1" height="20"/>
+                                  </grid>
+                                </constraints>
+                                <properties>
+                                  <floatable value="false"/>
+                                </properties>
+                                <border type="none"/>
+                                <children>
+                                  <component id="9ea6c" class="javax.swing.JButton" binding="singleRunButton" default-binding="true">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Single Run"/>
+                                    </properties>
+                                  </component>
+                                  <component id="a213e" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties>
+                                      <separatorSize width="5" height="10"/>
+                                    </properties>
+                                  </component>
+                                  <component id="f9430" class="javax.swing.JButton" binding="timedRunButton" default-binding="true">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Timed Run"/>
+                                    </properties>
+                                  </component>
+                                  <component id="705d3" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                  <component id="33a26" class="javax.swing.JLabel">
+                                    <constraints/>
+                                    <properties>
+                                      <text value="Speed:"/>
+                                    </properties>
+                                  </component>
+                                  <component id="82ffc" class="javax.swing.JSlider" binding="speedSlider">
+                                    <constraints/>
+                                    <properties>
+                                      <majorTickSpacing value="3"/>
+                                      <maximum value="5"/>
+                                      <minimum value="1"/>
+                                      <minorTickSpacing value="1"/>
+                                      <paintLabels value="false"/>
+                                      <paintTicks value="true"/>
+                                      <value value="1"/>
+                                      <valueIsAdjusting value="false"/>
+                                    </properties>
+                                  </component>
+                                  <component id="dff0b" class="javax.swing.JToolBar$Separator">
+                                    <constraints/>
+                                    <properties/>
+                                  </component>
+                                </children>
+                              </toolbar>
+                            </children>
+                          </grid>
+                        </children>
+                      </toolbar>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </splitpane>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="graphSelectorbuttonGroup">
+      <member id="c6bdc"/>
+      <member id="c6bdc"/>
+      <member id="90d29"/>
+    </group>
+  </buttonGroups>
+</form>

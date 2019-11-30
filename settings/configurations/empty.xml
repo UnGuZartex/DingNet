@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+    <map>
+        <region>
+            <origin>
+                <latitude>50.866714802830494</latitude>
+                <longitude>4.6808624267578125</longitude>
+            </origin>
+            <size>
+                <width>2773</width>
+                <height>2773</height>
+            </size>
+        </region>
+    </map>
+    <characteristics>
+        <regionProperty numberOfZones="49"/>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+    </characteristics>
+    <motes/>
+    <gateways/>
+    <wayPoints>
+        <wayPoint id="1">50.87833046636809,4.699573516845703</wayPoint>
+        <wayPoint id="2">50.88689994861236,4.706053733825684</wayPoint>
+        <wayPoint id="3">50.872589520951266,4.691162109375</wayPoint>
+        <wayPoint id="4">50.87313792010801,4.6913230419158936</wayPoint>
+        <wayPoint id="5">50.87239994937164,4.692953824996948</wayPoint>
+        <wayPoint id="6">50.87235255635624,4.693586826324463</wayPoint>
+        <wayPoint id="7">50.87288741759004,4.695936441421509</wayPoint>
+        <wayPoint id="8">50.87287387687503,4.698114395141602</wayPoint>
+        <wayPoint id="9">50.872812943608835,4.699766635894775</wayPoint>
+        <wayPoint id="10">50.8752637521456,4.697749614715576</wayPoint>
+        <wayPoint id="11">50.87478307886297,4.696183204650879</wayPoint>
+        <wayPoint id="12">50.87604906684225,4.697685241699219</wayPoint>
+        <wayPoint id="13">50.87759257785148,4.698425531387329</wayPoint>
+        <wayPoint id="14">50.877382717515445,4.698243141174316</wayPoint>
+        <wayPoint id="15">50.87747072357788,4.698972702026367</wayPoint>
+        <wayPoint id="16">50.87849293566457,4.699122905731201</wayPoint>
+        <wayPoint id="17">50.87573088058567,4.700324535369873</wayPoint>
+        <wayPoint id="18">50.87421438857698,4.699970483779907</wayPoint>
+        <wayPoint id="19">50.87631986194511,4.70041036605835</wayPoint>
+        <wayPoint id="20">50.87709161935566,4.700528383255005</wayPoint>
+        <wayPoint id="21">50.87301605418635,4.69290018081665</wayPoint>
+        <wayPoint id="22">50.87403159379704,4.692889451980591</wayPoint>
+        <wayPoint id="23">50.87403159379704,4.691516160964966</wayPoint>
+        <wayPoint id="24">50.874816929256404,4.694606065750122</wayPoint>
+        <wayPoint id="25">50.87518251193895,4.694552421569824</wayPoint>
+        <wayPoint id="26">50.87535176220968,4.693189859390259</wayPoint>
+        <wayPoint id="27">50.87625893318416,4.696784019470215</wayPoint>
+        <wayPoint id="28">50.87577150022877,4.69066858291626</wayPoint>
+        <wayPoint id="29">50.874844009553456,4.69115138053894</wayPoint>
+        <wayPoint id="30">50.87664481399155,4.6906578540802</wayPoint>
+        <wayPoint id="31">50.877815976525525,4.691430330276489</wayPoint>
+        <wayPoint id="32">50.87752488107214,4.693436622619629</wayPoint>
+        <wayPoint id="33">50.87764673520414,4.695507287979126</wayPoint>
+        <wayPoint id="34">50.87757903850348,4.697470664978027</wayPoint>
+        <wayPoint id="35">50.87599490763283,4.693425893783569</wayPoint>
+        <wayPoint id="36">50.876678663032735,4.693211317062378</wayPoint>
+        <wayPoint id="37">50.88717744894002,4.702727794647217</wayPoint>
+        <wayPoint id="38">50.8867442769731,4.702051877975464</wayPoint>
+        <wayPoint id="39">50.88529582895721,4.70089316368103</wayPoint>
+        <wayPoint id="40">50.88435499046595,4.700850248336792</wayPoint>
+        <wayPoint id="41">50.884104548241204,4.70090389251709</wayPoint>
+        <wayPoint id="42">50.88325844968715,4.701043367385864</wayPoint>
+        <wayPoint id="43">50.8830824592575,4.701064825057983</wayPoint>
+        <wayPoint id="44">50.881803124230935,4.701472520828247</wayPoint>
+        <wayPoint id="45">50.88128190359349,4.70165491104126</wayPoint>
+        <wayPoint id="46">50.88077421554896,4.702223539352417</wayPoint>
+        <wayPoint id="47">50.880009288449365,4.70089316368103</wayPoint>
+        <wayPoint id="48">50.879305273650154,4.700378179550171</wayPoint>
+        <wayPoint id="49">50.8843752965333,4.699723720550537</wayPoint>
+        <wayPoint id="50">50.88415869802549,4.698704481124878</wayPoint>
+        <wayPoint id="51">50.884104548241204,4.698286056518555</wayPoint>
+        <wayPoint id="52">50.88226341812748,4.6987903118133545</wayPoint>
+        <wayPoint id="53">50.88149174636948,4.699466228485107</wayPoint>
+        <wayPoint id="54">50.88126836531743,4.6995627880096436</wayPoint>
+        <wayPoint id="55">50.88088929199056,4.69940185546875</wayPoint>
+        <wayPoint id="56">50.880300368383246,4.700356721878052</wayPoint>
+        <wayPoint id="57">50.87525698213379,4.690566658973694</wayPoint>
+        <wayPoint id="58">50.874393797571244,4.6948689222335815</wayPoint>
+        <wayPoint id="59">50.87346289434123,4.691371321678162</wayPoint>
+        <wayPoint id="60">50.88174558717413,4.70215380191803</wayPoint>
+    </wayPoints>
+    <connections>
+        <connection dst="4" id="1" src="3"/>
+        <connection dst="5" id="2" src="3"/>
+        <connection dst="21" id="3" src="5"/>
+        <connection dst="6" id="4" src="5"/>
+        <connection dst="7" id="5" src="6"/>
+        <connection dst="11" id="6" src="7"/>
+        <connection dst="8" id="7" src="7"/>
+        <connection dst="9" id="8" src="8"/>
+        <connection dst="18" id="9" src="9"/>
+        <connection dst="10" id="10" src="8"/>
+        <connection dst="17" id="11" src="18"/>
+        <connection dst="10" id="12" src="11"/>
+        <connection dst="24" id="13" src="11"/>
+        <connection dst="11" id="14" src="24"/>
+        <connection dst="25" id="15" src="24"/>
+        <connection dst="22" id="16" src="21"/>
+        <connection dst="24" id="17" src="22"/>
+        <connection dst="27" id="18" src="25"/>
+        <connection dst="12" id="19" src="27"/>
+        <connection dst="12" id="20" src="10"/>
+        <connection dst="14" id="21" src="12"/>
+        <connection dst="19" id="22" src="12"/>
+        <connection dst="17" id="23" src="12"/>
+        <connection dst="19" id="24" src="17"/>
+        <connection dst="12" id="25" src="17"/>
+        <connection dst="26" id="26" src="22"/>
+        <connection dst="25" id="27" src="26"/>
+        <connection dst="26" id="28" src="25"/>
+        <connection dst="35" id="29" src="26"/>
+        <connection dst="28" id="30" src="26"/>
+        <connection dst="23" id="31" src="22"/>
+        <connection dst="22" id="32" src="23"/>
+        <connection dst="29" id="33" src="23"/>
+        <connection dst="28" id="34" src="29"/>
+        <connection dst="30" id="35" src="28"/>
+        <connection dst="31" id="36" src="30"/>
+        <connection dst="32" id="37" src="31"/>
+        <connection dst="36" id="38" src="35"/>
+        <connection dst="32" id="39" src="36"/>
+        <connection dst="33" id="40" src="32"/>
+        <connection dst="34" id="41" src="33"/>
+        <connection dst="14" id="42" src="34"/>
+        <connection dst="13" id="43" src="14"/>
+        <connection dst="15" id="44" src="13"/>
+        <connection dst="16" id="45" src="13"/>
+        <connection dst="1" id="46" src="16"/>
+        <connection dst="1" id="47" src="15"/>
+        <connection dst="20" id="48" src="19"/>
+        <connection dst="15" id="49" src="20"/>
+        <connection dst="37" id="50" src="2"/>
+        <connection dst="38" id="51" src="37"/>
+        <connection dst="39" id="52" src="38"/>
+        <connection dst="40" id="53" src="39"/>
+        <connection dst="49" id="54" src="40"/>
+        <connection dst="41" id="55" src="40"/>
+        <connection dst="42" id="56" src="41"/>
+        <connection dst="43" id="57" src="42"/>
+        <connection dst="44" id="58" src="43"/>
+        <connection dst="45" id="59" src="44"/>
+        <connection dst="46" id="60" src="45"/>
+        <connection dst="47" id="61" src="46"/>
+        <connection dst="50" id="62" src="49"/>
+        <connection dst="51" id="63" src="50"/>
+        <connection dst="52" id="64" src="51"/>
+        <connection dst="53" id="65" src="52"/>
+        <connection dst="54" id="66" src="53"/>
+        <connection dst="55" id="67" src="54"/>
+        <connection dst="56" id="68" src="55"/>
+        <connection dst="48" id="69" src="47"/>
+        <connection dst="1" id="70" src="48"/>
+        <connection dst="48" id="71" src="56"/>
+        <connection dst="59" id="72" src="4"/>
+        <connection dst="23" id="73" src="59"/>
+    </connections>
+</configuration>

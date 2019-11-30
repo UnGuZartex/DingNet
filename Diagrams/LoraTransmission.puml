@@ -1,0 +1,53 @@
+@startuml
+ -> Mote: sendToGateWay(data, macCommands)
+ activate Mote
+ create LoraWanPacket
+ Mote -> LoraWanPacket: new()
+ activate LoraWanPacket
+ return packet
+
+ Mote -> Mote: loraSend(packet)
+ Mote -> Mote: update history
+ Mote -> Environment: getGateways()
+ activate Environment
+ return gateways
+ loop for all gateways
+ create LoraTransmission
+   Mote -> LoraTransmission: new()
+   activate LoraTransmission
+   return transmission
+   Mote -> Mote : addToTransmissionsToSend
+ end
+ Mote -> Environment: getMotes()
+ activate Environment
+ return motes
+ loop for all motes where mote != this
+    Mote -> LoraTransmission: new()
+    activate LoraTransmission
+    return transmission
+    Mote -> Mote : addToTransmissionsToSend
+  end
+
+  loop for all transmissionsToSend
+  activate LoraTransmission
+     Mote -> LoraTransmission: depart()
+     loop until receiver reached
+     activate LoraTransmission
+     LoraTransmission -> LoraTransmission: moveTo(x,y)
+     LoraTransmission -> Environment: getCharacteristic(x,y)
+     activate Environment
+     return characteristic
+     LoraTransmission -> LoraTransmission: setTransmissionPower(...)
+     end
+     LoraTransmission -> NetworkEntity: receiveTransmission(this)
+     activate NetworkEntity
+     NetworkEntity -> NetworkEntity: IsPacketstrenghtHighEnough(transmission)
+     NetworkEntity -> NetworkEntity: Collsion(transmission)
+     NetworkEntity -> NetworkEntity: handleMacCommands(...)
+     NetworkEntity -> NetworkEntity: onRecieve(...)
+     NetworkEntity -> NetworkEntity: continue
+    deactivate
+     end
+
+
+@enduml

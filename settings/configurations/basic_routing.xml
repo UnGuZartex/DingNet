@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+    <map>
+        <region>
+            <origin>
+                <latitude>50.866714802830494</latitude>
+                <longitude>4.6808624267578125</longitude>
+            </origin>
+            <size>
+                <width>2773</width>
+                <height>2773</height>
+            </size>
+        </region>
+    </map>
+    <characteristics>
+        <regionProperty numberOfZones="49"/> <!-- Not really used for the demo -->
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+        <row>City-City-City-City-City-City-City</row>
+    </characteristics>
+    <motes>
+        <userMote>
+            <devEUI>727156569393802495</devEUI>
+            <location>
+                <waypoint id="1"/>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>12</spreadingFactor>
+            <energyLevel>20</energyLevel>
+            <movementSpeed>1.0</movementSpeed>
+            <startMovementOffset>0</startMovementOffset>
+            <periodSendingPacket>30</periodSendingPacket>
+            <startSendingOffset>1</startSendingOffset>
+            <sensors>
+                <sensor SensorType="GPS"/>
+            </sensors>
+            <path/>
+            <userMoteState>true</userMoteState>
+            <destination id="26"/>
+        </userMote>
+    </motes>
+    <gateways>
+        <gateway>
+            <devEUI>3122003464731981774</devEUI>
+            <location>
+                <xPos>1265</xPos>
+                <yPos>561</yPos>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>12</spreadingFactor>
+        </gateway>
+    </gateways>
+    <wayPoints>
+        <wayPoint id="1">50.86901461277239,4.697781801223755</wayPoint>
+        <wayPoint id="2">50.870077634945496,4.69791054725647</wayPoint>
+        <wayPoint id="3">50.87014534254294,4.696515798568726</wayPoint>
+        <wayPoint id="4">50.87085626637834,4.697996377944946</wayPoint>
+        <wayPoint id="5">50.87284679543324,4.698092937469482</wayPoint>
+        <wayPoint id="6">50.8727994028722,4.699798822402954</wayPoint>
+        <wayPoint id="7">50.87100183515962,4.699434041976929</wayPoint>
+        <wayPoint id="8">50.87090027559273,4.698420166969299</wayPoint>
+        <wayPoint id="9">50.87104922954843,4.698001742362976</wayPoint>
+        <wayPoint id="10">50.87165858168318,4.698050022125244</wayPoint>
+        <wayPoint id="11">50.87141484178523,4.699503779411316</wayPoint>
+        <wayPoint id="12">50.872271311074876,4.69964325428009</wayPoint>
+        <wayPoint id="13">50.87421438857698,4.699970483779907</wayPoint>
+        <wayPoint id="14">50.87400789812491,4.700592756271362</wayPoint>
+        <wayPoint id="15">50.872914499008225,4.695936441421509</wayPoint>
+        <wayPoint id="16">50.8752637521456,4.697738885879517</wayPoint>
+        <wayPoint id="17">50.8747627686151,4.696204662322998</wayPoint>
+        <wayPoint id="18">50.87573088058567,4.7003138065338135</wayPoint>
+        <wayPoint id="19">50.87630632222735,4.7003889083862305</wayPoint>
+        <wayPoint id="20">50.876272472915716,4.696794748306274</wayPoint>
+        <wayPoint id="21">50.87518251193895,4.694541692733765</wayPoint>
+        <wayPoint id="22">50.874816929256404,4.694616794586182</wayPoint>
+        <wayPoint id="23">50.8760219872454,4.697695970535278</wayPoint>
+        <wayPoint id="24">50.87736917810648,4.6982645988464355</wayPoint>
+        <wayPoint id="25">50.87760611719554,4.698446989059448</wayPoint>
+        <wayPoint id="26">50.87706454036462,4.7005391120910645</wayPoint>
+    </wayPoints>
+    <connections>
+        <connection dst="2" id="1" src="1"/>
+        <connection dst="3" id="2" src="2"/>
+        <connection dst="4" id="3" src="2"/>
+        <connection dst="9" id="4" src="4"/>
+        <connection dst="8" id="5" src="4"/>
+        <connection dst="7" id="6" src="8"/>
+        <connection dst="11" id="7" src="7"/>
+        <connection dst="12" id="8" src="11"/>
+        <connection dst="10" id="9" src="9"/>
+        <connection dst="5" id="10" src="10"/>
+        <connection dst="6" id="11" src="12"/>
+        <connection dst="6" id="12" src="5"/>
+        <connection dst="13" id="13" src="6"/>
+        <connection dst="14" id="14" src="13"/>
+        <connection dst="16" id="15" src="5"/>
+        <connection dst="15" id="16" src="5"/>
+        <connection dst="17" id="17" src="15"/>
+        <connection dst="16" id="18" src="17"/>
+        <connection dst="22" id="19" src="17"/>
+        <connection dst="21" id="20" src="22"/>
+        <connection dst="20" id="21" src="21"/>
+        <connection dst="23" id="22" src="20"/>
+        <connection dst="16" id="23" src="23"/>
+        <connection dst="18" id="24" src="13"/>
+        <connection dst="19" id="25" src="18"/>
+        <connection dst="19" id="26" src="23"/>
+        <connection dst="26" id="27" src="19"/>
+        <connection dst="24" id="28" src="23"/>
+        <connection dst="25" id="29" src="24"/>
+        <connection dst="26" id="30" src="25"/>
+    </connections>
+</configuration>

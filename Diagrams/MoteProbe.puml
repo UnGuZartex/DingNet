@@ -1,0 +1,6 @@
+@startuml
+MoteProbe -> MQTTServer : getXFromGatewayFromMote(gateway,mote)
+MQTTServer -> Gateway : getXFromMote(mote)
+Gateway --> MQTTServer : X
+MQTTServer --> MoteProbe : X
+@enduml
