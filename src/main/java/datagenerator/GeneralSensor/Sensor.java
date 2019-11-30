@@ -6,7 +6,10 @@ import util.Pair;
 import java.time.LocalTime;
 
 public abstract class Sensor implements SensorDataGenerator {
-    protected Sensor() {
+    int radius;
+
+    protected Sensor(int radius) {
+        this.radius = radius;
     }
 
     public byte[] generateData(int x, int y, LocalTime time) {

@@ -5,6 +5,8 @@ import application.pollution.PollutionMonitor;
 import application.routing.AStarRouter;
 import application.routing.RoutingApplication;
 import application.routing.heuristic.SimplePollutionHeuristic;
+import datagenerator.GeneralSensor.PolynomialSensor.PolynomialSensor;
+import datagenerator.GeneralSensor.Sensor;
 import gui.MainGUI;
 import iot.mqtt.MQTTClientFactory;
 import iot.networkentity.Gateway;
@@ -336,6 +338,7 @@ public class SimulationRunner {
      * Initialize all applications used in the simulation.
      */
     private void setupApplications() {
+        Sensor sensor = new PolynomialSensor(2,null);
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
             new AStarRouter(new SimplePollutionHeuristic(pollutionGrid)), getEnvironment().getGraph()
