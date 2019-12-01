@@ -1,0 +1,28 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: Test with Maven
+      run: mvn test
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+    - name: Upload to artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: Executable
+        path: ./target/DingNet-1.2.0-jar-with-dependencies.jar
+    - name: Download math result for job 1
+      uses: actions/download-artifact@v1
+      with:
+        name: Executable
