@@ -1,7 +1,6 @@
 package iot.networkentity;
 
 import datagenerator.*;
-import datagenerator.GeneralSensor.PolynomialSensor.PolynomialSensor;
 import datagenerator.iaqsensor.IAQDataGeneratorSingleton;
 import util.Pair;
 
@@ -20,7 +19,6 @@ public enum MoteSensor {
     PARTICULATE_MATTER(new ParticulateMatterDataGenerator(), 1),
     GPS(new GPSDataGenerator(),8),
     IAQ(IAQDataGeneratorSingleton.getInstance(), 1);
-    //POLYNOMIAL(new PolynomialSensor(2, null), 1);
 
 
     private final SensorDataGenerator sensorDataGenerator;

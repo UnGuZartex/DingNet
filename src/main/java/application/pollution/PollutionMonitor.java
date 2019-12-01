@@ -1,12 +1,14 @@
 package application.pollution;
 
 import application.Application;
+import application.Environment.PollutionEnvironment;
 import iot.Environment;
 import iot.lora.LoraWanPacket;
 import iot.lora.MessageType;
 import iot.mqtt.Topics;
 import iot.mqtt.TransmissionWrapper;
 import iot.networkentity.MoteSensor;
+import org.jxmapviewer.viewer.GeoPosition;
 import util.Converter;
 
 import java.util.Arrays;
@@ -21,15 +23,22 @@ public class PollutionMonitor extends Application {
     // The environment in which the pollution monitor operates
     private Environment environment;
 
+    private PollutionEnvironment polenv;
 
-    public PollutionMonitor(Environment environment, PollutionGrid pollutionGrid) {
+
+    public PollutionMonitor(Environment environment, PollutionGrid pollutionGrid, PollutionEnvironment polenv) {
         super(List.of(Topics.getNetServerToApp("+", "+")));
 
         this.pollutionGrid = pollutionGrid;
         this.environment = environment;
+        this.polenv = polenv;
     }
 
 
+
+    private double determinePollutionLevelFromPollutionEnvironment(GeoPosition position){
+        return polenv.getDataFromSensors(position);
+    }
     /**
      * Determine the pollution level from a byte array, solely using the data from an IAQ sensor.
      * @param sensorData The considered data.
@@ -73,11 +82,11 @@ public class PollutionMonitor extends Application {
 
 
         // Make sure the IAQ sensor is present in the currently processed mote
-        if (!sensorData.containsKey(MoteSensor.IAQ)) {
-            return;
-        }
+//        if (!sensorData.containsKey(MoteSensor.IAQ)) {
+//            return;
+//        }
 
-        this.pollutionGrid.addMeasurement(message.getSenderEUI(), position, new PollutionLevel(this.determinePollutionLevelFromIAQData(sensorData)));
+        this.pollutionGrid.addMeasurement(message.getSenderEUI(), position, new PollutionLevel(this.determinePollutionLevelFromPollutionEnvironment(position)));
     }
 
     @Override
