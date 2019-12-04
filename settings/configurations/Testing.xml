@@ -36,7 +36,41 @@
             <periodSendingPacket>30</periodSendingPacket>
             <startSendingOffset>10</startSendingOffset>
             <sensors>
-                <sensor SensorType="POLYNOMIAL"/>
+                <sensor SensorType="IAQ"/>
+            </sensors>
+            <path/>
+        </mote>
+        <mote>
+            <devEUI>4537036368447151375</devEUI>
+            <location>
+                <waypoint id="56"/>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>11</spreadingFactor>
+            <energyLevel>20</energyLevel>
+            <movementSpeed>1.0</movementSpeed>
+            <startMovementOffset>0</startMovementOffset>
+            <periodSendingPacket>30</periodSendingPacket>
+            <startSendingOffset>2</startSendingOffset>
+            <sensors>
+                <sensor SensorType="IAQ"/>
+            </sensors>
+            <path/>
+        </mote>
+        <mote>
+            <devEUI>12468807477143478427</devEUI>
+            <location>
+                <waypoint id="58"/>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>11</spreadingFactor>
+            <energyLevel>20</energyLevel>
+            <movementSpeed>1.0</movementSpeed>
+            <startMovementOffset>0</startMovementOffset>
+            <periodSendingPacket>30</periodSendingPacket>
+            <startSendingOffset>13</startSendingOffset>
+            <sensors>
+                <sensor SensorType="IAQ"/>
             </sensors>
             <path/>
         </mote>
@@ -53,70 +87,28 @@
             <periodSendingPacket>30</periodSendingPacket>
             <startSendingOffset>3</startSendingOffset>
             <sensors>
-                <sensor SensorType="POLYNOMIAL"/>
+                <sensor SensorType="IAQ"/>
             </sensors>
             <path>
-                <connection id="742"/>
-                <connection id="1611"/>
-                <connection id="1615"/>
-                <connection id="1614"/>
-                <connection id="499"/>
-                <connection id="500"/>
-                <connection id="496"/>
-                <connection id="497"/>
-                <connection id="379"/>
-                <connection id="361"/>
-                <connection id="491"/>
-                <connection id="1381"/>
-                <connection id="1247"/>
-                <connection id="1244"/>
-                <connection id="79"/>
-                <connection id="969"/>
-                <connection id="1121"/>
-                <connection id="229"/>
-                <connection id="1123"/>
-                <connection id="1122"/>
-                <connection id="1109"/>
-                <connection id="217"/>
-                <connection id="1071"/>
-                <connection id="1069"/>
-                <connection id="1067"/>
-                <connection id="1068"/>
-                <connection id="194"/>
-                <connection id="1087"/>
-                <connection id="308"/>
-                <connection id="309"/>
-                <connection id="310"/>
-                <connection id="311"/>
-                <connection id="272"/>
-                <connection id="273"/>
-                <connection id="274"/>
-                <connection id="275"/>
-                <connection id="276"/>
-                <connection id="31"/>
-                <connection id="140"/>
-                <connection id="141"/>
-                <connection id="142"/>
-                <connection id="32"/>
-                <connection id="34"/>
-                <connection id="35"/>
-                <connection id="36"/>
-                <connection id="348"/>
-                <connection id="347"/>
-                <connection id="349"/>
-                <connection id="1255"/>
-                <connection id="366"/>
-                <connection id="1263"/>
-                <connection id="1262"/>
-                <connection id="1280"/>
-                <connection id="1294"/>
-                <connection id="1293"/>
-                <connection id="1292"/>
-                <connection id="1786"/>
-                <connection id="392"/>
             </path>
         </mote>
-
+        <mote>
+            <devEUI>4971753318158117358</devEUI>
+            <location>
+                <waypoint id="152"/>
+            </location>
+            <transmissionPower>14</transmissionPower>
+            <spreadingFactor>10</spreadingFactor>
+            <energyLevel>20</energyLevel>
+            <movementSpeed>1.0</movementSpeed>
+            <startMovementOffset>0</startMovementOffset>
+            <periodSendingPacket>30</periodSendingPacket>
+            <startSendingOffset>20</startSendingOffset>
+            <sensors>
+                <sensor SensorType="IAQ"/>
+            </sensors>
+            <path/>
+        </mote>
         <userMote>
             <devEUI>8450821791487460777</devEUI>
             <location>

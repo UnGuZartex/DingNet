@@ -19,17 +19,24 @@ public class PolynomialSensor extends Sensor {
 
     public PolynomialSensor(int radius, List<Pair>points, PollutionEnvironment environment, GeoPosition position) {
         super(radius, environment, position);
-        pointsKnown.add(new Pair<Double,Double>(1.0, random.nextDouble()*255));
-        pointsKnown.add(new Pair<Double,Double>(2.0,random.nextDouble()*255));
-        pointsKnown.add(new Pair<Double,Double>(3.0,random.nextDouble()*255));
-        pointsKnown.add(new Pair<Double,Double>(4.0,random.nextDouble()*255));
-        pointsKnown.add(new Pair<Double,Double>(20.0,random.nextDouble()*255));
+        pointsKnown.add(new Pair<Double,Double>(1.0, random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(2.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(3.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(4.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(5.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(6.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(7.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(8.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(9.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(10.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(11.0,random.nextDouble()*150));
+        pointsKnown.add(new Pair<Double,Double>(12.0,random.nextDouble()*150));
 
 
         calculateNewtonCoefficients();
         System.out.println(newtonCoefficients);
 
-        timeUnit = TimeUnit.MINUTES;
+        timeUnit = TimeUnit.HOURS;
         System.out.println(generateData(LocalTime.of(0, 0, 4)));
 
     }
