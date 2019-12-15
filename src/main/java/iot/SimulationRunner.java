@@ -1,13 +1,11 @@
 package iot;
 
-import application.Environment.PollutionEnvironment;
+import EnvironmentAPI.PollutionEnvironment;
 import application.pollution.PollutionGrid;
 import application.pollution.PollutionMonitor;
 import application.routing.AStarRouter;
 import application.routing.RoutingApplication;
 import application.routing.heuristic.SimplePollutionHeuristic;
-import application.Environment.GeneralSensor.PolynomialSensor.PolynomialSensor;
-import application.Environment.GeneralSensor.Sensor;
 import gui.MainGUI;
 import iot.mqtt.MQTTClientFactory;
 import iot.networkentity.Gateway;
@@ -332,6 +330,9 @@ public class SimulationRunner {
         if (this.routingApplication != null) {
             this.routingApplication.destruct();
         }
+        if (this.pollutionEnvironment != null) {
+            this.pollutionEnvironment.Stop();
+        }
 
         this.networkServer.reconnect();
         this.environment = null;
@@ -342,10 +343,14 @@ public class SimulationRunner {
      */
     private void setupApplications() {
         this.pollutionEnvironment = new PollutionEnvironment(this.getEnvironment().getClock());
-        this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid, this.pollutionEnvironment);
+        this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
-            new AStarRouter(new SimplePollutionHeuristic(pollutionGrid)), getEnvironment().getGraph()
+            new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()
         );
+    }
+
+    public PollutionEnvironment getEnvironmentAPI() {
+        return this.pollutionEnvironment;
     }
 
     // endregion

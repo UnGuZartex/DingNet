@@ -1,12 +1,12 @@
 @startuml
 Package DingNetDomain{
 Package IotDomain{
-Class Environment{
+Class EnvironmentAPI{
 }
 
-Environment "1" <--> "0...n"NetworkEntity : has
+EnvironmentAPI "1" <--> "0...n"NetworkEntity : has
 
-Environment -> "1" RegionMap : contains
+EnvironmentAPI -> "1" RegionMap : contains
 
 Class RegionMap{
 }
@@ -43,9 +43,9 @@ City
 Plain
 }
 
-Environment --> "1" InputProfile : has
+EnvironmentAPI --> "1" InputProfile : has
 
-Environment "1" --> "1" MQTTServer : has
+EnvironmentAPI "1" --> "1" MQTTServer : has
 
 
 
@@ -55,7 +55,7 @@ Class InputProfile{
 
 }
 
-Simulation "1" <--> "1" Environment : uses
+Simulation "1" <--> "1" EnvironmentAPI : uses
 
 Class Simulation{
 }
@@ -64,7 +64,7 @@ Simulation "1" --() "1" SimulationPresenter : Communicates with
 
 Simulator "1" --() "1" DataPresenter : Communicates with
 
-Environment "1" --() "1" EnvironmentPresenter : Communicates with
+EnvironmentAPI "1" --() "1" EnvironmentPresenter : Communicates with
 
 Simulator --> "0...n" Simulation : manages
 Simulation --> "1" Clock : uses
@@ -81,7 +81,7 @@ Class LoraWanPacket{
 }
 
 LoraTransmission --> "2" NetworkEntity : has
-LoraTransmission --> "1" Environment : moves in
+LoraTransmission --> "1" EnvironmentAPI : moves in
 LoraTransmission --> "1" LoraWanPacket : contains
 
 
@@ -223,7 +223,7 @@ Simulation "1" ()-- "1" SimulationPresenter : Communicates with
 
 Simulator "1" ()-- "1" DataPresenter : Communicates with
 
-Environment "1" ()-- "1" EnvironmentPresenter : Communicates with
+EnvironmentAPI "1" ()-- "1" EnvironmentPresenter : Communicates with
 
 GUIHandler "1" ()-- "1" SimulationPresenter : Communicates with
 

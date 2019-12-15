@@ -1,7 +1,7 @@
-package application.Environment.GeneralSensor.PolynomialSensor;
+package EnvironmentAPI.GeneralSensor.PolynomialSensor;
 
-import application.Environment.GeneralSensor.Sensor;
-import application.Environment.PollutionEnvironment;
+import EnvironmentAPI.GeneralSensor.Sensor;
+import EnvironmentAPI.PollutionEnvironment;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.Pair;
@@ -34,23 +34,23 @@ public class PolynomialSensor extends Sensor {
 
 
         calculateNewtonCoefficients();
-        System.out.println(newtonCoefficients);
+        //System.out.println(newtonCoefficients);
 
-        timeUnit = TimeUnit.HOURS;
-        System.out.println(generateData(LocalTime.of(0, 0, 4)));
+        timeUnit = TimeUnit.SECONDS;
+        //System.out.println(generateData(LocalTime.of(0, 0, 4)));
 
     }
 
     /**
      * Generate data given the polynomial of the sensor. This is determined using Newton
      * interpolation. This function returns a byte (value in range [0,255])
-     * @param time: The time to evaluate the polynomial in.
+     * @param timeinNano: The time to evaluate the polynomial in.
      * @return a byte representing the amount of pollution in a range of [0,255].
      */
-    public double generateData(LocalTime time) {
+    public double generateData(long timeinNano) {
 
-        double dataAtTime =  evaluatePolynomial(time);
-        System.out.println("data: " + dataAtTime);
+        double dataAtTime =  evaluatePolynomial(timeinNano);
+        //System.out.println("data: " + dataAtTime);
         return dataAtTime;
     }
 
@@ -104,16 +104,16 @@ public class PolynomialSensor extends Sensor {
 
     /**
      * Evaluate the polynomial constructed with Newton interpolation.
-     * @param time: the time to evaluate in.
+     * @param timeinNano: the time to evaluate in.
      * @return a value
      */
-    private double evaluatePolynomial(LocalTime time) {
-        double timeToEvaluate = timeUnit.convertFromNano(time.toNanoOfDay());
+    private double evaluatePolynomial(long timeinNano) {
+        double timeToEvaluate = timeUnit.convertFromNano(timeinNano);
         double totalValue = 0;
         for (int i = 0; i < newtonCoefficients.size(); i++)
         {
             totalValue += newtonCoefficients.get(i) * getPointsFromOrder(i, timeToEvaluate);
-            System.out.println(i + ": " + totalValue);
+            //System.out.println(i + ": " + totalValue);
         }
         if (totalValue >= 255){
             totalValue = 255;

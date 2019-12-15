@@ -1,5 +1,6 @@
 package gui.util;
 
+import EnvironmentAPI.PollutionEnvironment;
 import application.pollution.PollutionGrid;
 import application.routing.RoutingApplication;
 import gui.mapviewer.*;
@@ -114,6 +115,17 @@ public class CompoundPainterBuilder {
      */
     public CompoundPainterBuilder withPollutionGrid(Environment environment, PollutionGrid pollutionGrid) {
         painters.add(new PollutionGridPainter(environment, pollutionGrid));
+        return this;
+    }
+
+    /**
+     * Include a painter of a pollution grid in the builder.
+     * @param environment The environment to which the pollution grid belongs.
+     * @param pollution   The pollution environment which should be painted.
+     * @return The current object.
+     */
+    public CompoundPainterBuilder withEnvironmentAPI(Environment environment, PollutionEnvironment pollution) {
+        painters.add(new PollutionEnvironmentPainter(environment, pollution));
         return this;
     }
 

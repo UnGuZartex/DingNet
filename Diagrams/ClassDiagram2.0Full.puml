@@ -1,13 +1,13 @@
 @startuml
 Package DingNetDomain{
 Package IotDomain{
-Class Environment{
+Class EnvironmentAPI{
 - motes : LinkedList<Mote>
 - gateways : LinkedList<Gateway>
 - MQTTServer : MQTTServer
 - regionMap : RegionMap
 - wayPoints : LinkedHashSet<GeoPosition>
-+ <<constructor>> Environment(Region region, GeoPosition mapOrigin,
++ <<constructor>> EnvironmentAPI(Region region, GeoPosition mapOrigin,
  LinkedHashSet<GeoPosition> wayPoints)
 
 + addWayPoint(GeoPosition wayPoint) : void
@@ -17,9 +17,9 @@ Class Environment{
 
 }
 
-Environment "1" <--> "0...n"NetworkEntity : has
+EnvironmentAPI "1" <--> "0...n"NetworkEntity : has
 
-Environment -> "1" RegionMap : contains
+EnvironmentAPI -> "1" RegionMap : contains
 
 Class RegionMap{
     - regions : Region[][]
@@ -58,14 +58,14 @@ Abstract Class NetworkEntity{
 - final EUI : Long
 - xPos : Integer
 - yPos :  Integer
-- environment : Environment
+- environment : EnvironmentAPI
 - transmissionPower : Integer
 - final transmissionPowerThreshold : Double
 - receivedTransmissions : LinkedList<LinkedHashMap<LoraTransmission,Boolean>>
 - sentTransmissions :  LinkedList<LinkedList<LoraTransmission>>
 - enabled : Boolean
 - SF : Integer
-+ <<constructor>> NetworkEntity(Long EUI, Integer xPos, Integer yPos, Environment environment,
++ <<constructor>> NetworkEntity(Long EUI, Integer xPos, Integer yPos, EnvironmentAPI environment,
 Integer transmissionPower, Integer SF, Double transmissionPowerThreshold)
 
 + getPowerSettingHistory(Integer run) : List<Integer>
@@ -101,11 +101,11 @@ Class Mote{
 - startTime : LocalTime
 - genericFeedBackLoop: GenericFeedBackLoop
 
-+ <<constructor>> Mote(Long DevEUI, Integer xPos, Integer yPos, Environment environment, Integer transmissionPower,
++ <<constructor>> Mote(Long DevEUI, Integer xPos, Integer yPos, EnvironmentAPI environment, Integer transmissionPower,
   {method}Integer SF, LinkedList<MoteSensor> moteSensors, Integer energyLevel, LinkedList<GeoPosition> connection,
   Integer samplingRate, Double movementSpeed, Integer startOffset)
 
-+ <<constructor>> Mote(Long DevEUI, Integer xPos, Integer yPos, Environment environment, Integer transmissionPower,
++ <<constructor>> Mote(Long DevEUI, Integer xPos, Integer yPos, EnvironmentAPI environment, Integer transmissionPower,
  {method} Integer SF, LinkedList<MoteSensor> moteSensors, Integer energyLevel, LinkedList<GeoPosition> connection,
  Integer samplingRate, Double movementSpeed)
 
@@ -124,7 +124,7 @@ NetworkEntity <|-- Gateway
 
 Class Gateway{
 - subscribedMoteProbes : LinkedList<MoteProbe>
-+ <<constructor>> public Gateway(Long gatewayEUI, Integer xPos, Integer yPos, Environment environment,
++ <<constructor>> public Gateway(Long gatewayEUI, Integer xPos, Integer yPos, EnvironmentAPI environment,
   Integer transmissionPower, Integer SF)
 
 # OnReceive(Byte[] packet, Long senderEUI, Long designatedReceiver) : void
@@ -146,9 +146,9 @@ __
 + <<constructor>> Characteristic(double pathLossExponent, double referenceDistance, double shadowFading, Color color)
 }
 
-Environment --> "1" InputProfile : has
+EnvironmentAPI --> "1" InputProfile : has
 
-Environment "1" --> "1" MQTTServer : has
+EnvironmentAPI "1" --> "1" MQTTServer : has
 
 
 
@@ -170,20 +170,20 @@ Class InputProfile{
 - updateFile() : void
 }
 
-Simulation "1" <--> "1" Environment : uses
+Simulation "1" <--> "1" EnvironmentAPI : uses
 
 Class Simulation{
 - clock : Clock
-- environment : Environment
+- environment : EnvironmentAPI
 
-+<<constructor>> Simulation(Environment environment)
++<<constructor>> Simulation(EnvironmentAPI environment)
 }
 
 Simulation "1" --() "1" SimulationPresenter : Communicates with
 
 Simulator "1" --() "1" DataPresenter : Communicates with
 
-Environment "1" --() "1" EnvironmentPresenter : Communicates with
+EnvironmentAPI "1" --() "1" EnvironmentPresenter : Communicates with
 
 Simulator --> "0...n" Simulation : manages
 Simulation --> "1" Clock : uses
@@ -227,7 +227,7 @@ Class LoraWanPacket{
 }
 
 LoraTransmission --> "2" NetworkEntity : has
-LoraTransmission --> "1" Environment : moves in
+LoraTransmission --> "1" EnvironmentAPI : moves in
 LoraTransmission --> "1" LoraWanPacket : contains
 
 
@@ -239,7 +239,7 @@ Class LoraTransmission{
 - final spreadingFactor : Integer
 - xPos : Integer
 - yPos : Integer
-- final environment : Environment
+- final environment : EnvironmentAPI
 - final content : LoraWanPacket
 - final random : Random
 - final departureTime : LocalTime
@@ -441,7 +441,7 @@ Simulation "1" ()-- "1" SimulationPresenter : Communicates with
 
 Simulator "1" ()-- "1" DataPresenter : Communicates with
 
-Environment "1" ()-- "1" EnvironmentPresenter : Communicates with
+EnvironmentAPI "1" ()-- "1" EnvironmentPresenter : Communicates with
 
 GUIHandler "1" ()-- "1" SimulationPresenter : Communicates with
 

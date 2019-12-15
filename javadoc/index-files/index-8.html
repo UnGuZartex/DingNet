@@ -108,11 +108,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">A class representing a gateway in the network.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../iot/networkentity/Gateway.html#%3Cinit%3E(long,int,int,int,int,iot.Environment)">Gateway(long, int, int, int, int, Environment)</a></span> - Constructor for class iot.networkentity.<a href="../iot/networkentity/Gateway.html" title="class in iot.networkentity">Gateway</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/networkentity/Gateway.html#%3Cinit%3E(long,int,int,int,int,iot.Environment)">Gateway(long, int, int, int, int, EnvironmentAPI)</a></span> - Constructor for class iot.networkentity.<a href="../iot/networkentity/Gateway.html" title="class in iot.networkentity">Gateway</a></dt>
 <dd>
 <div class="block">A construtor creating a gateway with a given xPos, yPos, environment and transmission power.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../iot/networkentity/Gateway.html#%3Cinit%3E(long,int,int,int,int,iot.strategy.response.gateway.ResponseStrategy,iot.Environment)">Gateway(long, int, int, int, int, ResponseStrategy, Environment)</a></span> - Constructor for class iot.networkentity.<a href="../iot/networkentity/Gateway.html" title="class in iot.networkentity">Gateway</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/networkentity/Gateway.html#%3Cinit%3E(long,int,int,int,int,iot.strategy.response.gateway.ResponseStrategy,iot.Environment)">Gateway(long, int, int, int, int, ResponseStrategy, EnvironmentAPI)</a></span> - Constructor for class iot.networkentity.<a href="../iot/networkentity/Gateway.html" title="class in iot.networkentity">Gateway</a></dt>
 <dd>
 <div class="block">A construtor creating a gateway with a given xPos, yPos, environment and transmission power.</div>
 </dd>
@@ -134,7 +134,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><a href="../gui/GatewayGUI.html" title="class in gui"><span class="typeNameLink">GatewayGUI</span></a> - Class in <a href="../gui/package-summary.html">gui</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../gui/GatewayGUI.html#%3Cinit%3E(iot.networkentity.Gateway,iot.Environment)">GatewayGUI(Gateway, Environment)</a></span> - Constructor for class gui.<a href="../gui/GatewayGUI.html" title="class in gui">GatewayGUI</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/GatewayGUI.html#%3Cinit%3E(iot.networkentity.Gateway,iot.Environment)">GatewayGUI(Gateway, EnvironmentAPI)</a></span> - Constructor for class gui.<a href="../gui/GatewayGUI.html" title="class in gui">GatewayGUI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/MainGUI.GatewayLegendMouseListener.html#%3Cinit%3E()">GatewayLegendMouseListener()</a></span> - Constructor for class gui.<a href="../gui/MainGUI.GatewayLegendMouseListener.html" title="class in gui">MainGUI.GatewayLegendMouseListener</a></dt>
 <dd>&nbsp;</dd>
@@ -146,13 +146,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/mapviewer/GatewayPainter.html#%3Cinit%3E()">GatewayPainter()</a></span> - Constructor for class gui.mapviewer.<a href="../gui/mapviewer/GatewayPainter.html" title="class in gui.mapviewer">GatewayPainter</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#gateways">gateways</a></span> - Variable in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#gateways">gateways</a></span> - Variable in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">A list containing all gateways currently active on the map.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="../gui/NewGatewayGUI.html#generateButton">generateButton</a></span> - Variable in class gui.<a href="../gui/NewGatewayGUI.html" title="class in gui">NewGatewayGUI</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateCarbonDioxideGraph(iot.Environment,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateCarbonDioxideGraph(Environment, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateCarbonDioxideGraph(iot.Environment,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateCarbonDioxideGraph(EnvironmentAPI, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateCarbonDioxideGraph(iot.networkentity.Mote)">generateCarbonDioxideGraph(Mote)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
@@ -206,7 +206,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../util/xml/ConfigurationWriter.MoteWriter.html#generateDevEUIElement()">generateDevEUIElement()</a></span> - Method in class util.xml.<a href="../util/xml/ConfigurationWriter.MoteWriter.html" title="class in util.xml">ConfigurationWriter.MoteWriter</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateDistanceToGatewayGraph(iot.networkentity.Mote,int,iot.Environment)">generateDistanceToGatewayGraph(Mote, int, Environment)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateDistanceToGatewayGraph(iot.networkentity.Mote,int,iot.Environment)">generateDistanceToGatewayGraph(Mote, int, EnvironmentAPI)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>
 <div class="block">Generates a distance to gateway graph for a specific mote for a specific run.</div>
 </dd>
@@ -214,7 +214,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/MoteGUI.html#generateEUIButton">generateEUIButton</a></span> - Variable in class gui.<a href="../gui/MoteGUI.html" title="class in gui">MoteGUI</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateGraph(iot.Environment,iot.networkentity.MoteSensor,java.lang.String,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateGraph(Environment, MoteSensor, String, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateGraph(iot.Environment,iot.networkentity.MoteSensor,java.lang.String,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateGraph(EnvironmentAPI, MoteSensor, String, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateGraph(iot.networkentity.Mote,iot.networkentity.MoteSensor,java.lang.String)">generateGraph(Mote, MoteSensor, String)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
@@ -232,11 +232,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/mapviewer/NumberPainter.html#generateNumberGraphics(int)">generateNumberGraphics(int)</a></span> - Method in class gui.mapviewer.<a href="../gui/mapviewer/NumberPainter.html" title="class in gui.mapviewer">NumberPainter</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateOzoneGraph(iot.Environment,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateOzoneGraph(Environment, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateOzoneGraph(iot.Environment,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateOzoneGraph(EnvironmentAPI, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateOzoneGraph(iot.networkentity.Mote)">generateOzoneGraph(Mote)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateParticulateMatterGraph(iot.Environment,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateParticulateMatterGraph(Environment, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateParticulateMatterGraph(iot.Environment,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateParticulateMatterGraph(EnvironmentAPI, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateParticulateMatterGraph(iot.networkentity.Mote)">generateParticulateMatterGraph(Mote)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
@@ -250,11 +250,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Generates a power setting graph for a specific mote for a specific run.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateReceivedPowerGraphForMotes(iot.networkentity.Mote,int,iot.Environment)">generateReceivedPowerGraphForMotes(Mote, int, Environment)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateReceivedPowerGraphForMotes(iot.networkentity.Mote,int,iot.Environment)">generateReceivedPowerGraphForMotes(Mote, int, EnvironmentAPI)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>
 <div class="block">Generates a received power graph for a specific mote for a specific run, the amount of packets sent and the amount lost.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateSootGraph(iot.Environment,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateSootGraph(Environment, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateSootGraph(iot.Environment,org.jxmapviewer.viewer.TileFactory,javax.swing.JFrame)">generateSootGraph(EnvironmentAPI, TileFactory, JFrame)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/util/ChartGenerator.html#generateSootGraph(iot.networkentity.Mote)">generateSootGraph(Mote)</a></span> - Static method in class gui.util.<a href="../gui/util/ChartGenerator.html" title="class in gui.util">ChartGenerator</a></dt>
 <dd>&nbsp;</dd>
@@ -328,7 +328,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../iot/lora/RegionalParameter.html#getBitRate()">getBitRate()</a></span> - Method in interface iot.lora.<a href="../iot/lora/RegionalParameter.html" title="interface in iot.lora">RegionalParameter</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../gui/util/GUIUtil.html#getBorderPainters(iot.Environment)">getBorderPainters(Environment)</a></span> - Static method in class gui.util.<a href="../gui/util/GUIUtil.html" title="class in gui.util">GUIUtil</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/GUIUtil.html#getBorderPainters(iot.Environment)">getBorderPainters(EnvironmentAPI)</a></span> - Static method in class gui.util.<a href="../gui/util/GUIUtil.html" title="class in gui.util">GUIUtil</a></dt>
 <dd>
 <div class="block">Generate a list of painters which paint the borders, based on the max x and y coordinates possible.</div>
 </dd>
@@ -336,13 +336,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../datagenerator/iaqsensor/Cell.html#getCellNumber()">getCellNumber()</a></span> - Method in class datagenerator.iaqsensor.<a href="../datagenerator/iaqsensor/Cell.html" title="class in datagenerator.iaqsensor">Cell</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getCharacteristic(int,int)">getCharacteristic(int, int)</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getCharacteristic(int,int)">getCharacteristic(int, int)</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">returns the characteristics of a given position</div>
 </dd>
 <dt><span class="memberNameLink"><a href="../gui/MainGUI.MoteLegendMouseListener.html#getClickedIndex()">getClickedIndex()</a></span> - Method in class gui.<a href="../gui/MainGUI.MoteLegendMouseListener.html" title="class in gui">MainGUI.MoteLegendMouseListener</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getClock()">getClock()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getClock()">getClock()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">Returns the clock used by this environment.</div>
 </dd>
@@ -437,7 +437,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../iot/Simulation.html#getEnvironment()">getEnvironment()</a></span> - Method in class iot.<a href="../iot/Simulation.html" title="class in iot">Simulation</a></dt>
 <dd>
-<div class="block">Gets the Environment used in th simulation.</div>
+<div class="block">Gets the EnvironmentAPI used in th simulation.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="../iot/SimulationRunner.html#getEnvironment()">getEnvironment()</a></span> - Method in class iot.<a href="../iot/SimulationRunner.html" title="class in iot">SimulationRunner</a></dt>
 <dd>&nbsp;</dd>
@@ -479,11 +479,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">returns a map with gateway buffers.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../gui/util/GUIUtil.html#getGatewayMap(iot.Environment)">getGatewayMap(Environment)</a></span> - Static method in class gui.util.<a href="../gui/util/GUIUtil.html" title="class in gui.util">GUIUtil</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/GUIUtil.html#getGatewayMap(iot.Environment)">getGatewayMap(EnvironmentAPI)</a></span> - Static method in class gui.util.<a href="../gui/util/GUIUtil.html" title="class in gui.util">GUIUtil</a></dt>
 <dd>
 <div class="block">Retrieve a map of gateway waypoints to their visualization Ids.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getGateways()">getGateways()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getGateways()">getGateways()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">Returns all the gateways on the map.</div>
 </dd>
@@ -497,7 +497,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="../iot/networkentity/UserMote.html#getGPSSensor()">getGPSSensor()</a></span> - Method in class iot.networkentity.<a href="../iot/networkentity/UserMote.html" title="class in iot.networkentity">UserMote</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getGraph()">getGraph()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getGraph()">getGraph()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/mapviewer/MoteWayPoint.html#getIcon()">getIcon()</a></span> - Method in class gui.mapviewer.<a href="../gui/mapviewer/MoteWayPoint.html" title="class in gui.mapviewer">MoteWayPoint</a></dt>
 <dd>&nbsp;</dd>
@@ -597,29 +597,29 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/util/AbstractConfigurePanel.html#getMainPanel()">getMainPanel()</a></span> - Method in class gui.util.<a href="../gui/util/AbstractConfigurePanel.html" title="class in gui.util">AbstractConfigurePanel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapCenter()">getMapCenter()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapCenter()">getMapCenter()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">Returns the geoPosition of the center of the map.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="../util/xml/ConfigurationReader.MoteReader.html#getMapCoordinates()">getMapCoordinates()</a></span> - Method in class util.xml.<a href="../util/xml/ConfigurationReader.MoteReader.html" title="class in util.xml">ConfigurationReader.MoteReader</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapHeight()">getMapHeight()</a></span> - Static method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapHeight()">getMapHeight()</a></span> - Static method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapHelper()">getMapHelper()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapHelper()">getMapHelper()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapOrigin()">getMapOrigin()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapOrigin()">getMapOrigin()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">Returns the coordinates of the point [0,0] on the map.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapWidth()">getMapWidth()</a></span> - Static method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMapWidth()">getMapWidth()</a></span> - Static method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../iot/lora/EU868ParameterByDataRate.html#getMaximumPayloadSize()">getMaximumPayloadSize()</a></span> - Method in enum iot.lora.<a href="../iot/lora/EU868ParameterByDataRate.html" title="enum in iot.lora">EU868ParameterByDataRate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../iot/lora/RegionalParameter.html#getMaximumPayloadSize()">getMaximumPayloadSize()</a></span> - Method in interface iot.lora.<a href="../iot/lora/RegionalParameter.html" title="interface in iot.lora">RegionalParameter</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMaxXpos()">getMaxXpos()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMaxXpos()">getMaxXpos()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMaxYpos()">getMaxYpos()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMaxYpos()">getMaxYpos()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../application/pollution/PollutionLevel.html#getMediumPollution(java.util.List)">getMediumPollution(List&lt;Pair&lt;Double, PollutionLevel&gt;&gt;)</a></span> - Static method in class application.pollution.<a href="../application/pollution/PollutionLevel.html" title="class in application.pollution">PollutionLevel</a></dt>
 <dd>&nbsp;</dd>
@@ -634,7 +634,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the mote effector used by this feedbackLoop.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../gui/util/GUIUtil.html#getMoteMap(iot.Environment)">getMoteMap(Environment)</a></span> - Static method in class gui.util.<a href="../gui/util/GUIUtil.html" title="class in gui.util">GUIUtil</a></dt>
+<dt><span class="memberNameLink"><a href="../gui/util/GUIUtil.html#getMoteMap(iot.Environment)">getMoteMap(EnvironmentAPI)</a></span> - Static method in class gui.util.<a href="../gui/util/GUIUtil.html" title="class in gui.util">GUIUtil</a></dt>
 <dd>
 <div class="block">Retrieve a map of mote waypoints to their visualization Ids.</div>
 </dd>
@@ -642,7 +642,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the mote probe used by this feedbackLoop.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMotes()">getMotes()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getMotes()">getMotes()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../util/xml/ConfigurationReader.MoteReader.html#getMoteSensors()">getMoteSensors()</a></span> - Method in class util.xml.<a href="../util/xml/ConfigurationReader.MoteReader.html" title="class in util.xml">ConfigurationReader.MoteReader</a></dt>
 <dd>&nbsp;</dd>
@@ -672,7 +672,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../iot/mqtt/Topics.html#getNetServerToGateway(java.lang.String,java.lang.String,java.lang.String)">getNetServerToGateway(String, String, String)</a></span> - Static method in class iot.mqtt.<a href="../iot/mqtt/Topics.html" title="class in iot.mqtt">Topics</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getNetworkEntityById(long)">getNetworkEntityById(long)</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getNetworkEntityById(long)">getNetworkEntityById(long)</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">Retrieve the <a href="../iot/networkentity/NetworkEntity.html" title="class in iot.networkentity"><code>NetworkEntity</code></a> with the required Id.</div>
 </dd>
@@ -684,7 +684,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Get the new remapped Id for a waypoint.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getNumberOfRuns()">getNumberOfRuns()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getNumberOfRuns()">getNumberOfRuns()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">Returns the number of runs of this configuration.</div>
 </dd>
@@ -692,7 +692,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the number of runs.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#getNumberOfZones()">getNumberOfZones()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#getNumberOfZones()">getNumberOfZones()</a></span> - Method in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>
 <div class="block">Gets the number of zones.</div>
 </dd>
@@ -1080,7 +1080,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../gui/DestinationGUI.html#graph">graph</a></span> - Variable in class gui.<a href="../gui/DestinationGUI.html" title="class in gui">DestinationGUI</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="../iot/Environment.html#graph">graph</a></span> - Variable in class iot.<a href="../iot/Environment.html" title="class in iot">Environment</a></dt>
+<dt><span class="memberNameLink"><a href="../iot/Environment.html#graph">graph</a></span> - Variable in class iot.<a href="../iot/Environment.html" title="class in iot">EnvironmentAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="../util/xml/ConfigurationWriter.MoteWriter.html#graph">graph</a></span> - Variable in class util.xml.<a href="../util/xml/ConfigurationWriter.MoteWriter.html" title="class in util.xml">ConfigurationWriter.MoteWriter</a></dt>
 <dd>&nbsp;</dd>

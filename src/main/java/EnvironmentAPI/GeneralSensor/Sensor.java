@@ -1,7 +1,7 @@
-package application.Environment.GeneralSensor;
+package EnvironmentAPI.GeneralSensor;
 
 
-import application.Environment.PollutionEnvironment;
+import EnvironmentAPI.PollutionEnvironment;
 import org.jxmapviewer.viewer.GeoPosition;
 
 import java.time.LocalTime;
@@ -17,7 +17,7 @@ public abstract class Sensor{
         this.position = position;
     }
 
-    public double generateData(LocalTime time) {
+    public double generateData(long timeinNano) {
         return 0.0;
     }
 
