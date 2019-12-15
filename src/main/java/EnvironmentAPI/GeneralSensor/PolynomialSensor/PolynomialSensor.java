@@ -6,7 +6,6 @@ import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.Pair;
 
-import java.time.LocalTime;
 import java.util.*;
 
 public class PolynomialSensor extends Sensor {

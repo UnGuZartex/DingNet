@@ -1,14 +1,12 @@
 package application.pollution;
 
 import application.Application;
-import EnvironmentAPI.PollutionEnvironment;
 import iot.Environment;
 import iot.lora.LoraWanPacket;
 import iot.lora.MessageType;
 import iot.mqtt.Topics;
 import iot.mqtt.TransmissionWrapper;
 import iot.networkentity.MoteSensor;
-import org.jxmapviewer.viewer.GeoPosition;
 import util.Converter;
 
 import java.util.Arrays;

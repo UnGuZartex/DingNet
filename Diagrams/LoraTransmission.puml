@@ -8,8 +8,8 @@
 
  Mote -> Mote: loraSend(packet)
  Mote -> Mote: update history
- Mote -> EnvironmentAPI: getGateways()
- activate EnvironmentAPI
+ Mote -> Environment: getGateways()
+ activate Environment
  return gateways
  loop for all gateways
  create LoraTransmission
@@ -18,8 +18,8 @@
    return transmission
    Mote -> Mote : addToTransmissionsToSend
  end
- Mote -> EnvironmentAPI: getMotes()
- activate EnvironmentAPI
+ Mote -> Environment: getMotes()
+ activate Environment
  return motes
  loop for all motes where mote != this
     Mote -> LoraTransmission: new()
@@ -34,8 +34,8 @@
      loop until receiver reached
      activate LoraTransmission
      LoraTransmission -> LoraTransmission: moveTo(x,y)
-     LoraTransmission -> EnvironmentAPI: getCharacteristic(x,y)
-     activate EnvironmentAPI
+     LoraTransmission -> Environment: getCharacteristic(x,y)
+     activate Environment
      return characteristic
      LoraTransmission -> LoraTransmission: setTransmissionPower(...)
      end

@@ -163,17 +163,17 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>private java.util.function.Predicate&lt;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&gt;</code></td>
+<td class="colFirst"><code>private java.util.function.Predicate&lt;<a href="Environment.html" title="class in iot">Environment</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#continueSimulation">continueSimulation</a></span></code></th>
 <td class="colLast">
 <div class="block">A condition which determines if the simulation should continue (should return <code>false</code> when the simulation is finished).</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>private java.lang.ref.WeakReference&lt;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&gt;</code></td>
+<td class="colFirst"><code>private java.lang.ref.WeakReference&lt;<a href="Environment.html" title="class in iot">Environment</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#environment">environment</a></span></code></th>
 <td class="colLast">
-<div class="block">The EnvironmentAPI used in th simulation.</div>
+<div class="block">The Environment used in th simulation.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -254,10 +254,10 @@ extends java.lang.Object</pre>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="Environment.html" title="class in iot">EnvironmentAPI</a></code></td>
+<td class="colFirst"><code><a href="Environment.html" title="class in iot">Environment</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getEnvironment()">getEnvironment</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Gets the EnvironmentAPI used in th simulation.</div>
+<div class="block">Gets the Environment used in th simulation.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -288,9 +288,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setEnvironment(java.lang.ref.WeakReference)">setEnvironment</a></span>&#8203;(java.lang.ref.WeakReference&lt;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&gt;&nbsp;environment)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setEnvironment(java.lang.ref.WeakReference)">setEnvironment</a></span>&#8203;(java.lang.ref.WeakReference&lt;<a href="Environment.html" title="class in iot">Environment</a>&gt;&nbsp;environment)</code></th>
 <td class="colLast">
-<div class="block">Sets the EnvironmentAPI used in th simulation.</div>
+<div class="block">Sets the Environment used in th simulation.</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
@@ -309,7 +309,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>private void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setupSimulation(java.util.function.Predicate)">setupSimulation</a></span>&#8203;(java.util.function.Predicate&lt;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&gt;&nbsp;pred)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setupSimulation(java.util.function.Predicate)">setupSimulation</a></span>&#8203;(java.util.function.Predicate&lt;<a href="Environment.html" title="class in iot">Environment</a>&gt;&nbsp;pred)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i12" class="altColor">
@@ -369,8 +369,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>environment</h4>
-<pre>private&nbsp;java.lang.ref.WeakReference&lt;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&gt; environment</pre>
-<div class="block">The EnvironmentAPI used in th simulation.</div>
+<pre>private&nbsp;java.lang.ref.WeakReference&lt;<a href="Environment.html" title="class in iot">Environment</a>&gt; environment</pre>
+<div class="block">The Environment used in th simulation.</div>
 </li>
 </ul>
 <a id="approach">
@@ -389,7 +389,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>continueSimulation</h4>
-<pre>private&nbsp;java.util.function.Predicate&lt;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&gt; continueSimulation</pre>
+<pre>private&nbsp;java.util.function.Predicate&lt;<a href="Environment.html" title="class in iot">Environment</a>&gt; continueSimulation</pre>
 <div class="block">A condition which determines if the simulation should continue (should return <code>false</code> when the simulation is finished).</div>
 </li>
 </ul>
@@ -448,11 +448,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getEnvironment</h4>
 <pre class="methodSignature">@Basic
-public&nbsp;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&nbsp;getEnvironment()</pre>
-<div class="block">Gets the EnvironmentAPI used in th simulation.</div>
+public&nbsp;<a href="Environment.html" title="class in iot">Environment</a>&nbsp;getEnvironment()</pre>
+<div class="block">Gets the Environment used in th simulation.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The EnvironmentAPI used in the simulation.</dd>
+<dd>The Environment used in the simulation.</dd>
 </dl>
 </li>
 </ul>
@@ -463,11 +463,11 @@ public&nbsp;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&n
 <li class="blockList">
 <h4>setEnvironment</h4>
 <pre class="methodSignature">@Basic
-public&nbsp;void&nbsp;setEnvironment&#8203;(java.lang.ref.WeakReference&lt;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&gt;&nbsp;environment)</pre>
-<div class="block">Sets the EnvironmentAPI used in th simulation.</div>
+public&nbsp;void&nbsp;setEnvironment&#8203;(java.lang.ref.WeakReference&lt;<a href="Environment.html" title="class in iot">Environment</a>&gt;&nbsp;environment)</pre>
+<div class="block">Sets the Environment used in th simulation.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>environment</code> - The EnvironmentAPI to use in the simulation.</dd>
+<dd><code>environment</code> - The Environment to use in the simulation.</dd>
 </dl>
 </li>
 </ul>
@@ -606,7 +606,7 @@ void&nbsp;setApproach&#8203;(<a href="../selfadaptation/feedbackloop/GenericFeed
 <ul class="blockList">
 <li class="blockList">
 <h4>setupSimulation</h4>
-<pre class="methodSignature">private&nbsp;void&nbsp;setupSimulation&#8203;(java.util.function.Predicate&lt;<a href="Environment.html" title="class in iot">EnvironmentAPI</a>&gt;&nbsp;pred)</pre>
+<pre class="methodSignature">private&nbsp;void&nbsp;setupSimulation&#8203;(java.util.function.Predicate&lt;<a href="Environment.html" title="class in iot">Environment</a>&gt;&nbsp;pred)</pre>
 </li>
 </ul>
 <a id="setupSingleRun(boolean)">

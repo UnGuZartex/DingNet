@@ -4,8 +4,6 @@ package EnvironmentAPI.GeneralSensor;
 import EnvironmentAPI.PollutionEnvironment;
 import org.jxmapviewer.viewer.GeoPosition;
 
-import java.time.LocalTime;
-
 public abstract class Sensor{
     private int radius;
     private PollutionEnvironment environment;
