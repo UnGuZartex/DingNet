@@ -6,7 +6,8 @@ public enum TimeUnit {
     MICROS("Micro", 1e3),
     MILLIS("Milli", 1e6),
     SECONDS("Second", 1e9),
-    MINUTES("Minute", 1e9*60);
+    MINUTES("Minute", 1e9*60),
+    HOURS("Hours", 1e9*3600);
 
     private final String name;
     private final double v;

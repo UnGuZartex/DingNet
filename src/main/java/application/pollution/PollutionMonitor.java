@@ -22,13 +22,13 @@ public class PollutionMonitor extends Application {
     private Environment environment;
 
 
+
     public PollutionMonitor(Environment environment, PollutionGrid pollutionGrid) {
         super(List.of(Topics.getNetServerToApp("+", "+")));
 
         this.pollutionGrid = pollutionGrid;
         this.environment = environment;
     }
-
 
     /**
      * Determine the pollution level from a byte array, solely using the data from an IAQ sensor.

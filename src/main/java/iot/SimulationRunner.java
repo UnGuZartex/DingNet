@@ -1,5 +1,6 @@
 package iot;
 
+import EnvironmentAPI.PollutionEnvironment;
 import application.pollution.PollutionGrid;
 import application.pollution.PollutionMonitor;
 import application.routing.AStarRouter;
@@ -46,6 +47,8 @@ public class SimulationRunner {
     private RoutingApplication routingApplication;
     private PollutionMonitor pollutionMonitor;
     private NetworkServer networkServer;
+
+    private PollutionEnvironment pollutionEnvironment;
 
 
 
@@ -327,6 +330,9 @@ public class SimulationRunner {
         if (this.routingApplication != null) {
             this.routingApplication.destruct();
         }
+        if (this.pollutionEnvironment != null) {
+            this.pollutionEnvironment.Stop();
+        }
 
         this.networkServer.reconnect();
         this.environment = null;
@@ -336,10 +342,15 @@ public class SimulationRunner {
      * Initialize all applications used in the simulation.
      */
     private void setupApplications() {
+        this.pollutionEnvironment = new PollutionEnvironment(this.getEnvironment().getClock());
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
-            new AStarRouter(new SimplePollutionHeuristic(pollutionGrid)), getEnvironment().getGraph()
+            new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()
         );
+    }
+
+    public PollutionEnvironment getEnvironmentAPI() {
+        return this.pollutionEnvironment;
     }
 
     // endregion
