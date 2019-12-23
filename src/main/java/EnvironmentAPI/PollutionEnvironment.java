@@ -1,8 +1,8 @@
 package EnvironmentAPI;
 
+import EnvironmentAPI.GeneralSensor.FunctionSensor.FunctionSensor;
 import EnvironmentAPI.GeneralSensor.PolynomialSensor.PolynomialSensor;
 import EnvironmentAPI.GeneralSensor.Sensor;
-import iot.GlobalClock;
 import org.apache.commons.lang3.time.StopWatch;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.MapHelper;
@@ -14,7 +14,7 @@ public class PollutionEnvironment {
     private List<Sensor> Sensors = new ArrayList<>();
     private final static StopWatch stopwatch = new StopWatch();
 
-    public PollutionEnvironment(GlobalClock clock) {
+    public PollutionEnvironment() {
 
         readSensorsFromJSON();
         stopwatch.reset();
@@ -22,11 +22,13 @@ public class PollutionEnvironment {
     }
 
     private void readSensorsFromJSON() {
-        Sensors.add(new PolynomialSensor(2, null, this, new GeoPosition(50.873566, 4.696793)));
-        Sensors.add(new PolynomialSensor(2, null, this, new GeoPosition(50.879845, 4.700518)));
-        Sensors.add(new PolynomialSensor(2, null, this, new GeoPosition(50.883023, 4.704790)));
-        Sensors.add(new PolynomialSensor(2, null, this, new GeoPosition(50.883259, 4.689375)));
-        Sensors.add(new PolynomialSensor(2, null, this, new GeoPosition(50.875508, 4.691571)));
+        //Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.873566, 4.696793)));
+        //Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.879845, 4.700518)));
+        //Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883023, 4.704790)));
+        //Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883259, 4.689375)));
+        Sensors.add(new FunctionSensor(2, new GeoPosition(50.873566, 4.696793), "255*sin(t)", 255));
+        Sensors.add(new FunctionSensor(2, new GeoPosition(50.875508, 4.691571), "255-t", 255));
+        Sensors.add(new FunctionSensor(2, new GeoPosition(50.883259, 4.691571), "1-255*sin(t)", 255));
 
     }
 
@@ -59,7 +61,7 @@ public class PollutionEnvironment {
         return totalPollution/(amount+2);
     }
 
-    public double getDataFromSensors(GeoPosition position){
+    public double getDataFromSensors(GeoPosition position) {
         double total = 0;
         List<Double> allDistances = getAllDistances(position);
         //System.out.println(allDistances);
@@ -72,7 +74,7 @@ public class PollutionEnvironment {
         //System.out.println("Total: " + total);
 
         total /= 255;
-        //System.out.println("Total: " + total);
+        System.out.println("Total: " + total);
         return total;
     }
 

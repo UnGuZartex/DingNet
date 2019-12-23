@@ -342,7 +342,7 @@ public class SimulationRunner {
      * Initialize all applications used in the simulation.
      */
     private void setupApplications() {
-        this.pollutionEnvironment = new PollutionEnvironment(this.getEnvironment().getClock());
+        this.pollutionEnvironment = new PollutionEnvironment();
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
             new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()
