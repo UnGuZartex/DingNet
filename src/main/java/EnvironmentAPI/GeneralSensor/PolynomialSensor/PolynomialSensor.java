@@ -1,7 +1,6 @@
 package EnvironmentAPI.GeneralSensor.PolynomialSensor;
 
 import EnvironmentAPI.GeneralSensor.Sensor;
-import EnvironmentAPI.PollutionEnvironment;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.Pair;
