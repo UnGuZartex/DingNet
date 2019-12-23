@@ -12,13 +12,11 @@ import parsii.tokenizer.ParseException;
 
 public class FunctionSensor extends Sensor {
     private TimeUnit timeUnit;
-    private double maxValue;
     private Expression function;
     private Variable t;
 
     public FunctionSensor(int radius, GeoPosition position, String function, double maxValue) {
-        super(radius, position);
-        this.maxValue = maxValue;
+        super(radius, position, maxValue);
         timeUnit = TimeUnit.SECONDS;
         Scope scope = new Scope();
         this.t = scope.getVariable("t");

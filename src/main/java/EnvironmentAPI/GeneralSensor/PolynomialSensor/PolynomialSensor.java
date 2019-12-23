@@ -8,34 +8,26 @@ import util.Pair;
 import java.util.*;
 
 public class PolynomialSensor extends Sensor {
-    private List<Double> newtonCoefficients  = new ArrayList<>();
+    private List<List<Double>> newtonCoefficients  = new ArrayList<>();
     private List<Pair<Double,Double>> pointsKnown  = new ArrayList<>();
     private Double NoiseFactor = 0.0;
     private TimeUnit timeUnit;
     private Random random = new Random();
 
 
-    public PolynomialSensor(int radius, List<Pair>points, GeoPosition position) {
-        super(radius, position);
-        pointsKnown.add(new Pair<Double,Double>(1.0, random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(2.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(3.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(4.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(5.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(6.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(7.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(8.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(9.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(10.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(11.0,random.nextDouble()*150));
-        pointsKnown.add(new Pair<Double,Double>(12.0,random.nextDouble()*150));
+    public PolynomialSensor(int radius, List<Pair>points, GeoPosition position, double maxValue) {
+        super(radius, position, maxValue);
+
+        addPoint(new Pair<Double,Double>(1.0,random.nextDouble()*155));
+        addPoint(new Pair<Double,Double>(2.0,random.nextDouble()*155));
+        addPoint(new Pair<Double,Double>(3.0,random.nextDouble()*155));
+        addPoint(new Pair<Double,Double>(4.0,random.nextDouble()*155));
+        addPoint(new Pair<Double,Double>(5.0,random.nextDouble()*155));
+        addPoint(new Pair<Double,Double>(15.0,random.nextDouble()*155));
 
 
-        calculateNewtonCoefficients();
-        //System.out.println(newtonCoefficients);
 
         timeUnit = TimeUnit.SECONDS;
-        //System.out.println(generateData(LocalTime.of(0, 0, 4)));
 
     }
 
@@ -49,56 +41,24 @@ public class PolynomialSensor extends Sensor {
     public double generateData(long timeinNano) {
 
         double dataAtTime =  evaluatePolynomial(timeinNano);
-        //System.out.println("data: " + dataAtTime);
         return dataAtTime;
     }
 
-    /**
-     * Calculate the Coefficients needed to determine the Newton polynomial
-     * This is done using divided differences. The table with these values is generated
-     * in the Coefficients map.
-     */
-    private void calculateNewtonCoefficients() {
-        Map<Integer,Map<Integer,Double>> Coefficients = new HashMap<>();
-        int order = pointsKnown.size() - 1;
-        Map<Integer,Double> orderZero = new HashMap<>();
-        int calculatingOrder = 0;
-        List<Double> Xlist = new ArrayList<>();
-
-        for (int i = 0; i < pointsKnown.size(); i++){
-            orderZero.put(i, pointsKnown.get(i).getRight());
-            Xlist.add(pointsKnown.get(i).getLeft());
+    public void addPoint(Pair<Double,Double> Point){
+        pointsKnown.add(Point);
+        if(newtonCoefficients.isEmpty()){
+            newtonCoefficients.add(new ArrayList<Double>(Collections.singleton(Point.getRight())));
         }
-        Coefficients.put(calculatingOrder, orderZero);
-        while(calculatingOrder < order){
-            calculatingOrder++;
-            Coefficients.put(calculatingOrder, getCoeffWithOrder(Coefficients,Xlist, calculatingOrder));
+        else{
+            newtonCoefficients.get(0).add(Point.getRight());
+            newtonCoefficients.add(new ArrayList<>());
+            for(int i = 1; i < newtonCoefficients.size(); i++){
+                int listLengthPrevious = newtonCoefficients.get(i-1).size() - 1;
+                double newValue = newtonCoefficients.get(i-1).get(listLengthPrevious) - newtonCoefficients.get(i-1).get(listLengthPrevious-1);
+                newValue /= pointsKnown.get(listLengthPrevious-1+i).getLeft() - pointsKnown.get(listLengthPrevious-1).getLeft();
+                newtonCoefficients.get(i).add(newValue);
+            }
         }
-        System.out.println(Coefficients);
-        for(int i = 0; i < Coefficients.size(); i++){
-            newtonCoefficients.add(Coefficients.get(i).get(0));
-        }
-    }
-
-    /**
-     * Calculate the coefficients of an order given the previous order coefficients.
-     * @param alreadyKnown: Map consisting of already known coefficients
-     * @param X: List containing all x-values
-     * @param order: The current order to calculate
-     * @return a map containing all coefficients for the order.
-     */
-    private Map<Integer, Double> getCoeffWithOrder(Map<Integer, Map<Integer,Double>> alreadyKnown,
-                                                  List<Double> X, int order){
-        Map<Integer, Double> previousOrder = alreadyKnown.get(alreadyKnown.size()-1);
-        Map<Integer, Double> results = new HashMap<>();
-
-        for(int i = 0; i < previousOrder.size()-1; i++){
-            Double currentValue = previousOrder.get(i);
-            Double nextValue = previousOrder.get(i+1);
-            results.put(i,((nextValue-currentValue)/(X.get(i+order) - X.get(i))));
-        }
-
-        return results;
     }
 
     /**
@@ -111,11 +71,10 @@ public class PolynomialSensor extends Sensor {
         double totalValue = 0;
         for (int i = 0; i < newtonCoefficients.size(); i++)
         {
-            totalValue += newtonCoefficients.get(i) * getPointsFromOrder(i, timeToEvaluate);
-            //System.out.println(i + ": " + totalValue);
+            totalValue += newtonCoefficients.get(i).get(0) * getPointsFromOrder(i, timeToEvaluate);
         }
-        if (totalValue >= 255){
-            totalValue = 255;
+        if (totalValue >= maxValue){
+            totalValue = maxValue;
         }
         else if (totalValue <= 0){
             totalValue = 0;

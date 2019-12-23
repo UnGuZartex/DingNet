@@ -22,10 +22,10 @@ public class PollutionEnvironment {
     }
 
     private void readSensorsFromJSON() {
-        //Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.873566, 4.696793)));
-        //Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.879845, 4.700518)));
-        //Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883023, 4.704790)));
-        //Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883259, 4.689375)));
+        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.873566, 4.696793),255));
+        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.879845, 4.700518),255));
+        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883023, 4.704790),255));
+        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883259, 4.689375),255));
         Sensors.add(new FunctionSensor(2, new GeoPosition(50.873566, 4.696793), "255*sin(t)", 255));
         Sensors.add(new FunctionSensor(2, new GeoPosition(50.875508, 4.691571), "255-t", 255));
         Sensors.add(new FunctionSensor(2, new GeoPosition(50.883259, 4.691571), "1-255*sin(t)", 255));
@@ -53,10 +53,7 @@ public class PollutionEnvironment {
             double yc = Math.toDegrees(y);
             GeoPosition newPoint = new GeoPosition(xc, yc);
             totalPollution += getDataFromSensors(newPoint);
-            System.out.println(amount);
 
-            System.out.println(totalPollution);
-            System.out.println(xc + "," + yc);
         }
         return totalPollution/(amount+2);
     }
@@ -64,17 +61,14 @@ public class PollutionEnvironment {
     public double getDataFromSensors(GeoPosition position) {
         double total = 0;
         List<Double> allDistances = getAllDistances(position);
-        //System.out.println(allDistances);
         for(int i = 0; i < Sensors.size(); i++){
             if (allDistances.get(i) == 0.0){
                 return Sensors.get(i).generateData(stopwatch.getNanoTime())/255;
             }
             total += Sensors.get(i).generateData(stopwatch.getNanoTime())*allDistances.get(i);
         }
-        //System.out.println("Total: " + total);
 
         total /= 255;
-        System.out.println("Total: " + total);
         return total;
     }
 
