@@ -22,10 +22,10 @@ public class PollutionEnvironment {
     }
 
     private void readSensorsFromJSON() {
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.873566, 4.696793)));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.879845, 4.700518)));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883023, 4.704790)));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883259, 4.689375)));
+        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.873566, 4.696793),255));
+        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.879845, 4.700518),255));
+        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883023, 4.704790),255));
+        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883259, 4.689375),255));
         Sensors.add(new FunctionSensor(2, new GeoPosition(50.873566, 4.696793), "255*sin(t)", 255));
         Sensors.add(new FunctionSensor(2, new GeoPosition(50.875508, 4.691571), "255-t", 255));
         Sensors.add(new FunctionSensor(2, new GeoPosition(50.883259, 4.691571), "1-255*sin(t)", 255));
