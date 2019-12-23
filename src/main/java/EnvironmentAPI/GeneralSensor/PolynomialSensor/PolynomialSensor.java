@@ -16,8 +16,8 @@ public class PolynomialSensor extends Sensor {
     private Random random = new Random();
 
 
-    public PolynomialSensor(int radius, List<Pair>points, PollutionEnvironment environment, GeoPosition position) {
-        super(radius, environment, position);
+    public PolynomialSensor(int radius, List<Pair>points, GeoPosition position) {
+        super(radius, position);
         pointsKnown.add(new Pair<Double,Double>(1.0, random.nextDouble()*150));
         pointsKnown.add(new Pair<Double,Double>(2.0,random.nextDouble()*150));
         pointsKnown.add(new Pair<Double,Double>(3.0,random.nextDouble()*150));
@@ -46,6 +46,7 @@ public class PolynomialSensor extends Sensor {
      * @param timeinNano: The time to evaluate the polynomial in.
      * @return a byte representing the amount of pollution in a range of [0,255].
      */
+    @Override
     public double generateData(long timeinNano) {
 
         double dataAtTime =  evaluatePolynomial(timeinNano);
