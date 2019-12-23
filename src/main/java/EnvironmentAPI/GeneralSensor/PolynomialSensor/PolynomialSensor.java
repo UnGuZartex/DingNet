@@ -15,8 +15,8 @@ public class PolynomialSensor extends Sensor {
     private Random random = new Random();
 
 
-    public PolynomialSensor(int radius, List<Pair>points, GeoPosition position) {
-        super(radius, position);
+    public PolynomialSensor(int radius, List<Pair>points, GeoPosition position, double maxValue) {
+        super(radius, position, maxValue);
 
         addPoint(new Pair<Double,Double>(1.0,random.nextDouble()*155));
         addPoint(new Pair<Double,Double>(2.0,random.nextDouble()*155));
@@ -73,8 +73,8 @@ public class PolynomialSensor extends Sensor {
         {
             totalValue += newtonCoefficients.get(i).get(0) * getPointsFromOrder(i, timeToEvaluate);
         }
-        if (totalValue >= 255){
-            totalValue = 255;
+        if (totalValue >= maxValue){
+            totalValue = maxValue;
         }
         else if (totalValue <= 0){
             totalValue = 0;
