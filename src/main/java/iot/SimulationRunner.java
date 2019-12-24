@@ -8,6 +8,7 @@ import application.routing.AStarRouter;
 import application.routing.RoutingApplication;
 import application.routing.heuristic.SimplePollutionHeuristic;
 import gui.MainGUI;
+import gui.util.GUISettings;
 import iot.mqtt.MQTTClientFactory;
 import iot.networkentity.Gateway;
 import iot.networkentity.Mote;
@@ -336,7 +337,7 @@ public class SimulationRunner {
             this.routingApplication.destruct();
         }
         if (this.pollutionEnvironment != null) {
-            this.pollutionEnvironment.Stop();
+            PollutionEnvironment.Stop();
         }
 
         this.networkServer.reconnect();
@@ -347,7 +348,7 @@ public class SimulationRunner {
      * Initialize all applications used in the simulation.
      */
     private void setupApplications() {
-        loadEnvironmentFromFile(new File("D:\\BachProef\\Code\\DingNet-1.2.0(1)\\DingNet-1.2.0\\src\\main\\java\\EnvironmentAPI\\Configurations\\BaseConfiguration.xml"));
+        loadEnvironmentFromFile(new File(GUISettings.PATH_TO_SENSOR_CONFIG + "BaseConfiguration.xml"));
         PollutionEnvironment.startWatch();
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(

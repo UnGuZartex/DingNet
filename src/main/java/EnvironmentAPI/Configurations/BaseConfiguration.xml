@@ -9,9 +9,10 @@
             <TimeUnit>SECONDS</TimeUnit>
         </PolynomialSensor>
         <PolynomialSensor>
-            <Position>50.873566, 4.696793</Position>
+            <Position>50.873500, 4.696793</Position>
             <Point>1.0,122.0</Point>
-            <Point>2.0,255.0</Point>
+            <Point>2.0,2.0</Point>
+            <Point>4.0,205.0</Point>
             <MaximumValue>255</MaximumValue>
             <TimeUnit>SECONDS</TimeUnit>
         </PolynomialSensor>

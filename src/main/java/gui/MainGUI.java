@@ -1,6 +1,7 @@
 package gui;
 
 
+import EnvironmentAPI.PollutionEnvironment;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -189,7 +190,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
             this.setEnabledRunButtons(false);
             simulationRunner.setupSingleRun();
-
+            PollutionEnvironment.startWatch();
             simulationRunner.simulate(simulationSpeed, this);
         });
 

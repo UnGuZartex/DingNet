@@ -17,7 +17,9 @@ public class PolynomialSensor extends Sensor {
 
     public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit) {
         super(position, maxValue);
-        this.pointsKnown = points;
+        for(Pair<Double,Double> point:points){
+            addPoint(point);
+        }
 
         timeUnit = unit;
 

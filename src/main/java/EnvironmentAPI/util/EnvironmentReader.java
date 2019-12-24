@@ -28,7 +28,6 @@ public class EnvironmentReader {
                 Element PSensorNode = (Element) Sensors.getElementsByTagName("PolynomialSensor").item(i);
                 List<Pair<Double,Double>> Points = new ArrayList<>();
                 for (int j = 0; j < PSensorNode.getElementsByTagName("Point").getLength(); j++) {
-                    System.out.println(PSensorNode.getElementsByTagName("Point").item(j).getTextContent());
                     Points.add(ToPoint(PSensorNode.getElementsByTagName("Point").item(j).getTextContent()));
                 }
                 Double maxValue = Double.valueOf(PSensorNode.getElementsByTagName("MaximumValue").item(0).getTextContent());

@@ -1,7 +1,6 @@
 package EnvironmentAPI;
 
-import EnvironmentAPI.GeneralSensor.FunctionSensor.FunctionSensor;
-import EnvironmentAPI.GeneralSensor.PolynomialSensor.PolynomialSensor;
+
 import EnvironmentAPI.GeneralSensor.Sensor;
 import org.apache.commons.lang3.time.StopWatch;
 import org.jxmapviewer.viewer.GeoPosition;
@@ -20,6 +19,7 @@ public class PollutionEnvironment {
     }
 
     public static void startWatch(){
+        stopwatch.reset();
         stopwatch.start();
     }
 
@@ -54,17 +54,24 @@ public class PollutionEnvironment {
         return totalPollution/(amount+2);
     }
 
+    public double getMaxOfSensors(){
+        List<Double> maxValues = new ArrayList<>();
+        for(Sensor sensor:Sensors){
+            maxValues.add(sensor.getMaxValue());
+        }
+        return Collections.max(maxValues);
+    }
     public double getDataFromSensors(GeoPosition position) {
         double total = 0;
         List<Double> allDistances = getAllDistances(position);
         for(int i = 0; i < Sensors.size(); i++){
             if (allDistances.get(i) == 0.0){
-                return Sensors.get(i).generateData(stopwatch.getNanoTime())/255;
+                return Sensors.get(i).generateData(stopwatch.getNanoTime())/getMaxOfSensors();
             }
             total += Sensors.get(i).generateData(stopwatch.getNanoTime())*allDistances.get(i);
         }
 
-        total /= 255;
+        total /= getMaxOfSensors();
         return total;
     }
 
@@ -88,7 +95,7 @@ public class PollutionEnvironment {
         return MapHelper.distance(position, sensor.getPosition());
     }
 
-    public void Stop(){
+    public static void Stop(){
         stopwatch.stop();
     }
 }
