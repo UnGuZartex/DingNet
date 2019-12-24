@@ -1,6 +1,7 @@
 package iot;
 
 import EnvironmentAPI.PollutionEnvironment;
+import EnvironmentAPI.util.EnvironmentReader;
 import application.pollution.PollutionGrid;
 import application.pollution.PollutionMonitor;
 import application.routing.AStarRouter;
@@ -285,6 +286,10 @@ public class SimulationRunner {
         return InputProfilesReader.readInputProfiles();
     }
 
+
+    public void loadEnvironmentFromFile(File file){
+        EnvironmentReader.loadEnvironment(file,this);
+    }
     /**
      * Load a configuration from a provided xml file.
      * @param file The file with the configuration.
@@ -342,7 +347,8 @@ public class SimulationRunner {
      * Initialize all applications used in the simulation.
      */
     private void setupApplications() {
-        this.pollutionEnvironment = new PollutionEnvironment();
+        loadEnvironmentFromFile(new File("D:\\BachProef\\Code\\DingNet-1.2.0(1)\\DingNet-1.2.0\\src\\main\\java\\EnvironmentAPI\\Configurations\\BaseConfiguration.xml"));
+        PollutionEnvironment.startWatch();
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
             new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()
@@ -351,6 +357,10 @@ public class SimulationRunner {
 
     public PollutionEnvironment getEnvironmentAPI() {
         return this.pollutionEnvironment;
+    }
+
+    public void setPollutionEnvironment(PollutionEnvironment env) {
+        this.pollutionEnvironment = env;
     }
 
     // endregion

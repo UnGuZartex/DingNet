@@ -15,9 +15,9 @@ public class FunctionSensor extends Sensor {
     private Expression function;
     private Variable t;
 
-    public FunctionSensor(int radius, GeoPosition position, String function, double maxValue) {
-        super(radius, position, maxValue);
-        timeUnit = TimeUnit.SECONDS;
+    public FunctionSensor(GeoPosition position, String function, double maxValue, TimeUnit unit) {
+        super(position, maxValue);
+        timeUnit = unit;
         Scope scope = new Scope();
         this.t = scope.getVariable("t");
         try {

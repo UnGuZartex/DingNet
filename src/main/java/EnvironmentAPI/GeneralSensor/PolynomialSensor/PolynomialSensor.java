@@ -9,25 +9,17 @@ import java.util.*;
 
 public class PolynomialSensor extends Sensor {
     private List<List<Double>> newtonCoefficients  = new ArrayList<>();
-    private List<Pair<Double,Double>> pointsKnown  = new ArrayList<>();
+    private List<Pair<Double,Double>> pointsKnown;
     private Double NoiseFactor = 0.0;
     private TimeUnit timeUnit;
     private Random random = new Random();
 
 
-    public PolynomialSensor(int radius, List<Pair>points, GeoPosition position, double maxValue) {
-        super(radius, position, maxValue);
+    public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit) {
+        super(position, maxValue);
+        this.pointsKnown = points;
 
-        addPoint(new Pair<Double,Double>(1.0,random.nextDouble()*155));
-        addPoint(new Pair<Double,Double>(2.0,random.nextDouble()*155));
-        addPoint(new Pair<Double,Double>(3.0,random.nextDouble()*155));
-        addPoint(new Pair<Double,Double>(4.0,random.nextDouble()*155));
-        addPoint(new Pair<Double,Double>(5.0,random.nextDouble()*155));
-        addPoint(new Pair<Double,Double>(15.0,random.nextDouble()*155));
-
-
-
-        timeUnit = TimeUnit.SECONDS;
+        timeUnit = unit;
 
     }
 
@@ -45,6 +37,9 @@ public class PolynomialSensor extends Sensor {
     }
 
     public void addPoint(Pair<Double,Double> Point){
+        if(pointsKnown == null){
+            pointsKnown = new ArrayList<>();
+        }
         pointsKnown.add(Point);
         if(newtonCoefficients.isEmpty()){
             newtonCoefficients.add(new ArrayList<Double>(Collections.singleton(Point.getRight())));

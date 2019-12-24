@@ -8,6 +8,7 @@ import org.jxmapviewer.viewer.GeoPosition;
 import util.MapHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PollutionEnvironment {
@@ -15,21 +16,16 @@ public class PollutionEnvironment {
     private final static StopWatch stopwatch = new StopWatch();
 
     public PollutionEnvironment() {
-
-        readSensorsFromJSON();
         stopwatch.reset();
+    }
+
+    public static void startWatch(){
         stopwatch.start();
     }
 
-    private void readSensorsFromJSON() {
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.873566, 4.696793),255));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.879845, 4.700518),255));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883023, 4.704790),255));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883259, 4.689375),255));
-        Sensors.add(new FunctionSensor(2, new GeoPosition(50.873566, 4.696793), "255*sin(t)", 255));
-        Sensors.add(new FunctionSensor(2, new GeoPosition(50.875508, 4.691571), "255-t", 255));
-        Sensors.add(new FunctionSensor(2, new GeoPosition(50.883259, 4.691571), "1-255*sin(t)", 255));
 
+    public void addSensor(Sensor sensor){
+        Sensors.add(sensor);
     }
 
     public double getDataBetweenPoints(GeoPosition begin, GeoPosition end, double interpollationDistance) {
