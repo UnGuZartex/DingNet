@@ -10,9 +10,7 @@ import java.util.*;
 public class PolynomialSensor extends Sensor {
     private List<List<Double>> newtonCoefficients  = new ArrayList<>();
     private List<Pair<Double,Double>> pointsKnown;
-    private Double NoiseFactor = 0.0;
     private TimeUnit timeUnit;
-    private Random random = new Random();
 
 
     public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit) {

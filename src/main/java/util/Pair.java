@@ -68,4 +68,9 @@ public class Pair<L,R> implements Serializable {
                 this.right.equals(pairo.getRight());
     }
 
+    @Override
+    public String toString(){
+        return "(" + getLeft()+ " ," + getRight() + ")";
+    }
+
 }
