@@ -1,12 +1,14 @@
 package iot;
 
 import EnvironmentAPI.PollutionEnvironment;
+import EnvironmentAPI.util.EnvironmentReader;
 import application.pollution.PollutionGrid;
 import application.pollution.PollutionMonitor;
 import application.routing.AStarRouter;
 import application.routing.RoutingApplication;
 import application.routing.heuristic.SimplePollutionHeuristic;
 import gui.MainGUI;
+import gui.util.GUISettings;
 import iot.mqtt.MQTTClientFactory;
 import iot.networkentity.Gateway;
 import iot.networkentity.Mote;
@@ -285,6 +287,10 @@ public class SimulationRunner {
         return InputProfilesReader.readInputProfiles();
     }
 
+
+    public void loadEnvironmentFromFile(File file){
+        EnvironmentReader.loadEnvironment(file,this);
+    }
     /**
      * Load a configuration from a provided xml file.
      * @param file The file with the configuration.
@@ -331,7 +337,7 @@ public class SimulationRunner {
             this.routingApplication.destruct();
         }
         if (this.pollutionEnvironment != null) {
-            this.pollutionEnvironment.Stop();
+            PollutionEnvironment.Stop();
         }
 
         this.networkServer.reconnect();
@@ -342,7 +348,7 @@ public class SimulationRunner {
      * Initialize all applications used in the simulation.
      */
     private void setupApplications() {
-        this.pollutionEnvironment = new PollutionEnvironment();
+        loadEnvironmentFromFile(new File(GUISettings.PATH_TO_SENSOR_CONFIG + "BaseConfiguration.xml"));
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
             new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()
@@ -351,6 +357,10 @@ public class SimulationRunner {
 
     public PollutionEnvironment getEnvironmentAPI() {
         return this.pollutionEnvironment;
+    }
+
+    public void setPollutionEnvironment(PollutionEnvironment env) {
+        this.pollutionEnvironment = env;
     }
 
     // endregion

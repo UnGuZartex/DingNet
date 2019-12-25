@@ -1,13 +1,13 @@
 package EnvironmentAPI;
 
-import EnvironmentAPI.GeneralSensor.FunctionSensor.FunctionSensor;
-import EnvironmentAPI.GeneralSensor.PolynomialSensor.PolynomialSensor;
+
 import EnvironmentAPI.GeneralSensor.Sensor;
 import org.apache.commons.lang3.time.StopWatch;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.MapHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PollutionEnvironment {
@@ -15,21 +15,17 @@ public class PollutionEnvironment {
     private final static StopWatch stopwatch = new StopWatch();
 
     public PollutionEnvironment() {
+        stopwatch.reset();
+    }
 
-        readSensorsFromJSON();
+    public static void startWatch(){
         stopwatch.reset();
         stopwatch.start();
     }
 
-    private void readSensorsFromJSON() {
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.873566, 4.696793),255));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.879845, 4.700518),255));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883023, 4.704790),255));
-        Sensors.add(new PolynomialSensor(2, null, new GeoPosition(50.883259, 4.689375),255));
-        Sensors.add(new FunctionSensor(2, new GeoPosition(50.873566, 4.696793), "255*sin(t)", 255));
-        Sensors.add(new FunctionSensor(2, new GeoPosition(50.875508, 4.691571), "255-t", 255));
-        Sensors.add(new FunctionSensor(2, new GeoPosition(50.883259, 4.691571), "1-255*sin(t)", 255));
 
+    public void addSensor(Sensor sensor){
+        Sensors.add(sensor);
     }
 
     public double getDataBetweenPoints(GeoPosition begin, GeoPosition end, double interpollationDistance) {
@@ -58,17 +54,24 @@ public class PollutionEnvironment {
         return totalPollution/(amount+2);
     }
 
+    public double getMaxOfSensors(){
+        List<Double> maxValues = new ArrayList<>();
+        for(Sensor sensor:Sensors){
+            maxValues.add(sensor.getMaxValue());
+        }
+        return Collections.max(maxValues);
+    }
     public double getDataFromSensors(GeoPosition position) {
         double total = 0;
         List<Double> allDistances = getAllDistances(position);
         for(int i = 0; i < Sensors.size(); i++){
             if (allDistances.get(i) == 0.0){
-                return Sensors.get(i).generateData(stopwatch.getNanoTime())/255;
+                return Sensors.get(i).generateData(stopwatch.getNanoTime())/getMaxOfSensors();
             }
             total += Sensors.get(i).generateData(stopwatch.getNanoTime())*allDistances.get(i);
         }
 
-        total /= 255;
+        total /= getMaxOfSensors();
         return total;
     }
 
@@ -92,7 +95,7 @@ public class PollutionEnvironment {
         return MapHelper.distance(position, sensor.getPosition());
     }
 
-    public void Stop(){
+    public static void Stop(){
         stopwatch.stop();
     }
 }

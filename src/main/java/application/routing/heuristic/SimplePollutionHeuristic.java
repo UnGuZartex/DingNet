@@ -25,7 +25,6 @@ public class SimplePollutionHeuristic implements RoutingHeuristic {
 
       //  double pollutionValue = this.pollutionGrid.getPollutionLevel(MapHelper.meanPosition(begin, end)).getPollutionFactor();
         double pollutionValue = this.env.getDataBetweenPoints(begin,end, 0.2);
-        System.out.println(pollutionValue);
 
         double factor = (0.0 <= pollutionValue && pollutionValue < 0.2) ? 1 :
                         (0.2 <= pollutionValue && pollutionValue < 0.4) ? 2 :

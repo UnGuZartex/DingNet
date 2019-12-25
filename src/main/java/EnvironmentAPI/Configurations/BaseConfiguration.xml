@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Environment>
+    <Sensors>
+        <PolynomialSensor>
+            <Position>50.873566, 4.696793</Position>
+            <Point>1.0,122.0</Point>
+            <Point>2.0,255.0</Point>
+            <MaximumValue>255</MaximumValue>
+            <TimeUnit>SECONDS</TimeUnit>
+        </PolynomialSensor>
+        <PolynomialSensor>
+            <Position>50.873500, 4.696793</Position>
+            <Point>1.0,122.0</Point>
+            <Point>2.0,2.0</Point>
+            <Point>4.0,205.0</Point>
+            <MaximumValue>255</MaximumValue>
+            <TimeUnit>SECONDS</TimeUnit>
+        </PolynomialSensor>
+        <FunctionSensor>
+            <Position>50.885021, 4.684924</Position>
+            <Function>255*sin(t)</Function>
+            <MaximumValue>255</MaximumValue>
+            <TimeUnit>SECONDS</TimeUnit>
+        </FunctionSensor>
+        <FunctionSensor>
+            <Position>50.878599, 4.715854</Position>
+            <Function>50*sin(t*3)</Function>
+            <MaximumValue>255</MaximumValue>
+            <TimeUnit>SECONDS</TimeUnit>
+        </FunctionSensor>
+        <FunctionSensor>
+            <Position>50.889058, 4.701625</Position>
+            <Function>122*sin(t*pi)</Function>
+            <MaximumValue>255</MaximumValue>
+            <TimeUnit>SECONDS</TimeUnit>
+        </FunctionSensor>
+    </Sensors>
+</Environment>

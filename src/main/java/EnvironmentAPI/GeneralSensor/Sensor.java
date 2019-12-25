@@ -4,12 +4,10 @@ package EnvironmentAPI.GeneralSensor;
 import org.jxmapviewer.viewer.GeoPosition;
 
 public abstract class Sensor{
-    private int radius;
     private GeoPosition position;
     protected double maxValue;
 
-    protected Sensor(int radius, GeoPosition position, double maxValue) {
-        this.radius = radius;
+    protected Sensor(GeoPosition position, double maxValue) {
         this.position = position;
         this.maxValue = maxValue;
     }
