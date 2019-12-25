@@ -69,6 +69,8 @@ public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
                     Math.abs(topLeft.getX() - bottomRight.getX()), Math.abs(topLeft.getY() - bottomRight.getY())));
             }
         }
+
+        g.dispose();
     }
 
 

@@ -2,11 +2,9 @@ package EnvironmentAPI.GeneralSensor.PolynomialSensor;
 
 import EnvironmentAPI.GeneralSensor.Sensor;
 import datagenerator.iaqsensor.TimeUnit;
-import gui.util.ImageLoader;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.Pair;
 
-import java.awt.image.BufferedImage;
 import java.util.*;
 
 public class PolynomialSensor extends Sensor {

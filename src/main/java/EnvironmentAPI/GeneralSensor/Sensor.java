@@ -3,7 +3,6 @@ package EnvironmentAPI.GeneralSensor;
 
 import org.jxmapviewer.viewer.GeoPosition;
 
-import java.awt.image.BufferedImage;
 
 public abstract class Sensor{
     private GeoPosition position;

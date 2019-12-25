@@ -2,7 +2,6 @@ package EnvironmentAPI.GeneralSensor.FunctionSensor;
 
 import EnvironmentAPI.GeneralSensor.Sensor;
 import datagenerator.iaqsensor.TimeUnit;
-import gui.util.ImageLoader;
 import org.jxmapviewer.viewer.GeoPosition;
 import parsii.eval.Expression;
 import parsii.eval.Parser;
@@ -10,7 +9,6 @@ import parsii.eval.Scope;
 import parsii.eval.Variable;
 import parsii.tokenizer.ParseException;
 
-import java.awt.image.BufferedImage;
 
 
 public class FunctionSensor extends Sensor {
