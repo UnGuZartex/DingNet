@@ -217,9 +217,6 @@ public class SimulationRunner {
      * @param listener The listener which receives the callbacks every x simulation steps.
      */
     public void simulate(MutableInteger updateFrequency, SimulationUpdateListener listener) {
-        if(PollutionEnvironment.isRunning()) {
-            PollutionEnvironment.Stop();
-        }
         PollutionEnvironment.startWatch();
         new Thread(() -> {
             long simulationStep = 0;
@@ -259,10 +256,6 @@ public class SimulationRunner {
             fn.accept(new Pair<>(0, nrOfRuns));
 
             for (int i = 0; i < nrOfRuns; i++) {
-
-                if(PollutionEnvironment.isRunning()) {
-                    PollutionEnvironment.Stop();
-                }
                 PollutionEnvironment.startWatch();
                 while (!simulation.isFinished()) {
                     this.simulation.simulateStep();

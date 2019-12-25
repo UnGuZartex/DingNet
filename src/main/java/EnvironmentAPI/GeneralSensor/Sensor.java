@@ -3,6 +3,8 @@ package EnvironmentAPI.GeneralSensor;
 
 import org.jxmapviewer.viewer.GeoPosition;
 
+import java.awt.image.BufferedImage;
+
 public abstract class Sensor{
     private GeoPosition position;
     protected double maxValue;
@@ -21,5 +23,4 @@ public abstract class Sensor{
     public double getMaxValue(){
         return maxValue;
     }
-
 }

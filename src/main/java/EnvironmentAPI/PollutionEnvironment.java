@@ -113,4 +113,8 @@ public class PollutionEnvironment {
             stopwatch.reset();
         }
     }
+
+    public List<Sensor> getSensors() {
+        return Sensors;
+    }
 }

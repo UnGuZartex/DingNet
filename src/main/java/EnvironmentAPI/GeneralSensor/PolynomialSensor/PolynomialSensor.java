@@ -2,9 +2,11 @@ package EnvironmentAPI.GeneralSensor.PolynomialSensor;
 
 import EnvironmentAPI.GeneralSensor.Sensor;
 import datagenerator.iaqsensor.TimeUnit;
+import gui.util.ImageLoader;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.Pair;
 
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 public class PolynomialSensor extends Sensor {
@@ -36,7 +38,7 @@ public class PolynomialSensor extends Sensor {
         return dataAtTime;
     }
 
-    public void addPoint(Pair<Double,Double> Point){
+    private void addPoint(Pair<Double, Double> Point){
         if(pointsKnown == null){
             pointsKnown = new ArrayList<>();
         }
