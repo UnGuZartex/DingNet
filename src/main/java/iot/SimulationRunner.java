@@ -349,7 +349,6 @@ public class SimulationRunner {
      */
     private void setupApplications() {
         loadEnvironmentFromFile(new File(GUISettings.PATH_TO_SENSOR_CONFIG + "BaseConfiguration.xml"));
-        PollutionEnvironment.startWatch();
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
             new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()
