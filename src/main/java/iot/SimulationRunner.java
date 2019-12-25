@@ -70,6 +70,7 @@ public class SimulationRunner {
 
         simulation = new Simulation();
         inputProfiles = loadInputProfiles();
+        this.pollutionEnvironment = new PollutionEnvironment();
 
         // Loading all the algorithms
         GenericFeedbackLoop noAdaptation = new GenericFeedbackLoop("No Adaptation") {
@@ -216,6 +217,10 @@ public class SimulationRunner {
      * @param listener The listener which receives the callbacks every x simulation steps.
      */
     public void simulate(MutableInteger updateFrequency, SimulationUpdateListener listener) {
+        if(PollutionEnvironment.isRunning()) {
+            PollutionEnvironment.Stop();
+        }
+        PollutionEnvironment.startWatch();
         new Thread(() -> {
             long simulationStep = 0;
             while (!this.isSimulationFinished()) {
@@ -249,11 +254,16 @@ public class SimulationRunner {
             .getNumberOfRuns();
         setupSingleRun(true);
 
+
         new Thread(() -> {
             fn.accept(new Pair<>(0, nrOfRuns));
 
             for (int i = 0; i < nrOfRuns; i++) {
 
+                if(PollutionEnvironment.isRunning()) {
+                    PollutionEnvironment.Stop();
+                }
+                PollutionEnvironment.startWatch();
                 while (!simulation.isFinished()) {
                     this.simulation.simulateStep();
                 }
@@ -289,6 +299,7 @@ public class SimulationRunner {
 
 
     public void loadEnvironmentFromFile(File file){
+
         EnvironmentReader.loadEnvironment(file,this);
     }
     /**
@@ -306,8 +317,8 @@ public class SimulationRunner {
                 gateway.addSubscription(moteProbe.get(i));
             }
         }
-
         setupApplications();
+
     }
 
 
@@ -337,6 +348,7 @@ public class SimulationRunner {
             this.routingApplication.destruct();
         }
         if (this.pollutionEnvironment != null) {
+            if(PollutionEnvironment.isRunning())
             PollutionEnvironment.Stop();
         }
 
@@ -348,7 +360,6 @@ public class SimulationRunner {
      * Initialize all applications used in the simulation.
      */
     private void setupApplications() {
-        loadEnvironmentFromFile(new File(GUISettings.PATH_TO_SENSOR_CONFIG + "BaseConfiguration.xml"));
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
             new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()

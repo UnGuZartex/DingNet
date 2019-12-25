@@ -103,6 +103,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private JSplitPane statisticsSplitPane;
     private JPanel inputProfilePanel;
     private JPanel statisticsPanel;
+    private JButton openPollutionEnvironmentButton;
 
     private static JXMapViewer mapViewer = new JXMapViewer();
     // Create a TileFactoryInfo for OpenStreetMap
@@ -178,6 +179,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         openConfigurationButton.addActionListener(new OpenConfigurationListener());
         saveConfigurationButton.addActionListener(new SaveConfigurationListener());
         simulationSaveButton.addActionListener(new SaveSimulationResultListener());
+        openPollutionEnvironmentButton.addActionListener(new OpenPollutionEnvironmentListener());
 
         regionButton.addActionListener(e -> this.setPollutionGraphs(simulationRunner.getEnvironment()));
 
@@ -190,7 +192,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
             this.setEnabledRunButtons(false);
             simulationRunner.setupSingleRun();
-            PollutionEnvironment.startWatch();
+            this.setConfigurationButtons(false);
             simulationRunner.simulate(simulationSpeed, this);
         });
 
@@ -202,7 +204,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
             this.setEnabledRunButtons(false);
             simulationRunner.setupTimedRun();
-
+            this.setConfigurationButtons(false);
             simulationRunner.simulate(simulationSpeed, this);
         });
 
@@ -213,7 +215,9 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             }
 
             this.setEnabledRunButtons(false);
+            this.setConfigurationButtons(false);
 
+            openPollutionEnvironmentButton.setEnabled(false);
             simulationRunner.totalRun(this::setProgressTotalRun);
         });
 
@@ -819,6 +823,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
                 simulationRunner.saveConfigurationToFile(file);
 
                 frame.dispose();
+
             }
         }
     }
@@ -838,6 +843,39 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 file = GUIUtil.getOutputFile(fc.getSelectedFile(), "xml");
                 simulationRunner.saveSimulationToFile(file);
+            }
+        }
+    }
+
+    private class OpenPollutionEnvironmentListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            if (simulationRunner.getRoutingApplication() == null){
+                showNoConfigurationSelectedError();
+                return;
+            }
+            JFileChooser fc = new JFileChooser();
+            fc.setDialogTitle("Load a Pollution Environment");
+            fc.setFileFilter(new FileNameExtensionFilter("xml configuration", "xml"));
+
+            File file = new File(MainGUI.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+            String basePath = file.getParentFile().getParent();
+            fc.setCurrentDirectory(new File(Paths.get(basePath, "src", "main","java","EnvironmentAPI","Configurations").toUri()));
+
+            int returnVal = fc.showOpenDialog(mainPanel);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                JFrame frame = new JFrame("Loading Environment");
+                LoadingGUI loadingGUI = new LoadingGUI();
+                frame.setContentPane(loadingGUI.getMainPanel());
+                frame.setMinimumSize(new Dimension(300, 300));
+                frame.setVisible(true);
+
+                simulationRunner.loadEnvironmentFromFile(fc.getSelectedFile());
+
+                frame.dispose();
+                loadMap(false);
+
             }
         }
     }
@@ -918,6 +956,12 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
     // region Miscellanious
 
+
+    private void showNoConfigurationSelectedError() {
+        JOptionPane.showMessageDialog(null, "Make sure to have a configuration loaded in before selecting an environment.",
+            "Warning: no configuration loaded", JOptionPane.ERROR_MESSAGE);
+    }
+
     private void showNoInputProfileSelectedError() {
         JOptionPane.showMessageDialog(null, "Make sure to have an input profile selected before running the simulator.",
             "Warning: no input profile selected", JOptionPane.ERROR_MESSAGE);
@@ -963,6 +1007,14 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             ex.printStackTrace();
         }
         this.setEnabledRunButtons(true);
+        this.setConfigurationButtons(true);
+    }
+
+    private void setConfigurationButtons(boolean b) {
+        openPollutionEnvironmentButton.setEnabled(b);
+        openConfigurationButton.setEnabled(b);
+        saveConfigurationButton.setEnabled(b);
+        configureButton.setEnabled(b);
     }
 
     // endregion
