@@ -217,12 +217,11 @@ public class SimulationRunner {
      * @param listener The listener which receives the callbacks every x simulation steps.
      */
     public void simulate(MutableInteger updateFrequency, SimulationUpdateListener listener) {
-        PollutionEnvironment.startWatch();
+        //PollutionEnvironment.startWatch();
         new Thread(() -> {
             long simulationStep = 0;
             while (!this.isSimulationFinished()) {
                 this.simulation.simulateStep();
-
                 // Visualize every x seconds
                 if (simulationStep++ % (updateFrequency.intValue() * 1000) == 0) {
                     listener.update();
@@ -256,7 +255,7 @@ public class SimulationRunner {
             fn.accept(new Pair<>(0, nrOfRuns));
 
             for (int i = 0; i < nrOfRuns; i++) {
-                PollutionEnvironment.startWatch();
+                //PollutionEnvironment.startWatch();
                 while (!simulation.isFinished()) {
                     this.simulation.simulateStep();
                 }
@@ -304,6 +303,7 @@ public class SimulationRunner {
 
         ConfigurationReader.loadConfiguration(file, this);
         simulation.setEnvironment(new WeakReference<>(this.getEnvironment()));
+        PollutionEnvironment.setClock(this.environment.getClock());
 
         for (Gateway gateway : simulation.getEnvironment().getGateways()) {
             for (int i = 0; i < algorithms.size(); i++) {
@@ -341,8 +341,8 @@ public class SimulationRunner {
             this.routingApplication.destruct();
         }
         if (this.pollutionEnvironment != null) {
-            if(PollutionEnvironment.isRunning())
-            PollutionEnvironment.Stop();
+            //if(PollutionEnvironment.isRunning())
+            //PollutionEnvironment.Stop();
         }
 
         this.networkServer.reconnect();
