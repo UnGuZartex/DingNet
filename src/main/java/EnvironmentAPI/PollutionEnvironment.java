@@ -2,7 +2,7 @@ package EnvironmentAPI;
 
 
 import EnvironmentAPI.GeneralSensor.Sensor;
-import org.apache.commons.lang3.time.StopWatch;
+import iot.GlobalClock;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.MapHelper;
 
@@ -12,19 +12,12 @@ import java.util.List;
 
 public class PollutionEnvironment {
     private List<Sensor> Sensors = new ArrayList<>();
-    private final static StopWatch stopwatch = new StopWatch();
+    private static GlobalClock clock = null;
 
-    public PollutionEnvironment() {
-        stopwatch.reset();
-    }
 
-    public static void startWatch(){
-        stopwatch.reset();
-        stopwatch.start();
-    }
 
-    public static boolean isRunning(){
-        return stopwatch.isStarted();
+    public static void setClock(GlobalClock clockToSet){
+        clock = clockToSet;
     }
 
 
@@ -70,12 +63,13 @@ public class PollutionEnvironment {
             return 0.0;
         }
         double total = 0;
+
         List<Double> allDistances = getAllDistances(position);
         for(int i = 0; i < Sensors.size(); i++){
             if (allDistances.get(i) == 0.0){
-                return Sensors.get(i).generateData(stopwatch.getNanoTime())/getMaxOfSensors();
+                return Sensors.get(i).generateData(clock.getTime().toNanoOfDay())/getMaxOfSensors();
             }
-            total += Sensors.get(i).generateData(stopwatch.getNanoTime())*allDistances.get(i);
+            total += Sensors.get(i).generateData(clock.getTime().toNanoOfDay())*allDistances.get(i);
         }
 
         total /= getMaxOfSensors();
@@ -102,16 +96,9 @@ public class PollutionEnvironment {
         return MapHelper.distance(position, sensor.getPosition());
     }
 
-    public static void Stop(){
-        stopwatch.stop();
-    }
-
     public void reset() {
-        this.Sensors.clear();
-        if(isRunning()){
-            Stop();
-            stopwatch.reset();
-        }
+       this.Sensors.clear();
+
     }
 
     public List<Sensor> getSensors() {

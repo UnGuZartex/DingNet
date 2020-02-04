@@ -19,7 +19,6 @@ import java.util.List;
 public class EnvironmentReader {
 
     public static void loadEnvironment(File file, SimulationRunner runner) {
-        runner.getEnvironmentAPI().reset();
         try {
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
             Element configuration = doc.getDocumentElement();
