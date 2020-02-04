@@ -19,7 +19,7 @@ import java.util.List;
 public class EnvironmentReader {
 
     public static void loadEnvironment(File file, SimulationRunner runner) {
-        PollutionEnvironment env = new PollutionEnvironment();
+        runner.getEnvironmentAPI().reset();
         try {
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
             Element configuration = doc.getDocumentElement();
@@ -34,7 +34,7 @@ public class EnvironmentReader {
                 GeoPosition position = ToGeoPos(PSensorNode.getElementsByTagName("Position").item(0).getTextContent());
                 TimeUnit unit = ToTimeUnit(PSensorNode.getElementsByTagName("TimeUnit").item(0).getTextContent());
 
-                env.addSensor(SensorFactory.createPolynomialSensor(Points,maxValue,position, unit));
+                runner.getEnvironmentAPI().addSensor(SensorFactory.createPolynomialSensor(Points,maxValue,position, unit));
             }
             for (int i = 0; i < Sensors.getElementsByTagName("FunctionSensor").getLength(); i++) {
                 Element FSensorNode = (Element) Sensors.getElementsByTagName("FunctionSensor").item(i);
@@ -44,10 +44,9 @@ public class EnvironmentReader {
                 TimeUnit unit = ToTimeUnit(FSensorNode.getElementsByTagName("TimeUnit").item(0).getTextContent());
 
 
-                env.addSensor(SensorFactory.createFunctionSensor(function,maxValue,position, unit));
+                runner.getEnvironmentAPI().addSensor(SensorFactory.createFunctionSensor(function,maxValue,position, unit));
 
             }
-            runner.setPollutionEnvironment(env);
 
         } catch (SAXException | ParserConfigurationException | IOException e) {
             e.printStackTrace();

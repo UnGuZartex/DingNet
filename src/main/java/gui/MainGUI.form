@@ -65,10 +65,25 @@
           <hspacer id="ab4fa">
             <constraints/>
           </hspacer>
+          <component id="f6b78" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <text value="PollutionEnvironment: "/>
+            </properties>
+          </component>
+          <component id="4e48f" class="javax.swing.JButton" binding="openPollutionEnvironmentButton">
+            <constraints/>
+            <properties>
+              <text value="Open"/>
+            </properties>
+          </component>
           <component id="5e7c3" class="javax.swing.JToolBar$Separator">
             <constraints/>
             <properties/>
           </component>
+          <hspacer id="def34">
+            <constraints/>
+          </hspacer>
           <component id="e8ff9" class="javax.swing.JButton" binding="helpButton" default-binding="true">
             <constraints/>
             <properties>
@@ -100,7 +115,7 @@
           </grid>
         </constraints>
         <properties>
-          <dividerLocation value="600"/>
+          <dividerLocation value="605"/>
           <orientation value="0"/>
         </properties>
         <border type="none"/>

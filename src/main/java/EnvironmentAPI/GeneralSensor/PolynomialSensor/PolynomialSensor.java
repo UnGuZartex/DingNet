@@ -36,7 +36,7 @@ public class PolynomialSensor extends Sensor {
         return dataAtTime;
     }
 
-    public void addPoint(Pair<Double,Double> Point){
+    private void addPoint(Pair<Double, Double> Point){
         if(pointsKnown == null){
             pointsKnown = new ArrayList<>();
         }

@@ -23,6 +23,10 @@ public class PollutionEnvironment {
         stopwatch.start();
     }
 
+    public static boolean isRunning(){
+        return stopwatch.isStarted();
+    }
+
 
     public void addSensor(Sensor sensor){
         Sensors.add(sensor);
@@ -62,6 +66,9 @@ public class PollutionEnvironment {
         return Collections.max(maxValues);
     }
     public double getDataFromSensors(GeoPosition position) {
+        if(Sensors.isEmpty()){
+            return 0.0;
+        }
         double total = 0;
         List<Double> allDistances = getAllDistances(position);
         for(int i = 0; i < Sensors.size(); i++){
@@ -97,5 +104,17 @@ public class PollutionEnvironment {
 
     public static void Stop(){
         stopwatch.stop();
+    }
+
+    public void reset() {
+        this.Sensors.clear();
+        if(isRunning()){
+            Stop();
+            stopwatch.reset();
+        }
+    }
+
+    public List<Sensor> getSensors() {
+        return Sensors;
     }
 }

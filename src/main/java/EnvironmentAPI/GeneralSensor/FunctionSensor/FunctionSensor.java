@@ -10,6 +10,7 @@ import parsii.eval.Variable;
 import parsii.tokenizer.ParseException;
 
 
+
 public class FunctionSensor extends Sensor {
     private TimeUnit timeUnit;
     private Expression function;
