@@ -44,4 +44,19 @@ public class FunctionSensor extends Sensor {
 
         return value;
     }
+
+    @Override
+    public String getType() {
+        return "FunctionSensor";
+    }
+
+    @Override
+    public TimeUnit getTimeUnit() {
+        return timeUnit;
+    }
+
+    @Override
+    public Object getDefiningFeatures() {
+        return function;
+    }
 }

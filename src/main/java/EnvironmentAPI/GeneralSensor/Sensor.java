@@ -1,6 +1,7 @@
 package EnvironmentAPI.GeneralSensor;
 
 
+import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 
 
@@ -22,4 +23,10 @@ public abstract class Sensor{
     public double getMaxValue(){
         return maxValue;
     }
+
+    public abstract String getType();
+    public abstract TimeUnit getTimeUnit();
+
+    public abstract Object getDefiningFeatures();
+
 }
