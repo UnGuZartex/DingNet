@@ -16,8 +16,8 @@ public class PollutionEnvironment {
 
 
 
-    public static void setClock(GlobalClock setclock){
-        clock = setclock;
+    public static void setClock(GlobalClock clockToSet){
+        clock = clockToSet;
     }
 
 
