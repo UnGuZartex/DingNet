@@ -104,4 +104,7 @@ public class PollutionEnvironment {
     public List<Sensor> getSensors() {
         return Sensors;
     }
+    public void removeSensor(Sensor sensor) {
+        this.Sensors.remove(sensor);
+    }
 }

@@ -104,6 +104,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private JPanel statisticsPanel;
     private JButton openPollutionEnvironmentButton;
     private JButton savePollutionConfigButton;
+    private JButton configureEnvironmentButton;
 
     private static JXMapViewer mapViewer = new JXMapViewer();
     // Create a TileFactoryInfo for OpenStreetMap
@@ -181,6 +182,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         simulationSaveButton.addActionListener(new SaveSimulationResultListener());
         openPollutionEnvironmentButton.addActionListener(new OpenPollutionEnvironmentListener());
         savePollutionConfigButton.addActionListener(new SavePollutionConfigurationListener());
+        configureEnvironmentButton.addActionListener(new ConfigurePollutionActionListener(this, simulationRunner));
+
 
 
         regionButton.addActionListener(e -> this.setPollutionGraphs(simulationRunner.getEnvironment()));
@@ -754,6 +757,28 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             frame.setContentPane(configureGUI.getMainPanel());
             frame.setMinimumSize(configureGUI.getMainPanel().getMinimumSize());
             frame.setPreferredSize(configureGUI.getMainPanel().getPreferredSize());
+            frame.setVisible(true);
+
+        }
+    }
+
+    private static class ConfigurePollutionActionListener implements ActionListener {
+        private MainGUI gui;
+        private SimulationRunner simulationRunner;
+
+
+        ConfigurePollutionActionListener(MainGUI gui, SimulationRunner simRunner) {
+            this.gui = gui;
+            this.simulationRunner = simRunner;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFrame frame = new JFrame("Configure Pollution environment");
+            PollutionConfig pollutionConfigureGUI = new PollutionConfig(gui, frame, simulationRunner);
+            frame.setContentPane(pollutionConfigureGUI.getMainPanel());
+            frame.setMinimumSize(pollutionConfigureGUI.getMainPanel().getMinimumSize());
+            frame.setPreferredSize(pollutionConfigureGUI.getMainPanel().getPreferredSize());
             frame.setVisible(true);
 
         }

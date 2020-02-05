@@ -29,4 +29,8 @@ public abstract class Sensor{
 
     public abstract Object getDefiningFeatures();
 
+    @Override
+    public String toString() {
+        return this.getType() + " @" + getPosition();
+    }
 }

@@ -20,6 +20,7 @@ public class EnvironmentReader {
 
     public static void loadEnvironment(File file, SimulationRunner runner) {
         try {
+            runner.getEnvironmentAPI().reset();
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
             Element configuration = doc.getDocumentElement();
             Element Sensors = (Element) configuration.getElementsByTagName("Sensors").item(0);
