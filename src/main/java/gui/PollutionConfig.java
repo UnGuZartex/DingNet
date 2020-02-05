@@ -71,23 +71,23 @@ public class PollutionConfig implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         Object source = evt.getSource();
         if (source == PositionText) {
-            changeValuePosition();
+            changeValuePosition(PositionText.getValue().toString());
         } else if (source == TimeUnitText) {
-            changeValueTimeUnit();
+            changeValueTimeUnit(TimeUnitText.getValue().toString());
         } else if (source == MaximumValueText) {
-            changeValueMaximumValue();
+            changeValueMaximumValue(MaximumValueText.getValue().toString());
         }
     }
 
-    private void changeValueMaximumValue() {
+    private void changeValueMaximumValue(String value) {
         //TODO
     }
 
-    private void changeValueTimeUnit() {
+    private void changeValueTimeUnit(String value) {
         //TODO
     }
 
-    private void changeValuePosition() {
+    private void changeValuePosition(String value) {
         //TODO
     }
 
