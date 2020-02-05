@@ -36,6 +36,21 @@ public class PolynomialSensor extends Sensor {
         return dataAtTime;
     }
 
+    @Override
+    public String getType() {
+        return "PolynomialSensor";
+    }
+
+    @Override
+    public TimeUnit getTimeUnit() {
+        return timeUnit;
+    }
+
+    @Override
+    public Object getDefiningFeatures() {
+        return this.pointsKnown;
+    }
+
     private void addPoint(Pair<Double, Double> Point){
         if(pointsKnown == null){
             pointsKnown = new ArrayList<>();
