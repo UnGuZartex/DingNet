@@ -2,6 +2,7 @@ package iot;
 
 import EnvironmentAPI.PollutionEnvironment;
 import EnvironmentAPI.util.EnvironmentReader;
+import EnvironmentAPI.util.EnvironmentWriter;
 import application.pollution.PollutionGrid;
 import application.pollution.PollutionMonitor;
 import application.routing.AStarRouter;
@@ -324,6 +325,10 @@ public class SimulationRunner {
 
     public void saveSimulationToFile(File file) {
         SimulationWriter.saveSimulationToFile(file, simulation);
+    }
+
+    public void savePollutionConfiguration(File file) {
+        EnvironmentWriter.saveEnvironment(this.pollutionEnvironment.getSensors(), file);
     }
 
 

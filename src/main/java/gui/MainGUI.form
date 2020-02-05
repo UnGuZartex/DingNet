@@ -81,6 +81,12 @@
             <constraints/>
             <properties/>
           </component>
+          <component id="92f8d" class="javax.swing.JButton" binding="savePollutionConfigButton">
+            <constraints/>
+            <properties>
+              <text value="Save"/>
+            </properties>
+          </component>
           <hspacer id="def34">
             <constraints/>
           </hspacer>

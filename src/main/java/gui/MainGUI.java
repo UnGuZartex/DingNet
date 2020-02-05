@@ -103,6 +103,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private JPanel inputProfilePanel;
     private JPanel statisticsPanel;
     private JButton openPollutionEnvironmentButton;
+    private JButton savePollutionConfigButton;
 
     private static JXMapViewer mapViewer = new JXMapViewer();
     // Create a TileFactoryInfo for OpenStreetMap
@@ -179,6 +180,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         saveConfigurationButton.addActionListener(new SaveConfigurationListener());
         simulationSaveButton.addActionListener(new SaveSimulationResultListener());
         openPollutionEnvironmentButton.addActionListener(new OpenPollutionEnvironmentListener());
+        savePollutionConfigButton.addActionListener(new SavePollutionConfigurationListener());
+
 
         regionButton.addActionListener(e -> this.setPollutionGraphs(simulationRunner.getEnvironment()));
 
@@ -827,6 +830,25 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         }
     }
 
+
+    private class SavePollutionConfigurationListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            JFileChooser fc = new JFileChooser();
+            fc.setDialogTitle("Save PollutionConfiguration");
+            fc.setFileFilter(new FileNameExtensionFilter("xml output", "xml"));
+
+            File file = new File(MainGUI.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+            String basePath = file.getParentFile().getParent();
+            fc.setCurrentDirectory(new File(Paths.get(basePath, "src", "main","java","EnvironmentAPI","Configurations").toUri()));
+
+            int returnVal = fc.showSaveDialog(mainPanel);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                file = GUIUtil.getOutputFile(fc.getSelectedFile(), "xml");
+                simulationRunner.savePollutionConfiguration(file);
+            }
+        }
+    }
     private class SaveSimulationResultListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
@@ -1014,6 +1036,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         openConfigurationButton.setEnabled(b);
         saveConfigurationButton.setEnabled(b);
         configureButton.setEnabled(b);
+        savePollutionConfigButton.setEnabled(b);
     }
 
     // endregion

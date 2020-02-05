@@ -33,14 +33,16 @@ public class EnvironmentWriter {
                 MaximumValue.appendChild(doc.createTextNode(String.valueOf(sensor.getMaxValue())));
                 type.appendChild(MaximumValue);
                 Element TimeUnit = doc.createElement("TimeUnit");
-                TimeUnit.appendChild(doc.createTextNode(Translate(sensor.getTimeUnit().name())));
+                TimeUnit.appendChild(doc.createTextNode(sensor.getTimeUnit().name()));
                 type.appendChild(TimeUnit);
                 switch(sensor.getType()){
                     case "FunctionSensor":
                         Element Function = doc.createElement("Function");
                         Function.appendChild(doc.createTextNode(String.valueOf(sensor.getDefiningFeatures())));
                         type.appendChild(Function);
+                        break;
                     case "PolynomialSensor":
+                        System.out.println(sensor.getType());
                         @SuppressWarnings("unchecked")
                         List<Pair<Double,Double>> pointsKnown = (List<Pair<Double, Double>>) sensor.getDefiningFeatures();
                         for(Pair<Double,Double> point:pointsKnown){
@@ -48,10 +50,15 @@ public class EnvironmentWriter {
                             Point.appendChild(doc.createTextNode(point.toString().replace("(","").replace(")","")));
                             type.appendChild(Point);
                         }
+                        break;
+                    default:
+                        System.out.println("Invalid type: " + sensor.getType());
                 }
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            transformerFactory.setAttribute("indent-number", 4);
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(file);
             transformer.transform(source, result);
@@ -59,26 +66,6 @@ public class EnvironmentWriter {
 
         } catch (ParserConfigurationException | TransformerException e) {
             e.printStackTrace();
-        }
-    }
-
-    private static String Translate(String name) {
-        switch (name){
-            case "Nano":
-                return "NANOS";
-            case "Micro":
-                return "MICROS";
-            case "Milli":
-                return "MILLIS";
-            case "Second":
-                return "SECONDS";
-            case "Minute":
-                return "MINUTES";
-            case "Hours":
-                return "HOURS";
-            default:
-                throw new IllegalArgumentException("INVALID TIME UNIT: " + name);
-
         }
     }
 
