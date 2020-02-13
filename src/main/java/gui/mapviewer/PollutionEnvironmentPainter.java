@@ -80,7 +80,8 @@ public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
      * @return A color between green and red representing the air quality.
      */
     private Color getColor(float airQuality) {
-        float[] hsbVals = Color.RGBtoHSB((int) (255 * airQuality), (int) (255 * (1 - airQuality)), 0, null);
+        //return new Color(105,105,105, (int)(255*airQuality));
+        float[] hsbVals = Color.RGBtoHSB((int) (255 * (airQuality)), (int) (255 * (1-airQuality)), 0, null);
         return Color.getHSBColor(hsbVals[0], hsbVals[1], hsbVals[2]);
     }
 }

@@ -1062,6 +1062,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         saveConfigurationButton.setEnabled(b);
         configureButton.setEnabled(b);
         savePollutionConfigButton.setEnabled(b);
+        configureEnvironmentButton.setEnabled(b);
     }
 
     // endregion
