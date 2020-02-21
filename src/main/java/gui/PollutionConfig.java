@@ -6,7 +6,6 @@ import EnvironmentAPI.GeneralSensor.Sensor;
 import datagenerator.iaqsensor.TimeUnit;
 import gui.util.GUIUtil;
 import iot.SimulationRunner;
-import javafx.geometry.Pos;
 import org.jxmapviewer.viewer.GeoPosition;
 
 
@@ -17,10 +16,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+
 import java.io.File;
-import java.nio.CharBuffer;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
