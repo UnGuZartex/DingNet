@@ -12,23 +12,16 @@ import java.util.List;
 
 public class PollutionEnvironment {
     private List<Sensor> Sensors = new ArrayList<>();
-    private static GlobalClock clock = null;
-
-
-
-    public static void setClock(GlobalClock clockToSet){
-        clock = clockToSet;
-    }
 
 
     public void addSensor(Sensor sensor){
         Sensors.add(sensor);
     }
 
-    public double getDataBetweenPoints(GeoPosition begin, GeoPosition end, double interpollationDistance) {
+    public double getDataBetweenPoints(GeoPosition begin, GeoPosition end, double interpollationDistance, long timeInNano) {
         double totalPollution = 0;
-        totalPollution += getDataFromSensors(begin);
-        totalPollution += getDataFromSensors(end);
+        totalPollution += getDataFromSensors(begin,timeInNano);
+        totalPollution += getDataFromSensors(end,timeInNano);
         double totalDistance = MapHelper.distance(begin, end);
         int amount = (int) (totalDistance / interpollationDistance);
         double phi1 = Math.toRadians(begin.getLatitude());
@@ -45,7 +38,7 @@ public class PollutionEnvironment {
             double xc = Math.toDegrees(x);
             double yc = Math.toDegrees(y);
             GeoPosition newPoint = new GeoPosition(xc, yc);
-            totalPollution += getDataFromSensors(newPoint);
+            totalPollution += getDataFromSensors(newPoint,timeInNano);
 
         }
         return totalPollution/(amount+2);
@@ -58,7 +51,7 @@ public class PollutionEnvironment {
         }
         return Collections.max(maxValues);
     }
-    public double getDataFromSensors(GeoPosition position) {
+    public double getDataFromSensors(GeoPosition position, long timeInNano ) {
         if(Sensors.isEmpty()){
             return 0.0;
         }
@@ -67,9 +60,9 @@ public class PollutionEnvironment {
         List<Double> allDistances = getAllDistances(position);
         for(int i = 0; i < Sensors.size(); i++){
             if (allDistances.get(i) == 0.0){
-                return Sensors.get(i).generateData(clock.getTime().toNanoOfDay())/getMaxOfSensors();
+                return Sensors.get(i).generateData(timeInNano)/getMaxOfSensors();
             }
-            total += Sensors.get(i).generateData(clock.getTime().toNanoOfDay())*allDistances.get(i);
+            total += Sensors.get(i).generateData(timeInNano)*allDistances.get(i);
         }
 
         total /= getMaxOfSensors();

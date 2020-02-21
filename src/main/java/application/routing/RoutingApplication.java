@@ -1,6 +1,7 @@
 package application.routing;
 
 import application.Application;
+import iot.GlobalClock;
 import iot.lora.LoraWanPacket;
 import iot.lora.MessageType;
 import iot.mqtt.BasicMqttMessage;
@@ -29,14 +30,17 @@ public class RoutingApplication extends Application {
     // The route finding algorithm that is used to handle routing requests
     private PathFinder pathFinder;
 
+    private GlobalClock clock;
 
 
-    public RoutingApplication(PathFinder pathFinder, GraphStructure graph) {
+
+    public RoutingApplication(PathFinder pathFinder, GraphStructure graph, GlobalClock clock) {
         super(List.of(Topics.getNetServerToApp("+", "+")));
         this.routes = new HashMap<>();
         this.lastPositions = new HashMap<>();
         this.graph = graph;
         this.pathFinder = pathFinder;
+        this.clock = clock;
     }
 
 
@@ -74,7 +78,7 @@ public class RoutingApplication extends Application {
         }
 
         // Use the routing algorithm to calculate the path for the mote
-        List<GeoPosition> routeMote = this.pathFinder.retrievePath(graph, motePosition, destinationPosition);
+        List<GeoPosition> routeMote = this.pathFinder.retrievePath(graph, motePosition, destinationPosition, clock);
         this.routes.put(deviceEUI, routeMote);
 
         // Compose the reply packet: up to 24 bytes for now, which can store 3 geopositions (in float)

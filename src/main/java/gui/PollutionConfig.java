@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PollutionConfig implements PropertyChangeListener {
+public class PollutionConfig {
     private JPanel panel1;
 
     private JList list1;
@@ -67,37 +67,12 @@ public class PollutionConfig implements PropertyChangeListener {
             }
         });
         saveValuesTemporaryButton.addActionListener(new SaveTemporaryActionListener());
-        PositionText.addPropertyChangeListener("value", this );
         saveValuesToFileButton.addActionListener(new TotalSaveActionListener());
 
 
     }
     public JPanel getMainPanel() {
         return panel1;
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        Object source = evt.getSource();
-        if (source == PositionText) {
-            changeValuePosition(PositionText.getValue().toString());
-        } else if (source == TimeUnitText) {
-            changeValueTimeUnit(TimeUnitText.getValue().toString());
-        } else if (source == MaximumValueText) {
-            changeValueMaximumValue(MaximumValueText.getValue().toString());
-        }
-    }
-
-    private void changeValueMaximumValue(String value) {
-        //TODO
-    }
-
-    private void changeValueTimeUnit(String value) {
-        //TODO
-    }
-
-    private void changeValuePosition(String value) {
-        //TODO
     }
 
 
@@ -140,7 +115,6 @@ public class PollutionConfig implements PropertyChangeListener {
                 }
             }
             toDelete.clear();
-            frame.dispose();
             JFileChooser fc = new JFileChooser();
             fc.setDialogTitle("Save PollutionConfiguration");
             fc.setFileFilter(new FileNameExtensionFilter("xml output", "xml"));
@@ -154,6 +128,7 @@ public class PollutionConfig implements PropertyChangeListener {
                 file = GUIUtil.getOutputFile(fc.getSelectedFile(), "xml");
                 simRunner.savePollutionConfiguration(file);
             }
+            frame.dispose();
         }
     }
 }

@@ -302,7 +302,6 @@ public class SimulationRunner {
 
         ConfigurationReader.loadConfiguration(file, this);
         simulation.setEnvironment(new WeakReference<>(this.getEnvironment()));
-        PollutionEnvironment.setClock(this.environment.getClock());
 
         for (Gateway gateway : simulation.getEnvironment().getGateways()) {
             for (int i = 0; i < algorithms.size(); i++) {
@@ -355,7 +354,7 @@ public class SimulationRunner {
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
             new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()
-        );
+        , this.environment.getClock());
     }
 
     public PollutionEnvironment getEnvironmentAPI() {
