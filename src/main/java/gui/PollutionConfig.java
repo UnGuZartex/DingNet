@@ -1,9 +1,13 @@
 package gui;
 
+import EnvironmentAPI.GeneralSensor.FunctionSensor.FunctionSensor;
 import EnvironmentAPI.GeneralSensor.Sensor;
 
+import datagenerator.iaqsensor.TimeUnit;
 import gui.util.GUIUtil;
 import iot.SimulationRunner;
+import javafx.geometry.Pos;
+import org.jxmapviewer.viewer.GeoPosition;
 
 
 import javax.swing.*;
@@ -34,15 +38,21 @@ public class PollutionConfig {
     private JButton saveValuesTemporaryButton;
     private JButton saveValuesToFileButton;
     private JPanel MapPanel;
+    private JComboBox comboBox1;
     private SimulationRunner simRunner;
     private List<Sensor> toDelete;
+    private List<Sensor> toAdd;
+
     private List<Sensor> remainingList;
     private JFrame frame;
 
     public PollutionConfig(MainGUI parent, JFrame frame, SimulationRunner simRunner) {
         toDelete = new ArrayList<Sensor>();
+        toAdd = new ArrayList<Sensor>();
         this.simRunner = simRunner;
         this.frame = frame;
+        comboBox1.addItem("FunctionSensor");
+        comboBox1.addItem("PolynomialSensor");
         remainingList = simRunner.getEnvironmentAPI().getSensors();
         List<Sensor> sensorList = simRunner.getEnvironmentAPI().getSensors();
         list1.setListData(sensorList.toArray());
@@ -66,6 +76,14 @@ public class PollutionConfig {
                 list1.setListData(newList);
             }
         });
+
+        addButton.addActionListener(e -> {
+            Sensor newSensor = new FunctionSensor(new GeoPosition(0,0), "x", 255, TimeUnit.MINUTES);
+            toAdd.add(newSensor);
+            remainingList.add(newSensor);
+            list1.setListData(remainingList.toArray());
+
+        });
         saveValuesTemporaryButton.addActionListener(new SaveTemporaryActionListener());
         saveValuesToFileButton.addActionListener(new TotalSaveActionListener());
 
@@ -83,6 +101,8 @@ public class PollutionConfig {
             PositionText.setValue(Chosen.getPosition());
             TimeUnitText.setValue(Chosen.getTimeUnit());
             MaximumValueText.setValue(Chosen.getMaxValue());
+            comboBox1.setSelectedItem(Chosen.getType());
+
 
 
 
@@ -100,7 +120,41 @@ public class PollutionConfig {
                 }
             }
             toDelete.clear();
-            frame.dispose();
+            int currentlyChanged = list1.getSelectedIndex();
+            Sensor toChange = simRunner.getEnvironmentAPI().getSensors().get(currentlyChanged);
+            toChange.setPosition(ToGeoPos(PositionText.getText()));
+            toChange.setMaxValue(Integer.valueOf(MaximumValueText.getText()));
+            toChange.setTimeUnit(ToTimeUnit(TimeUnitText.getText()));
+
+
+        }
+
+        private GeoPosition ToGeoPos(String position) {
+            position = position.replace("[","");
+            position = position.replace("]","");
+            String[] longlat = position.split(",");
+            return new GeoPosition(Double.parseDouble(longlat[0]), Double.parseDouble(longlat[1]));
+        }
+
+        private TimeUnit ToTimeUnit(String timeUnit) {
+            switch (timeUnit){
+                case "NANOS":
+                    return TimeUnit.NANOS;
+                case "MICROS":
+                    return TimeUnit.MICROS;
+                case "MILLIS":
+                    return TimeUnit.MILLIS;
+                case "SECONDS":
+                    return TimeUnit.SECONDS;
+                case "MINUTES":
+                    return TimeUnit.MINUTES;
+                case "HOURS":
+                    return TimeUnit.HOURS;
+                default:
+                    throw new IllegalArgumentException("INVALID TIME UNIT: " + timeUnit);
+
+            }
+
         }
     }
 

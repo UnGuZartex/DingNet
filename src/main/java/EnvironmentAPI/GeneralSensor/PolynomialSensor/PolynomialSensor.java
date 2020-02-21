@@ -14,13 +14,10 @@ public class PolynomialSensor extends Sensor {
 
 
     public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit) {
-        super(position, maxValue);
+        super(position, maxValue, unit);
         for(Pair<Double,Double> point:points){
             addPoint(point);
         }
-
-        timeUnit = unit;
-
     }
 
     /**
@@ -41,10 +38,6 @@ public class PolynomialSensor extends Sensor {
         return "PolynomialSensor";
     }
 
-    @Override
-    public TimeUnit getTimeUnit() {
-        return timeUnit;
-    }
 
     @Override
     public Object getDefiningFeatures() {
