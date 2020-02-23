@@ -1,8 +1,10 @@
 package EnvironmentAPI.GeneralSensor.PolynomialSensor;
 
 import EnvironmentAPI.GeneralSensor.Sensor;
+import EnvironmentAPI.util.EnvSettings;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
+import util.MapHelper;
 import util.Pair;
 
 import java.util.*;
@@ -10,7 +12,6 @@ import java.util.*;
 public class PolynomialSensor extends Sensor {
     private List<List<Double>> newtonCoefficients  = new ArrayList<>();
     private List<Pair<Double,Double>> pointsKnown;
-    private TimeUnit timeUnit;
 
 
     public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit) {
@@ -76,6 +77,7 @@ public class PolynomialSensor extends Sensor {
         {
             totalValue += newtonCoefficients.get(i).get(0) * getPointsFromOrder(i, timeToEvaluate);
         }
+        totalValue += NoiseRatio*noise.noise3_XYBeforeZ(this.getPosition().getLatitude(), this.getPosition().getLongitude(), timeinNano/1000);
         if (totalValue >= maxValue){
             totalValue = maxValue;
         }

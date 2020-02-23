@@ -100,4 +100,8 @@ public class PollutionEnvironment {
     public void removeSensor(Sensor sensor) {
         this.Sensors.remove(sensor);
     }
+
+    public void setNoiseRatio(int NoiseRatio) {
+        Sensor.setNoiseRatio(NoiseRatio);
+    }
 }

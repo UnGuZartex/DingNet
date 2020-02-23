@@ -105,6 +105,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private JButton openPollutionEnvironmentButton;
     private JButton savePollutionConfigButton;
     private JButton configureEnvironmentButton;
+    private JSlider NoiseSlider;
 
     private static JXMapViewer mapViewer = new JXMapViewer();
     // Create a TileFactoryInfo for OpenStreetMap
@@ -267,6 +268,10 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
         speedSlider.addChangeListener(
             e -> this.simulationSpeed.setValue(GUISettings.BASE_VISUALIZATION_SPEED * speedSlider.getValue())
+        );
+
+        NoiseSlider.addChangeListener(
+            e -> this.simulationRunner.getEnvironmentAPI().setNoiseRatio(NoiseSlider.getValue())
         );
     }
 
@@ -1063,6 +1068,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         configureButton.setEnabled(b);
         savePollutionConfigButton.setEnabled(b);
         configureEnvironmentButton.setEnabled(b);
+        NoiseSlider.setEnabled(b);
     }
 
     // endregion

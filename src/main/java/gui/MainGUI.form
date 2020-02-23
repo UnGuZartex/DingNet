@@ -859,6 +859,24 @@
                             <constraints/>
                             <properties/>
                           </component>
+                          <component id="97ff1" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <text value="Noise Ratio"/>
+                            </properties>
+                          </component>
+                          <component id="5c3ed" class="javax.swing.JSlider" binding="NoiseSlider">
+                            <constraints/>
+                            <properties>
+                              <majorTickSpacing value="1"/>
+                              <maximum value="20"/>
+                              <minorTickSpacing value="1"/>
+                              <paintLabels value="true"/>
+                              <paintTicks value="true"/>
+                              <snapToTicks value="true"/>
+                              <value value="1"/>
+                            </properties>
+                          </component>
                           <hspacer id="4122d">
                             <constraints/>
                           </hspacer>
