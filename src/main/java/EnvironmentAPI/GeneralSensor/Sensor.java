@@ -6,7 +6,6 @@ import EnvironmentAPI.util.OpenSimplex2S;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 
-import java.sql.Time;
 import java.util.Random;
 
 

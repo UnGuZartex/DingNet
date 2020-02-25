@@ -2,7 +2,7 @@ package EnvironmentAPI;
 
 
 import EnvironmentAPI.GeneralSensor.Sensor;
-import iot.GlobalClock;
+
 import org.jxmapviewer.viewer.GeoPosition;
 import util.MapHelper;
 
@@ -12,8 +12,6 @@ import java.util.List;
 
 public class PollutionEnvironment {
     private List<Sensor> Sensors = new ArrayList<>();
-
-
     public void addSensor(Sensor sensor){
         Sensors.add(sensor);
     }
@@ -66,7 +64,7 @@ public class PollutionEnvironment {
         }
 
         total /= getMaxOfSensors();
-        return total;
+        return total ;
     }
 
     private List<Double> getAllDistances(GeoPosition position) {
