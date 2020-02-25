@@ -29,7 +29,7 @@ public class PolynomialSensor extends Sensor {
      */
     @Override
     public double generateData(long timeinNano) {
-
+        System.out.println(evaluatePolynomial(5));
         double dataAtTime =  evaluatePolynomial(timeinNano);
         return dataAtTime;
     }
