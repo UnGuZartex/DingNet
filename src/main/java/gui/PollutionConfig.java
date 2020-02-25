@@ -1,12 +1,14 @@
 package gui;
 
 import EnvironmentAPI.GeneralSensor.FunctionSensor.FunctionSensor;
+import EnvironmentAPI.GeneralSensor.PolynomialSensor.PolynomialSensor;
 import EnvironmentAPI.GeneralSensor.Sensor;
 
 import datagenerator.iaqsensor.TimeUnit;
 import gui.util.GUIUtil;
 import iot.SimulationRunner;
 import org.jxmapviewer.viewer.GeoPosition;
+import util.Pair;
 
 
 import javax.swing.*;
@@ -26,7 +28,7 @@ public class PollutionConfig {
     private JPanel panel1;
 
     private JList list1;
-    private JButton addButton;
+    private JButton addFunctionalSensorButton;
     private JButton deleteSelectedButton;
     private JFormattedTextField PositionText;
     private JFormattedTextField MaximumValueText;
@@ -35,7 +37,8 @@ public class PollutionConfig {
     private JButton saveValuesTemporaryButton;
     private JButton saveValuesToFileButton;
     private JPanel MapPanel;
-    private JComboBox comboBox1;
+    private JButton addPolynomialSensorButton;
+    private JFormattedTextField typeText;
     private SimulationRunner simRunner;
     private List<Sensor> toDelete;
     private List<Sensor> toAdd;
@@ -48,8 +51,6 @@ public class PollutionConfig {
         toAdd = new ArrayList<Sensor>();
         this.simRunner = simRunner;
         this.frame = frame;
-        comboBox1.addItem("FunctionSensor");
-        comboBox1.addItem("PolynomialSensor");
         remainingList = simRunner.getEnvironmentAPI().getSensors();
         List<Sensor> sensorList = simRunner.getEnvironmentAPI().getSensors();
         list1.setListData(sensorList.toArray());
@@ -74,8 +75,19 @@ public class PollutionConfig {
             }
         });
 
-        addButton.addActionListener(e -> {
+        addFunctionalSensorButton.addActionListener(e -> {
             Sensor newSensor = new FunctionSensor(new GeoPosition(0,0), "x", 255, TimeUnit.MINUTES);
+            toAdd.add(newSensor);
+            remainingList.add(newSensor);
+            list1.setListData(remainingList.toArray());
+
+        });
+
+        addPolynomialSensorButton.addActionListener(e -> {
+            Pair<Double,Double> DefaultPoint = new Pair<Double,Double>(0.0,0.0);
+            List<Pair<Double,Double>> points = new ArrayList<>();
+            points.add(DefaultPoint);
+            Sensor newSensor = new PolynomialSensor(points, new GeoPosition(0,0), 255, TimeUnit.MINUTES);
             toAdd.add(newSensor);
             remainingList.add(newSensor);
             list1.setListData(remainingList.toArray());
@@ -98,7 +110,7 @@ public class PollutionConfig {
             PositionText.setValue(Chosen.getPosition());
             TimeUnitText.setValue(Chosen.getTimeUnit());
             MaximumValueText.setValue(Chosen.getMaxValue());
-            comboBox1.setSelectedItem(Chosen.getType());
+            typeText.setValue(Chosen.getType());
 
 
 
