@@ -3,14 +3,16 @@ package gui;
 import EnvironmentAPI.GeneralSensor.Sensor;
 
 import EnvironmentAPI.util.SensorFactory;
-import com.intellij.uiDesigner.core.GridConstraints;
 import datagenerator.iaqsensor.TimeUnit;
+import gui.util.ChartGenerator;
 import gui.util.CompoundPainterBuilder;
 import gui.util.GUISettings;
 import gui.util.GUIUtil;
 import iot.Environment;
 import iot.SimulationRunner;
-import iot.networkentity.Mote;
+
+import org.jfree.chart.ChartPanel;
+
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.cache.FileBasedLocalCache;
@@ -35,6 +37,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class PollutionConfig {
     private JPanel panel1;
@@ -52,6 +55,7 @@ public class PollutionConfig {
     private JButton addPolynomialSensorButton;
     private JFormattedTextField typeText;
     private JFormattedTextField NoiseField;
+    private JPanel GraphPanel;
     private SimulationRunner simRunner;
     private List<Sensor> toDelete;
     private List<Sensor> toAdd;
@@ -72,6 +76,9 @@ public class PollutionConfig {
         this.simRunner = simRunner;
         MapPanel.setLayout(new BorderLayout(0, 0));
         MapPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
+
+        GraphPanel.setLayout(new BorderLayout(0, 0));
+        GraphPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
 
         if (GUISettings.USE_MAP_CACHING) {
             File cache = new File(GUISettings.PATH_CACHE_TILEFACTORY);
@@ -96,6 +103,8 @@ public class PollutionConfig {
 
 
         loadMap(false);
+
+
 
         toDelete = new ArrayList<Sensor>();
         toAdd = new ArrayList<Sensor>();
@@ -149,6 +158,17 @@ public class PollutionConfig {
 
 
     }
+
+    void setSensorFunction(Sensor Chosen) {
+        BiConsumer<JPanel, ChartPanel> updateGraph = (p, c) -> {
+            p.removeAll();
+            p.add(c);
+            p.repaint();
+            p.revalidate();
+        };
+
+        updateGraph.accept(GraphPanel, ChartGenerator.generateSensorGraph(Chosen));
+    }
     public JPanel getMainPanel() {
         return panel1;
     }
@@ -161,13 +181,15 @@ public class PollutionConfig {
     private class SharedListSelectionHandler implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            Sensor Chosen = simRunner.getEnvironmentAPI().getSensors().get(list1.getSelectedIndex());
+            Sensor Chosen = remainingList.get(list1.getSelectedIndex());
             PositionText.setValue(Chosen.getPosition());
             TimeUnitText.setValue(Chosen.getTimeUnit());
             MaximumValueText.setValue(Chosen.getMaxValue());
             typeText.setValue(Chosen.getType());
             NoiseField.setValue(Chosen.getNoiseRatio());
             refresh();
+            setSensorFunction(Chosen);
+
         }
     }
 
@@ -343,4 +365,5 @@ public class PollutionConfig {
 
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package gui.util;
 
+import EnvironmentAPI.GeneralSensor.Sensor;
 import gui.mapviewer.SensorDataPainter;
 import iot.Environment;
 import iot.SimulationRunner;
@@ -20,9 +21,7 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.PaintScaleLegend;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.data.xy.DefaultXYZDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.data.xy.*;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.input.CenterMapListener;
 import org.jxmapviewer.input.PanMouseInputListener;
@@ -466,6 +465,25 @@ public class ChartGenerator {
         XYItemRenderer renderer = plot.getRenderer();
         renderer.setSeriesShape(0, shape);
         return new ChartPanel(chart);
+    }
+
+    public static ChartPanel generateSensorGraph(Sensor chosen) {
+
+
+            DefaultXYDataset ds = new DefaultXYDataset();
+
+            double[][] data = { {0.1, 0.2, 0.3}, {1, 2, 3} };
+
+            ds.addSeries("series1", data);
+        JFreeChart chart = ChartFactory.createXYLineChart(
+            "PollutionFunction",
+            "Time",
+            "Pollution",
+            ds // data
+        );
+        System.out.println(ds);
+        return new ChartPanel(chart);
+
     }
 
 
