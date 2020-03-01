@@ -494,6 +494,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             .withMotePaths(environment)
             .withMotes(environment)
             .withGateways(environment)
+            .withSensors(environment, simulationRunner.getEnvironmentAPI())
             .build()
         );
 
@@ -767,7 +768,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         }
     }
 
-    private static class ConfigurePollutionActionListener implements ActionListener {
+    private class ConfigurePollutionActionListener implements ActionListener {
         private MainGUI gui;
         private SimulationRunner simulationRunner;
 
@@ -779,6 +780,10 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (simulationRunner.getRoutingApplication() == null){
+                showNoConfigurationSelectedError();
+                return;
+            }
             JFrame frame = new JFrame("Configure Pollution environment");
             PollutionConfig pollutionConfigureGUI = new PollutionConfig(gui, frame, simulationRunner);
             frame.setContentPane(pollutionConfigureGUI.getMainPanel());
@@ -864,6 +869,10 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private class SavePollutionConfigurationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
+            if (simulationRunner.getRoutingApplication() == null){
+                showNoConfigurationSelectedError();
+                return;
+            }
             JFileChooser fc = new JFileChooser();
             fc.setDialogTitle("Save PollutionConfiguration");
             fc.setFileFilter(new FileNameExtensionFilter("xml output", "xml"));
@@ -1009,7 +1018,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
 
     private void showNoConfigurationSelectedError() {
-        JOptionPane.showMessageDialog(null, "Make sure to have a configuration loaded in before selecting an environment.",
+        JOptionPane.showMessageDialog(null, "Make sure to have a configuration loaded in before selecting/saving/configuring an environment.",
             "Warning: no configuration loaded", JOptionPane.ERROR_MESSAGE);
     }
 

@@ -14,8 +14,8 @@ public class PolynomialSensor extends Sensor {
     private List<Pair<Double,Double>> pointsKnown;
 
 
-    public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit) {
-        super(position, maxValue, unit);
+    public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit, int NoiseRatio) {
+        super(position, maxValue, unit, NoiseRatio);
         for(Pair<Double,Double> point:points){
             addPoint(point);
         }
@@ -76,7 +76,7 @@ public class PolynomialSensor extends Sensor {
         {
             totalValue += newtonCoefficients.get(i).get(0) * getPointsFromOrder(i, timeToEvaluate);
         }
-        totalValue += NoiseRatio*noise.noise3_XYBeforeZ(this.getPosition().getLatitude(), this.getPosition().getLongitude(), timeinNano/1000);
+        totalValue += noiseMultiplicator*NoiseRatio*noise.noise3_XYBeforeZ(this.getPosition().getLatitude(), this.getPosition().getLongitude(), timeinNano/1000);
         if (totalValue >= maxValue){
             totalValue = maxValue;
         }

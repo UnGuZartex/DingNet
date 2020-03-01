@@ -22,17 +22,19 @@ public abstract class Sensor{
     protected Random rand = new Random();
     protected OpenSimplex2S noise;
 
-    protected static int NoiseRatio = EnvSettings.NOISE_RATIO;
+    protected static int noiseMultiplicator = EnvSettings.NOISE_RATIO;
 
-    protected Sensor(GeoPosition position, double maxValue, TimeUnit unit) {
+
+
+
+    protected int NoiseRatio;
+
+    protected Sensor(GeoPosition position, double maxValue, TimeUnit unit, int NoiseRatio) {
         this.position = position;
         this.maxValue = maxValue;
         this.timeUnit = unit;
         noise = new OpenSimplex2S(rand.nextLong());
-    }
-
-    public static void setNoiseRatio(int noiseRatio) {
-        NoiseRatio = EnvSettings.NOISE_RATIO*noiseRatio;
+        this.NoiseRatio = NoiseRatio;
     }
 
     public void setPosition(GeoPosition position) {
@@ -42,10 +44,18 @@ public abstract class Sensor{
     public void setMaxValue(double maxValue) {
         this.maxValue = maxValue;
     }
-
+    public void setNoiseRatio(int noiseRatio) {
+        NoiseRatio = noiseRatio;
+    }
+    public int getNoiseRatio() {
+        return NoiseRatio;
+    }
 
     public void setTimeUnit(TimeUnit timeUnit) {
         this.timeUnit = timeUnit;
+    }
+    public static void setNoiseMultiplicator(int noiseRatio) {
+        noiseMultiplicator = noiseRatio * EnvSettings.NOISE_RATIO;
     }
 
     public abstract double generateData(long timeinNano) ;
@@ -70,4 +80,5 @@ public abstract class Sensor{
     public String toString() {
         return this.getType() + " @" + getPosition();
     }
+
 }

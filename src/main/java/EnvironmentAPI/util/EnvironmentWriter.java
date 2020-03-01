@@ -35,6 +35,9 @@ public class EnvironmentWriter {
                 Element TimeUnit = doc.createElement("TimeUnit");
                 TimeUnit.appendChild(doc.createTextNode(sensor.getTimeUnit().name()));
                 type.appendChild(TimeUnit);
+                Element NoiseRatio = doc.createElement("NoiseRatio");
+                NoiseRatio.appendChild(doc.createTextNode(String.valueOf(sensor.getNoiseRatio())));
+                type.appendChild(NoiseRatio);
                 switch(sensor.getType()){
                     case "FunctionSensor":
                         Element Function = doc.createElement("Function");

@@ -100,6 +100,6 @@ public class PollutionEnvironment {
     }
 
     public void setNoiseRatio(int NoiseRatio) {
-        Sensor.setNoiseRatio(NoiseRatio);
+        Sensor.setNoiseMultiplicator(NoiseRatio);
     }
 }

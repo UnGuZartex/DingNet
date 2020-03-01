@@ -18,8 +18,8 @@ public class FunctionSensor extends Sensor {
     private Variable t;
     private String functionString;
 
-    public FunctionSensor(GeoPosition position, String function, double maxValue, TimeUnit unit) {
-        super(position, maxValue, unit);
+    public FunctionSensor(GeoPosition position, String function, double maxValue, TimeUnit unit, int NoiseRatio) {
+        super(position, maxValue, unit, NoiseRatio);
         this.functionString = function;
         Scope scope = new Scope();
         this.t = scope.getVariable("t");
@@ -37,7 +37,7 @@ public class FunctionSensor extends Sensor {
         double timeToEvaluate = timeUnit.convertFromNano(timeinNano);
         t.setValue(timeToEvaluate);
         double value = function.evaluate();
-        value += NoiseRatio *noise.noise3_XYBeforeZ(this.getPosition().getLatitude(), this.getPosition().getLongitude(), timeinNano/1000);
+        value += noiseMultiplicator * NoiseRatio *noise.noise3_XYBeforeZ(this.getPosition().getLatitude(), this.getPosition().getLongitude(), timeinNano/1000);
         if (value > maxValue) {
             value = maxValue;
         }
