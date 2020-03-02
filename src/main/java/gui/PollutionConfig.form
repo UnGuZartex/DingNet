@@ -162,7 +162,7 @@
       </component>
       <scrollpane id="10217">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="3" column="0" row-span="9" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="328" height="128"/>
           </grid>
         </constraints>
@@ -221,25 +221,25 @@
       <grid id="23c03" binding="GraphPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="7" column="0" row-span="13" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="15" column="0" row-span="5" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children/>
       </grid>
-      <component id="788d9" class="javax.swing.JButton" binding="addPolynomialSensorButton" default-binding="true">
+      <component id="db4d9" class="javax.swing.JButton" binding="deleteSelectedButton" default-binding="true">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="328" height="30"/>
           </grid>
         </constraints>
         <properties>
-          <text value="Add Polynomial Sensor"/>
+          <text value="Delete selected"/>
         </properties>
       </component>
       <component id="36bf6" class="javax.swing.JButton" binding="addFunctionalSensorButton">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="328" height="30"/>
           </grid>
         </constraints>
@@ -247,14 +247,14 @@
           <text value="Add Functional Sensor"/>
         </properties>
       </component>
-      <component id="db4d9" class="javax.swing.JButton" binding="deleteSelectedButton" default-binding="true">
+      <component id="788d9" class="javax.swing.JButton" binding="addPolynomialSensorButton" default-binding="true">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="328" height="30"/>
           </grid>
         </constraints>
         <properties>
-          <text value="Delete selected"/>
+          <text value="Add Polynomial Sensor"/>
         </properties>
       </component>
     </children>

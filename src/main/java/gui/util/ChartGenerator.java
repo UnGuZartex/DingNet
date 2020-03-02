@@ -479,7 +479,7 @@ public class ChartGenerator {
 
         double[][] data = new double[2][MaxTime*SAMPLERATE];
         int index = 0;
-        for(double i = 0; i < MaxTime; i += SampleLength){
+        for(double i = 0; i <= MaxTime-SampleLength; i += SampleLength){
             double time = chosen.getTimeUnit().convertToNano(i);
             data[1][index] = chosen.generateData(time);
             data[0][index] = i;

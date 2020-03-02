@@ -39,5 +39,12 @@
             <NoiseRatio>1</NoiseRatio>
             <Function>20*exp(-((t-5)^2/2*4))</Function>
         </FunctionSensor>
+        <FunctionSensor>
+            <Position>50.889058, 4.701625</Position>
+            <MaximumValue>255.0</MaximumValue>
+            <TimeUnit>MINUTES</TimeUnit>
+            <NoiseRatio>1</NoiseRatio>
+            <Function>log(t)</Function>
+        </FunctionSensor>
     </Sensors>
 </Environment>

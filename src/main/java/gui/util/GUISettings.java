@@ -41,5 +41,5 @@ public class GUISettings {
 
     public static final String PATH_TO_SENSOR_CONFIG = System.getProperty("user.dir") + "/src/main/java/EnvironmentAPI/Configurations/";
     public static final int MAX_GRAPH_TIME = 20;
-    public static final int SAMPLERATE = 100;
+    public static final int SAMPLERATE = 500;
 }
