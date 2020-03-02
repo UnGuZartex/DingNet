@@ -33,7 +33,7 @@ public class FunctionSensor extends Sensor {
     }
 
     @Override
-    public double generateData(long timeinNano) {
+    public double generateData(double timeinNano) {
         double timeToEvaluate = timeUnit.convertFromNano(timeinNano);
         t.setValue(timeToEvaluate);
         double value = function.evaluate();

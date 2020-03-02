@@ -37,7 +37,7 @@
             <MaximumValue>255.0</MaximumValue>
             <TimeUnit>MINUTES</TimeUnit>
             <NoiseRatio>1</NoiseRatio>
-            <Function>122*cos(t*pi)</Function>
+            <Function>20*exp(-((t-5)^2/2*4))</Function>
         </FunctionSensor>
     </Sensors>
 </Environment>

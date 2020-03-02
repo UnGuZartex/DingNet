@@ -40,4 +40,6 @@ public class GUISettings {
     public static final String PATH_CACHE_TILEFACTORY = System.getProperty("user.dir") + "/.cache";
 
     public static final String PATH_TO_SENSOR_CONFIG = System.getProperty("user.dir") + "/src/main/java/EnvironmentAPI/Configurations/";
+    public static final int MAX_GRAPH_TIME = 20;
+    public static final int SAMPLERATE = 100;
 }

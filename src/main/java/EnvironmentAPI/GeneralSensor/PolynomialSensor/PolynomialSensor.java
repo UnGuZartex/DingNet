@@ -28,7 +28,7 @@ public class PolynomialSensor extends Sensor {
      * @return a byte representing the amount of pollution in a range of [0,255].
      */
     @Override
-    public double generateData(long timeinNano) {
+    public double generateData(double timeinNano) {
         double dataAtTime =  evaluatePolynomial(timeinNano);
         return dataAtTime;
     }
@@ -69,7 +69,7 @@ public class PolynomialSensor extends Sensor {
      * @param timeinNano: the time to evaluate in.
      * @return a value
      */
-    private double evaluatePolynomial(long timeinNano) {
+    private double evaluatePolynomial(double timeinNano) {
         double timeToEvaluate = timeUnit.convertFromNano(timeinNano);
         double totalValue = 0;
         for (int i = 0; i < newtonCoefficients.size(); i++)

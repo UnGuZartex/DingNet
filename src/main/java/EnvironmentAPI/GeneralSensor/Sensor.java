@@ -58,7 +58,7 @@ public abstract class Sensor{
         noiseMultiplicator = noiseRatio * EnvSettings.NOISE_RATIO;
     }
 
-    public abstract double generateData(long timeinNano) ;
+    public abstract double generateData(double timeinNano) ;
 
     public GeoPosition getPosition(){
         return position;

@@ -38,6 +38,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -469,19 +470,31 @@ public class ChartGenerator {
 
     public static ChartPanel generateSensorGraph(Sensor chosen) {
 
+        int MaxTime = GUISettings.MAX_GRAPH_TIME;
+        int SAMPLERATE = GUISettings.SAMPLERATE;
+        DefaultXYDataset ds = new DefaultXYDataset();
 
-            DefaultXYDataset ds = new DefaultXYDataset();
 
-            double[][] data = { {0.1, 0.2, 0.3}, {1, 2, 3} };
+        double SampleLength = 1.0/SAMPLERATE;
 
-            ds.addSeries("series1", data);
+        double[][] data = new double[2][MaxTime*SAMPLERATE];
+        int index = 0;
+        for(double i = 0; i < MaxTime; i += SampleLength){
+            double time = chosen.getTimeUnit().convertToNano(i);
+            data[1][index] = chosen.generateData(time);
+            data[0][index] = i;
+            index++;
+        }
+
+
+
+        ds.addSeries("Pollution", data);
         JFreeChart chart = ChartFactory.createXYLineChart(
             "PollutionFunction",
             "Time",
             "Pollution",
             ds // data
         );
-        System.out.println(ds);
         return new ChartPanel(chart);
 
     }
