@@ -13,13 +13,12 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
+public class SensorEnvironmentPainter extends AbstractPainter<JXMapViewer> {
     private SensorEnvironment pollutionEnv;
     private Environment environment;
-    private int counter = 0;
 
 
-    public PollutionEnvironmentPainter(Environment environment, SensorEnvironment pollutionEnv) {
+    public SensorEnvironmentPainter(Environment environment, SensorEnvironment pollutionEnv) {
         this.setAntialiasing(GUISettings.USE_ANTIALIASING);
         this.setCacheable(true);
 
@@ -64,7 +63,7 @@ public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
                     (int) ((j+.5) * maxY / DIVISION));
 
 
-                float airQuality = (float) pollutionEnv.getPoll().getDensity(middle, environment)/255;
+                float airQuality = (float) pollutionEnv.getDataFromSensors(middle, environment.getClock().getTime().toNanoOfDay());
                 //System.out.println(airQuality);
                 g.setColor(this.getColor(airQuality));
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, GUISettings.TRANSPARENCY_POLLUTIONGRID));

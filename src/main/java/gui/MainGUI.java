@@ -270,9 +270,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             e -> this.simulationSpeed.setValue(GUISettings.BASE_VISUALIZATION_SPEED * speedSlider.getValue())
         );
 
-        NoiseSlider.addChangeListener(
-            e -> this.simulationRunner.getEnvironmentAPI().setNoiseRatio(NoiseSlider.getValue())
-        );
+
     }
 
 
@@ -488,7 +486,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         }
 
         mapViewer.setOverlayPainter(new CompoundPainterBuilder()
-            .withEnvironmentAPI(environment, simulationRunner.getEnvironmentAPI())
+            .withEnvironmentAPISensor(environment, simulationRunner.getEnvironmentAPI())
+            //.withEnvironmentAPI(environment, simulationRunner.getEnvironmentAPI())
             //.withPollutionGrid(environment, simulationRunner.getPollutionGrid())
             .withRoutingPath(environment, simulationRunner.getRoutingApplication())
             .withMotePaths(environment)
@@ -1077,7 +1076,6 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         configureButton.setEnabled(b);
         savePollutionConfigButton.setEnabled(b);
         configureEnvironmentButton.setEnabled(b);
-        NoiseSlider.setEnabled(b);
     }
 
     // endregion

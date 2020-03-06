@@ -1,5 +1,6 @@
 package iot;
 
+import EnvironmentAPI.PollutionEnvironment;
 import be.kuleuven.cs.som.annotate.Basic;
 import datagenerator.SensorDataGenerator;
 import iot.networkentity.Gateway;
@@ -23,6 +24,8 @@ public class Simulation {
      * The InputProfile used in the simulation.
      */
     private InputProfile inputProfile;
+
+    private int counter = 0;
     /**
      * The Environment used in th simulation.
      */
@@ -154,7 +157,7 @@ public class Simulation {
     /**
      * Simulate a single step in the simulator.
      */
-    public void simulateStep() {
+    public void simulateStep(PollutionEnvironment Pollenvironment) {
         //noinspection SimplifyStreamApiCallChains
         this.getEnvironment().getMotes().stream()
             .filter(Mote::isEnabled)
@@ -169,6 +172,11 @@ public class Simulation {
                     this.getEnvironment().moveMote(mote, mote.getPath().getWayPoints().get(wayPointMap.get(mote)));
                 } else {wayPointMap.put(mote, wayPointMap.get(mote) + 1);}
             });
+        if(counter % 500 == 0) {
+            Pollenvironment.doStep(this.getEnvironment().getClock().getTime().toNanoOfDay(), this.getEnvironment());
+        }
+        counter++;
+
         this.getEnvironment().getClock().tick(1);
     }
 

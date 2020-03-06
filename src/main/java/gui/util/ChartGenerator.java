@@ -1,6 +1,6 @@
 package gui.util;
 
-import EnvironmentAPI.GeneralSensor.Sensor;
+import EnvironmentAPI.GeneralSources.Source;
 import gui.mapviewer.SensorDataPainter;
 import iot.Environment;
 import iot.SimulationRunner;
@@ -38,7 +38,6 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -468,7 +467,7 @@ public class ChartGenerator {
         return new ChartPanel(chart);
     }
 
-    public static ChartPanel generateSensorGraph(Sensor chosen) {
+    public static ChartPanel generateSensorGraph(Source chosen) {
 
         int MaxTime = GUISettings.MAX_GRAPH_TIME;
         int SAMPLERATE = GUISettings.SAMPLERATE;

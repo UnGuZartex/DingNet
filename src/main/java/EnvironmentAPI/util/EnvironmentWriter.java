@@ -1,6 +1,6 @@
 package EnvironmentAPI.util;
 
-import EnvironmentAPI.GeneralSensor.Sensor;
+import EnvironmentAPI.GeneralSources.Source;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import util.Pair;
@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.List;
 
 public class EnvironmentWriter {
-    public static void saveEnvironment(List<Sensor> toSaveList, File file){
+    public static void saveEnvironment(List<Source> toSaveList, File file){
         try {
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             // root element
@@ -23,31 +23,31 @@ public class EnvironmentWriter {
             doc.appendChild(rootElement);
             Element sensorElement = doc.createElement("Sensors");
             rootElement.appendChild(sensorElement);
-            for(Sensor sensor:toSaveList){
-                Element type = doc.createElement(sensor.getType());
+            for(Source source :toSaveList){
+                Element type = doc.createElement(source.getType());
                 sensorElement.appendChild(type);
                 Element Position = doc.createElement("Position");
-                Position.appendChild(doc.createTextNode(sensor.getPosition().toString().replace("[", "").replace("]", "")));
+                Position.appendChild(doc.createTextNode(source.getPosition().toString().replace("[", "").replace("]", "")));
                 type.appendChild(Position);
                 Element MaximumValue = doc.createElement("MaximumValue");
-                MaximumValue.appendChild(doc.createTextNode(String.valueOf(sensor.getMaxValue())));
+                MaximumValue.appendChild(doc.createTextNode(String.valueOf(source.getMaxValue())));
                 type.appendChild(MaximumValue);
                 Element TimeUnit = doc.createElement("TimeUnit");
-                TimeUnit.appendChild(doc.createTextNode(sensor.getTimeUnit().name()));
+                TimeUnit.appendChild(doc.createTextNode(source.getTimeUnit().name()));
                 type.appendChild(TimeUnit);
                 Element NoiseRatio = doc.createElement("NoiseRatio");
-                NoiseRatio.appendChild(doc.createTextNode(String.valueOf(sensor.getNoiseRatio())));
+                NoiseRatio.appendChild(doc.createTextNode(String.valueOf(source.getNoiseRatio())));
                 type.appendChild(NoiseRatio);
-                switch(sensor.getType()){
+                switch(source.getType()){
                     case "FunctionSensor":
                         Element Function = doc.createElement("Function");
-                        Function.appendChild(doc.createTextNode(String.valueOf(sensor.getDefiningFeatures())));
+                        Function.appendChild(doc.createTextNode(String.valueOf(source.getDefiningFeatures())));
                         type.appendChild(Function);
                         break;
                     case "PolynomialSensor":
-                        System.out.println(sensor.getType());
+                        System.out.println(source.getType());
                         @SuppressWarnings("unchecked")
-                        List<Pair<Double,Double>> pointsKnown = (List<Pair<Double, Double>>) sensor.getDefiningFeatures();
+                        List<Pair<Double,Double>> pointsKnown = (List<Pair<Double, Double>>) source.getDefiningFeatures();
                         for(Pair<Double,Double> point:pointsKnown){
                             Element Point = doc.createElement("Point");
                             Point.appendChild(doc.createTextNode(point.toString().replace("(","").replace(")","")));
@@ -55,7 +55,7 @@ public class EnvironmentWriter {
                         }
                         break;
                     default:
-                        System.out.println("Invalid type: " + sensor.getType());
+                        System.out.println("Invalid type: " + source.getType());
                 }
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

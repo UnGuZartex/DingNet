@@ -1,7 +1,6 @@
-package EnvironmentAPI.GeneralSensor.FunctionSensor;
+package EnvironmentAPI.GeneralSources.FunctionSources;
 
-import EnvironmentAPI.GeneralSensor.Sensor;
-import EnvironmentAPI.util.EnvSettings;
+import EnvironmentAPI.GeneralSources.Source;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 import parsii.eval.Expression;
@@ -12,14 +11,14 @@ import parsii.tokenizer.ParseException;
 
 
 
-public class FunctionSensor extends Sensor {
+public class FunctionSource extends Source {
 
     private Expression function;
     private Variable t;
     private String functionString;
 
-    public FunctionSensor(GeoPosition position, String function, double maxValue, TimeUnit unit, int NoiseRatio) {
-        super(position, maxValue, unit, NoiseRatio);
+    public FunctionSource(GeoPosition position, String function, TimeUnit unit) {
+        super(position, unit);
         this.functionString = function;
         Scope scope = new Scope();
         this.t = scope.getVariable("t");
@@ -37,10 +36,6 @@ public class FunctionSensor extends Sensor {
         double timeToEvaluate = timeUnit.convertFromNano(timeinNano);
         t.setValue(timeToEvaluate);
         double value = function.evaluate();
-        value += noiseMultiplicator * NoiseRatio *noise.noise3_XYBeforeZ(this.getPosition().getLatitude(), this.getPosition().getLongitude(), timeinNano/1000);
-        if (value > maxValue) {
-            value = maxValue;
-        }
         if (value < 0){
             value = 0;
         }
@@ -50,7 +45,7 @@ public class FunctionSensor extends Sensor {
 
     @Override
     public String getType() {
-        return "FunctionSensor";
+        return "FunctionSource";
     }
 
     @Override

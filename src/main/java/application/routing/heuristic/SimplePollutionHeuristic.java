@@ -1,6 +1,6 @@
 package application.routing.heuristic;
 
-import EnvironmentAPI.PollutionEnvironment;
+import EnvironmentAPI.SensorEnvironment;
 import application.pollution.PollutionGrid;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.MapHelper;
@@ -11,9 +11,9 @@ import util.MapHelper;
  */
 public class SimplePollutionHeuristic implements RoutingHeuristic {
     private final PollutionGrid pollutionGrid;
-    private final PollutionEnvironment env;
+    private final SensorEnvironment env;
 
-    public SimplePollutionHeuristic(PollutionGrid pollutionGrid, PollutionEnvironment env) {
+    public SimplePollutionHeuristic(PollutionGrid pollutionGrid, SensorEnvironment env) {
         this.pollutionGrid = pollutionGrid;
         this.env = env;
     }

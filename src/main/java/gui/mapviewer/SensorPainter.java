@@ -1,7 +1,7 @@
 package gui.mapviewer;
 
-import EnvironmentAPI.GeneralSensor.Sensor;
-import EnvironmentAPI.PollutionEnvironment;
+import EnvironmentAPI.GeneralSources.Source;
+import EnvironmentAPI.SensorEnvironment;
 import gui.util.GUISettings;
 import iot.Environment;
 import org.jxmapviewer.JXMapViewer;
@@ -12,11 +12,11 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 public class SensorPainter extends AbstractPainter<JXMapViewer> {
-    private PollutionEnvironment pollutionEnv;
+    private SensorEnvironment pollutionEnv;
     private Environment environment;
 
 
-    public SensorPainter(Environment environment, PollutionEnvironment pollutionEnv) {
+    public SensorPainter(Environment environment, SensorEnvironment pollutionEnv) {
         this.setAntialiasing(GUISettings.USE_ANTIALIASING);
         this.setCacheable(true);
 
@@ -29,12 +29,12 @@ public class SensorPainter extends AbstractPainter<JXMapViewer> {
         g = (Graphics2D) g.create();
         Rectangle rect = jxMapViewer.getViewportBounds();
         g.translate(-rect.x, -rect.y);
-        List<Sensor> sensorList = pollutionEnv.getSensors();
-        for(Sensor sensor:sensorList){
-            float airQuality = (float) (sensor.generateData(environment.getClock().getTime().toNanoOfDay())/pollutionEnv.getMaxOfSensors());
+        List<Source> sourceList = pollutionEnv.getPoll().getSources();
+        for(Source source : sourceList){
+            float airQuality = (float) (source.generateData(environment.getClock().getTime().toNanoOfDay())/255);
             g.setColor(getColor(airQuality));
 
-            Point2D point = jxMapViewer.getTileFactory().geoToPixel(sensor.getPosition(), jxMapViewer.getZoom());
+            Point2D point = jxMapViewer.getTileFactory().geoToPixel(source.getPosition(), jxMapViewer.getZoom());
 
             int x = (int) (point.getX()-5);
             int y = (int) (point.getY()-5);

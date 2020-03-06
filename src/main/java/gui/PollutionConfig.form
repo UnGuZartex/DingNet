@@ -186,7 +186,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Select a sensor to change"/>
+          <text value="Select a source to change"/>
         </properties>
       </component>
       <component id="e32d9" class="javax.swing.JButton" binding="saveValuesToFileButton" default-binding="true">
@@ -202,7 +202,7 @@
           <grid row="16" column="1" row-span="1" col-span="20" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Save sensor*"/>
+          <text value="Save source*"/>
         </properties>
       </component>
       <component id="21b95" class="javax.swing.JLabel">
@@ -210,7 +210,7 @@
           <grid row="18" column="1" row-span="1" col-span="11" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="*Saving the sensor will save the value for this runtime"/>
+          <text value="*Saving the source will save the value for this runtime"/>
         </properties>
       </component>
       <hspacer id="f6e1d">

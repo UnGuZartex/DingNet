@@ -1,21 +1,19 @@
-package EnvironmentAPI.GeneralSensor.PolynomialSensor;
+package EnvironmentAPI.GeneralSources.PolynomialSources;
 
-import EnvironmentAPI.GeneralSensor.Sensor;
-import EnvironmentAPI.util.EnvSettings;
+import EnvironmentAPI.GeneralSources.Source;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
-import util.MapHelper;
 import util.Pair;
 
 import java.util.*;
 
-public class PolynomialSensor extends Sensor {
+public class PolynomialSource extends Source {
     private List<List<Double>> newtonCoefficients  = new ArrayList<>();
     private List<Pair<Double,Double>> pointsKnown;
 
 
-    public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit, int NoiseRatio) {
-        super(position, maxValue, unit, NoiseRatio);
+    public PolynomialSource(List<Pair<Double,Double>>points, GeoPosition position, TimeUnit unit) {
+        super(position, unit);
         for(Pair<Double,Double> point:points){
             addPoint(point);
         }
@@ -35,7 +33,7 @@ public class PolynomialSensor extends Sensor {
 
     @Override
     public String getType() {
-        return "PolynomialSensor";
+        return "PolynomialSource";
     }
 
 
@@ -76,11 +74,7 @@ public class PolynomialSensor extends Sensor {
         {
             totalValue += newtonCoefficients.get(i).get(0) * getPointsFromOrder(i, timeToEvaluate);
         }
-        totalValue += noiseMultiplicator*NoiseRatio*noise.noise3_XYBeforeZ(this.getPosition().getLatitude(), this.getPosition().getLongitude(), timeinNano/1000);
-        if (totalValue >= maxValue){
-            totalValue = maxValue;
-        }
-        else if (totalValue <= 0){
+        if (totalValue <= 0){
             totalValue = 0;
         }
         return totalValue;

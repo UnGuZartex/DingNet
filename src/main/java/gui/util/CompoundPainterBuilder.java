@@ -1,6 +1,6 @@
 package gui.util;
 
-import EnvironmentAPI.PollutionEnvironment;
+import EnvironmentAPI.SensorEnvironment;
 import application.pollution.PollutionGrid;
 import application.routing.RoutingApplication;
 import gui.mapviewer.*;
@@ -10,7 +10,6 @@ import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.painter.CompoundPainter;
 import org.jxmapviewer.painter.Painter;
 import org.jxmapviewer.viewer.DefaultWaypoint;
-import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.Waypoint;
 import util.GraphStructure;
 
@@ -125,12 +124,17 @@ public class CompoundPainterBuilder {
      * @param pollution   The pollution environment which should be painted.
      * @return The current object.
      */
-    public CompoundPainterBuilder withEnvironmentAPI(Environment environment, PollutionEnvironment pollution) {
+    public CompoundPainterBuilder withEnvironmentAPI(Environment environment, SensorEnvironment pollution) {
         painters.add(new PollutionEnvironmentPainter(environment, pollution));
         return this;
     }
 
-    public CompoundPainterBuilder withSensors(Environment environment, PollutionEnvironment pollution) {
+    public CompoundPainterBuilder withEnvironmentAPISensor(Environment environment, SensorEnvironment pollution) {
+        painters.add(new SensorEnvironmentPainter(environment, pollution));
+        return this;
+    }
+
+    public CompoundPainterBuilder withSensors(Environment environment, SensorEnvironment pollution) {
         painters.add(new SensorPainter(environment, pollution));
         return this;
     }

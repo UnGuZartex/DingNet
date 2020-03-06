@@ -1,8 +1,8 @@
 package gui;
 
-import EnvironmentAPI.GeneralSensor.Sensor;
+import EnvironmentAPI.GeneralSources.Source;
 
-import EnvironmentAPI.util.SensorFactory;
+import EnvironmentAPI.util.SourceFactory;
 import datagenerator.iaqsensor.TimeUnit;
 import gui.util.ChartGenerator;
 import gui.util.CompoundPainterBuilder;
@@ -57,10 +57,10 @@ public class PollutionConfig {
     private JFormattedTextField NoiseField;
     private JPanel GraphPanel;
     private SimulationRunner simRunner;
-    private List<Sensor> toDelete;
-    private List<Sensor> toAdd;
+    private List<Source> toDelete;
+    private List<Source> toAdd;
 
-    private List<Sensor> remainingList;
+    private List<Source> remainingList;
     private JFrame frame;
 
     protected MainGUI mainGUI;
@@ -106,28 +106,28 @@ public class PollutionConfig {
 
 
 
-        toDelete = new ArrayList<Sensor>();
-        toAdd = new ArrayList<Sensor>();
+        toDelete = new ArrayList<Source>();
+        toAdd = new ArrayList<Source>();
         this.simRunner = simRunner;
         this.frame = frame;
-        remainingList = simRunner.getEnvironmentAPI().getSensors();
-        List<Sensor> sensorList = simRunner.getEnvironmentAPI().getSensors();
-        list1.setListData(sensorList.toArray());
+        remainingList = simRunner.getEnvironmentAPI().getPoll().getSources();
+        List<Source> sourceList = simRunner.getEnvironmentAPI().getPoll().getSources();
+        list1.setListData(sourceList.toArray());
         list1.addListSelectionListener(new SharedListSelectionHandler());
         deleteSelectedButton.addActionListener(e -> {
             if (!list1.isSelectionEmpty()) {
                 toDelete.add(remainingList.get(list1.getSelectedIndex()));
                 remainingList.remove(list1.getSelectedIndex());
                 ListModel model = list1.getModel();
-                Sensor[] newList = new Sensor[model.getSize()-1];
+                Source[] newList = new Source[model.getSize()-1];
                 for (int i = 0; i < model.getSize(); i++){
                     if(i < list1.getSelectedIndex()) {
-                        Sensor sensor = (Sensor) model.getElementAt(i);
-                        newList[i] = sensor;
+                        Source source = (Source) model.getElementAt(i);
+                        newList[i] = source;
                     }
                     if(i > list1.getSelectedIndex()) {
-                        Sensor sensor = (Sensor) model.getElementAt(i);
-                        newList[i-1] = sensor;
+                        Source source = (Source) model.getElementAt(i);
+                        newList[i-1] = source;
                     }
                 }
                 list1.setListData(newList);
@@ -136,9 +136,9 @@ public class PollutionConfig {
 
 
         addFunctionalSensorButton.addActionListener(e -> {
-            Sensor newSensor = SensorFactory.createFunctionSensor("0", 255.0, new GeoPosition(0,0), TimeUnit.MINUTES, 1);
-            toAdd.add(newSensor);
-            remainingList.add(newSensor);
+            Source newSource = SourceFactory.createFunctionSource("0", new GeoPosition(0,0), TimeUnit.MINUTES, 1);
+            toAdd.add(newSource);
+            remainingList.add(newSource);
             list1.setListData(remainingList.toArray());
 
         });
@@ -147,9 +147,9 @@ public class PollutionConfig {
             Pair<Double,Double> DefaultPoint = new Pair<Double,Double>(0.0,0.0);
             List<Pair<Double,Double>> points = new ArrayList<>();
             points.add(DefaultPoint);
-            Sensor newSensor = SensorFactory.createPolynomialSensor(points, 255.0, new GeoPosition(0,0), TimeUnit.MINUTES, 1);
-            toAdd.add(newSensor);
-            remainingList.add(newSensor);
+            Source newSource = SourceFactory.createPolynomialSource(points, new GeoPosition(0,0), TimeUnit.MINUTES, 1);
+            toAdd.add(newSource);
+            remainingList.add(newSource);
             list1.setListData(remainingList.toArray());
 
         });
@@ -159,7 +159,7 @@ public class PollutionConfig {
 
     }
 
-    void setSensorFunction(Sensor Chosen) {
+    void setSensorFunction(Source Chosen) {
         BiConsumer<JPanel, ChartPanel> updateGraph = (p, c) -> {
             p.removeAll();
             p.add(c);
@@ -181,7 +181,7 @@ public class PollutionConfig {
     private class SharedListSelectionHandler implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            Sensor Chosen = remainingList.get(list1.getSelectedIndex());
+            Source Chosen = remainingList.get(list1.getSelectedIndex());
             PositionText.setValue(Chosen.getPosition());
             TimeUnitText.setValue(Chosen.getTimeUnit());
             MaximumValueText.setValue(Chosen.getMaxValue());
@@ -200,12 +200,12 @@ public class PollutionConfig {
         public void actionPerformed(ActionEvent e) {
             if(!toDelete.isEmpty()){
                 for(int i = 0; i < toDelete.size(); i++){
-                    simRunner.getEnvironmentAPI().removeSensor(toDelete.get(i));
+                    simRunner.getEnvironmentAPI().getPoll().removeSource(toDelete.get(i));
                 }
             }
             toDelete.clear();
             int currentlyChanged = list1.getSelectedIndex();
-            Sensor toChange = simRunner.getEnvironmentAPI().getSensors().get(currentlyChanged);
+            Source toChange = simRunner.getEnvironmentAPI().getPoll().getSources().get(currentlyChanged);
             toChange.setPosition(ToGeoPos(PositionText.getText()));
             toChange.setMaxValue(Integer.valueOf(MaximumValueText.getText()));
             toChange.setTimeUnit(ToTimeUnit(TimeUnitText.getText()));
@@ -249,12 +249,12 @@ public class PollutionConfig {
         public void actionPerformed(ActionEvent e) {
             if(!toDelete.isEmpty()){
                 for(int i = 0; i < toDelete.size(); i++){
-                    simRunner.getEnvironmentAPI().removeSensor(toDelete.get(i));
+                    simRunner.getEnvironmentAPI().getPoll().removeSource(toDelete.get(i));
                 }
             }
             toDelete.clear();
             int currentlyChanged = list1.getSelectedIndex();
-            Sensor toChange = simRunner.getEnvironmentAPI().getSensors().get(currentlyChanged);
+            Source toChange = simRunner.getEnvironmentAPI().getPoll().getSources().get(currentlyChanged);
             toChange.setPosition(ToGeoPos(PositionText.getText()));
             toChange.setMaxValue(Integer.valueOf(MaximumValueText.getText()));
             toChange.setTimeUnit(ToTimeUnit(TimeUnitText.getText()));

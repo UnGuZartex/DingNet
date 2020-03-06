@@ -1,7 +1,7 @@
 package EnvironmentAPI.util;
 
-import EnvironmentAPI.GeneralSensor.FunctionSensor.FunctionSensor;
-import EnvironmentAPI.GeneralSensor.PolynomialSensor.PolynomialSensor;
+import EnvironmentAPI.GeneralSources.FunctionSources.FunctionSource;
+import EnvironmentAPI.GeneralSources.PolynomialSources.PolynomialSource;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.Pair;
@@ -11,18 +11,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class SensorFactory {
-    public static PolynomialSensor createPolynomialSensor(List<Pair<Double,Double>> Points,
-                                                          Double maxValue,
+public class SourceFactory {
+    public static PolynomialSource createPolynomialSource(List<Pair<Double,Double>> Points,
                                                           GeoPosition position, TimeUnit unit, int NoiseRatio){
         Points = sortPoints(Points);
-        return new PolynomialSensor(Points, position, maxValue, unit, NoiseRatio);
+        return new PolynomialSource(Points, position, unit);
     }
 
-    public static FunctionSensor createFunctionSensor(String function,
-                                                      Double maxValue,
+    public static FunctionSource createFunctionSource(String function,
                                                       GeoPosition position, TimeUnit unit, int NoiseRatio){
-        return new FunctionSensor(position, function, maxValue, unit, NoiseRatio);
+        return new FunctionSource(position, function, unit);
     }
 
     private static List<Pair<Double,Double>> sortPoints(List<Pair<Double,Double>> points){

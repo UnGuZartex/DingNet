@@ -1,6 +1,5 @@
 package EnvironmentAPI.util;
 
-import EnvironmentAPI.PollutionEnvironment;
 import datagenerator.iaqsensor.TimeUnit;
 import iot.SimulationRunner;
 import org.jxmapviewer.viewer.GeoPosition;
@@ -20,7 +19,7 @@ public class EnvironmentReader {
 
     public static void loadEnvironment(File file, SimulationRunner runner) {
         try {
-            runner.getEnvironmentAPI().reset();
+            runner.getEnvironmentAPI().getPoll().reset();
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
             Element configuration = doc.getDocumentElement();
             Element Sensors = (Element) configuration.getElementsByTagName("Sensors").item(0);
@@ -30,23 +29,21 @@ public class EnvironmentReader {
                 for (int j = 0; j < PSensorNode.getElementsByTagName("Point").getLength(); j++) {
                     Points.add(ToPoint(PSensorNode.getElementsByTagName("Point").item(j).getTextContent()));
                 }
-                Double maxValue = Double.valueOf(PSensorNode.getElementsByTagName("MaximumValue").item(0).getTextContent());
                 GeoPosition position = ToGeoPos(PSensorNode.getElementsByTagName("Position").item(0).getTextContent());
                 TimeUnit unit = ToTimeUnit(PSensorNode.getElementsByTagName("TimeUnit").item(0).getTextContent());
                 int NoiseRatio = Integer.parseInt(PSensorNode.getElementsByTagName("NoiseRatio").item(0).getTextContent());
 
-                runner.getEnvironmentAPI().addSensor(SensorFactory.createPolynomialSensor(Points,maxValue,position, unit, NoiseRatio));
+                runner.getEnvironmentAPI().getPoll().addSource(SourceFactory.createPolynomialSource(Points, position, unit, NoiseRatio));
             }
             for (int i = 0; i < Sensors.getElementsByTagName("FunctionSensor").getLength(); i++) {
                 Element FSensorNode = (Element) Sensors.getElementsByTagName("FunctionSensor").item(i);
-                Double maxValue = Double.valueOf(FSensorNode.getElementsByTagName("MaximumValue").item(0).getTextContent());
                 GeoPosition position = ToGeoPos(FSensorNode.getElementsByTagName("Position").item(0).getTextContent());
                 String function = FSensorNode.getElementsByTagName("Function").item(0).getTextContent();
                 TimeUnit unit = ToTimeUnit(FSensorNode.getElementsByTagName("TimeUnit").item(0).getTextContent());
                 int NoiseRatio = Integer.parseInt(FSensorNode.getElementsByTagName("NoiseRatio").item(0).getTextContent());
 
 
-                runner.getEnvironmentAPI().addSensor(SensorFactory.createFunctionSensor(function,maxValue,position, unit, NoiseRatio));
+                runner.getEnvironmentAPI().getPoll().addSource(SourceFactory.createFunctionSource(function, position, unit, NoiseRatio));
 
             }
 

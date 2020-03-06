@@ -227,7 +227,7 @@ extends java.lang.Object</pre>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#retrieveSensorData(iot.networkentity.Mote,java.util.List)">retrieveSensorData</a></span>&#8203;(<a href="../iot/networkentity/Mote.html" title="class in iot.networkentity">Mote</a>&nbsp;mote,
                   java.util.List&lt;java.lang.Byte&gt;&nbsp;messageBody)</code></th>
 <td class="colLast">
-<div class="block">Conversion function which converts a message of bytes to the corresponding mote sensor measurements</div>
+<div class="block">Conversion function which converts a message of bytes to the corresponding mote source measurements</div>
 </td>
 </tr>
 </table>
@@ -317,13 +317,13 @@ extends java.lang.Object</pre>
 <h4>retrieveSensorData</h4>
 <pre class="methodSignature">protected&nbsp;java.util.Map&lt;<a href="../iot/networkentity/MoteSensor.html" title="enum in iot.networkentity">MoteSensor</a>,&#8203;java.lang.Byte[]&gt;&nbsp;retrieveSensorData&#8203;(<a href="../iot/networkentity/Mote.html" title="class in iot.networkentity">Mote</a>&nbsp;mote,
                                                                               java.util.List&lt;java.lang.Byte&gt;&nbsp;messageBody)</pre>
-<div class="block">Conversion function which converts a message of bytes to the corresponding mote sensor measurements</div>
+<div class="block">Conversion function which converts a message of bytes to the corresponding mote source measurements</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>mote</code> - The mote from which the message originated.</dd>
-<dd><code>messageBody</code> - The raw message data containing the sensor measurements.</dd>
+<dd><code>messageBody</code> - The raw message data containing the source measurements.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>A map from the sensor types to the data/measurements they produced.</dd>
+<dd>A map from the source types to the data/measurements they produced.</dd>
 </dl>
 </li>
 </ul>

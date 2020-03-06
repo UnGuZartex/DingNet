@@ -1,4 +1,4 @@
-package EnvironmentAPI.GeneralSensor;
+package EnvironmentAPI.GeneralSources;
 
 
 import EnvironmentAPI.util.EnvSettings;
@@ -9,7 +9,7 @@ import org.jxmapviewer.viewer.GeoPosition;
 import java.util.Random;
 
 
-public abstract class Sensor{
+public abstract class Source {
     private GeoPosition position;
 
 
@@ -19,22 +19,16 @@ public abstract class Sensor{
 
     protected double maxValue;
 
-    protected Random rand = new Random();
-    protected OpenSimplex2S noise;
 
-    protected static int noiseMultiplicator = EnvSettings.NOISE_RATIO;
 
 
 
 
     protected int NoiseRatio;
 
-    protected Sensor(GeoPosition position, double maxValue, TimeUnit unit, int NoiseRatio) {
+    protected Source(GeoPosition position, TimeUnit unit) {
         this.position = position;
-        this.maxValue = maxValue;
         this.timeUnit = unit;
-        noise = new OpenSimplex2S(rand.nextLong());
-        this.NoiseRatio = NoiseRatio;
     }
 
     public void setPosition(GeoPosition position) {
@@ -54,9 +48,7 @@ public abstract class Sensor{
     public void setTimeUnit(TimeUnit timeUnit) {
         this.timeUnit = timeUnit;
     }
-    public static void setNoiseMultiplicator(int noiseRatio) {
-        noiseMultiplicator = noiseRatio * EnvSettings.NOISE_RATIO;
-    }
+
 
     public abstract double generateData(double timeinNano) ;
 

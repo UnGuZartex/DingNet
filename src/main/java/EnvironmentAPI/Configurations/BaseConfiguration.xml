@@ -1,29 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Max Value a pollution source can reach is 255 -->
 <Environment>
     <Sensors>
-        <PolynomialSensor>
-            <Position>50.873566, 4.696793</Position>
-            <Point>1.0,122.0</Point>
-            <Point>2.0,255.0</Point>
-            <MaximumValue>255</MaximumValue>
-            <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>1</NoiseRatio>
-        </PolynomialSensor>
-
-        <FunctionSensor>
-            <Position>50.878599, 4.715854</Position>
-            <Function>50*sin(t*3)</Function>
-            <MaximumValue>255</MaximumValue>
-            <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>1</NoiseRatio>
-
-        </FunctionSensor>
         <FunctionSensor>
             <Position>50.889058, 4.701625</Position>
-            <Function>122*sin(t*pi)</Function>
-            <MaximumValue>255</MaximumValue>
             <TimeUnit>MINUTES</TimeUnit>
             <NoiseRatio>1</NoiseRatio>
+            <Function>255*exp(-((t)^2/30*4))</Function>
         </FunctionSensor>
     </Sensors>
 </Environment>
