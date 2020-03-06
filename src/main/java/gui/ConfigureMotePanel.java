@@ -45,7 +45,7 @@ public class ConfigureMotePanel extends AbstractConfigurePanel {
         return mainPanel;
     }
 
-    private class MapMouseAdapter implements MouseListener {
+    class MapMouseAdapter implements MouseListener {
         private ConfigureMotePanel panel;
 
         MapMouseAdapter(ConfigureMotePanel panel) {

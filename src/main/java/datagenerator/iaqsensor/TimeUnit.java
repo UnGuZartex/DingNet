@@ -17,7 +17,10 @@ public enum TimeUnit {
         this.v = v;
     }
 
-    public double convertFromNano(long nanoSeconds) {
+    public double convertToNano(double time){
+        return time*v;
+    }
+    public double convertFromNano(double nanoSeconds) {
         return nanoSeconds / v;
     }
 }

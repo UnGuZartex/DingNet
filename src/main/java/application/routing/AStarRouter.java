@@ -2,6 +2,7 @@ package application.routing;
 
 import application.routing.heuristic.RoutingHeuristic;
 import application.routing.heuristic.RoutingHeuristic.HeuristicEntry;
+import iot.GlobalClock;
 import org.jetbrains.annotations.NotNull;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.GraphStructure;
@@ -29,7 +30,7 @@ public class AStarRouter implements PathFinder {
 
 
     @Override
-    public List<GeoPosition> retrievePath(GraphStructure graph, GeoPosition begin, GeoPosition end) {
+    public List<GeoPosition> retrievePath(GraphStructure graph, GeoPosition begin, GeoPosition end, GlobalClock clock) {
         long beginWaypointId = graph.getClosestWayPointWithinRange(begin, DISTANCE_THRESHOLD_POSITIONS)
             .orElseThrow(() -> new IllegalStateException("The mote position retrieved from the message is not located at a waypoint."));
         long endWaypointId = graph.getClosestWayPointWithinRange(end, DISTANCE_THRESHOLD_POSITIONS)
@@ -44,7 +45,7 @@ public class AStarRouter implements PathFinder {
             .forEach(entry -> {
                 fringe.add(new FringeEntry(
                     List.of(entry.getKey()),
-                    this.heuristic.calculateHeuristic(new HeuristicEntry(graph, entry.getValue(), end))
+                    this.heuristic.calculateHeuristic(new HeuristicEntry(graph, entry.getValue(), end), clock.getTime().toNanoOfDay())
                 ));
                 visitedConnections.add(entry.getKey());
             });
@@ -70,7 +71,7 @@ public class AStarRouter implements PathFinder {
                     extendedPath.add(connId);
 
                     double newHeuristicValue = current.heuristicValue
-                        + this.heuristic.calculateHeuristic(new HeuristicEntry(graph, graph.getConnection(connId), end));
+                        + this.heuristic.calculateHeuristic(new HeuristicEntry(graph, graph.getConnection(connId), end), clock.getTime().toNanoOfDay());
 
                     fringe.add(new FringeEntry(extendedPath, newHeuristicValue));
                     visitedConnections.add(connId);

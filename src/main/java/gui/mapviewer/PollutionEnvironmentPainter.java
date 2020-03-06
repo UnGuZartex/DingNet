@@ -62,7 +62,7 @@ public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
                     (int) ((i+.5) * maxX / DIVISION),
                     (int) ((j+.5) * maxY / DIVISION));
 
-                float airQuality = (float) pollutionEnv.getDataFromSensors(middle);
+                float airQuality = (float) pollutionEnv.getDataFromSensors(middle, environment.getClock().getTime().toNanoOfDay());
                 g.setColor(this.getColor(airQuality));
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, GUISettings.TRANSPARENCY_POLLUTIONGRID));
                 g.fill(new Rectangle2D.Double(topLeft.getX(), topLeft.getY(),
@@ -80,7 +80,8 @@ public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
      * @return A color between green and red representing the air quality.
      */
     private Color getColor(float airQuality) {
-        float[] hsbVals = Color.RGBtoHSB((int) (255 * airQuality), (int) (255 * (1 - airQuality)), 0, null);
+        //return new Color(105,105,105, (int)(255*airQuality));
+        float[] hsbVals = Color.RGBtoHSB((int) (255 * (airQuality)), (int) (255 * (1-airQuality)), 0, null);
         return Color.getHSBColor(hsbVals[0], hsbVals[1], hsbVals[2]);
     }
 }

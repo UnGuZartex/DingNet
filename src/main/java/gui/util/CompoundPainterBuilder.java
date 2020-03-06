@@ -10,6 +10,7 @@ import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.painter.CompoundPainter;
 import org.jxmapviewer.painter.Painter;
 import org.jxmapviewer.viewer.DefaultWaypoint;
+import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.Waypoint;
 import util.GraphStructure;
 
@@ -129,6 +130,11 @@ public class CompoundPainterBuilder {
         return this;
     }
 
+    public CompoundPainterBuilder withSensors(Environment environment, PollutionEnvironment pollution) {
+        painters.add(new SensorPainter(environment, pollution));
+        return this;
+    }
+
     /**
      * Include a painter for the stored routing path (at {@code routingApplication}) for the currently active user mote (if present)
      * @param environment The environment which contains the user mote.
@@ -154,5 +160,10 @@ public class CompoundPainterBuilder {
      */
     public CompoundPainter<JXMapViewer> build() {
         return new CompoundPainter<>(painters);
+    }
+
+    public CompoundPainterBuilder withSelected(Environment environment, String text) {
+        painters.add(new SelectedPainter(environment, text));
+        return this;
     }
 }

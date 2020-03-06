@@ -1,8 +1,10 @@
 package EnvironmentAPI.GeneralSensor.PolynomialSensor;
 
 import EnvironmentAPI.GeneralSensor.Sensor;
+import EnvironmentAPI.util.EnvSettings;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
+import util.MapHelper;
 import util.Pair;
 
 import java.util.*;
@@ -10,17 +12,13 @@ import java.util.*;
 public class PolynomialSensor extends Sensor {
     private List<List<Double>> newtonCoefficients  = new ArrayList<>();
     private List<Pair<Double,Double>> pointsKnown;
-    private TimeUnit timeUnit;
 
 
-    public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit) {
-        super(position, maxValue);
+    public PolynomialSensor(List<Pair<Double,Double>>points, GeoPosition position, double maxValue, TimeUnit unit, int NoiseRatio) {
+        super(position, maxValue, unit, NoiseRatio);
         for(Pair<Double,Double> point:points){
             addPoint(point);
         }
-
-        timeUnit = unit;
-
     }
 
     /**
@@ -30,8 +28,7 @@ public class PolynomialSensor extends Sensor {
      * @return a byte representing the amount of pollution in a range of [0,255].
      */
     @Override
-    public double generateData(long timeinNano) {
-
+    public double generateData(double timeinNano) {
         double dataAtTime =  evaluatePolynomial(timeinNano);
         return dataAtTime;
     }
@@ -41,10 +38,6 @@ public class PolynomialSensor extends Sensor {
         return "PolynomialSensor";
     }
 
-    @Override
-    public TimeUnit getTimeUnit() {
-        return timeUnit;
-    }
 
     @Override
     public Object getDefiningFeatures() {
@@ -76,13 +69,14 @@ public class PolynomialSensor extends Sensor {
      * @param timeinNano: the time to evaluate in.
      * @return a value
      */
-    private double evaluatePolynomial(long timeinNano) {
+    private double evaluatePolynomial(double timeinNano) {
         double timeToEvaluate = timeUnit.convertFromNano(timeinNano);
         double totalValue = 0;
         for (int i = 0; i < newtonCoefficients.size(); i++)
         {
             totalValue += newtonCoefficients.get(i).get(0) * getPointsFromOrder(i, timeToEvaluate);
         }
+        totalValue += noiseMultiplicator*NoiseRatio*noise.noise3_XYBeforeZ(this.getPosition().getLatitude(), this.getPosition().getLongitude(), timeinNano/1000);
         if (totalValue >= maxValue){
             totalValue = maxValue;
         }

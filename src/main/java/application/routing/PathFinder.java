@@ -1,5 +1,6 @@
 package application.routing;
 
+import iot.GlobalClock;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.GraphStructure;
 
@@ -14,5 +15,5 @@ public interface PathFinder {
      * @return A list of positions containing the path to the destination
      * @throws RuntimeException When no path existed between the starting and ending position.
      */
-    List<GeoPosition> retrievePath(GraphStructure graph, GeoPosition begin, GeoPosition end);
+    List<GeoPosition> retrievePath(GraphStructure graph, GeoPosition begin, GeoPosition end, GlobalClock clock);
 }

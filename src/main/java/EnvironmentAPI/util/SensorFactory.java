@@ -14,15 +14,15 @@ import java.util.List;
 public class SensorFactory {
     public static PolynomialSensor createPolynomialSensor(List<Pair<Double,Double>> Points,
                                                           Double maxValue,
-                                                          GeoPosition position, TimeUnit unit){
+                                                          GeoPosition position, TimeUnit unit, int NoiseRatio){
         Points = sortPoints(Points);
-        return new PolynomialSensor(Points, position, maxValue, unit);
+        return new PolynomialSensor(Points, position, maxValue, unit, NoiseRatio);
     }
 
     public static FunctionSensor createFunctionSensor(String function,
                                                       Double maxValue,
-                                                      GeoPosition position, TimeUnit unit){
-        return new FunctionSensor(position, function, maxValue, unit);
+                                                      GeoPosition position, TimeUnit unit, int NoiseRatio){
+        return new FunctionSensor(position, function, maxValue, unit, NoiseRatio);
     }
 
     private static List<Pair<Double,Double>> sortPoints(List<Pair<Double,Double>> points){

@@ -104,6 +104,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private JPanel statisticsPanel;
     private JButton openPollutionEnvironmentButton;
     private JButton savePollutionConfigButton;
+    private JButton configureEnvironmentButton;
+    private JSlider NoiseSlider;
 
     private static JXMapViewer mapViewer = new JXMapViewer();
     // Create a TileFactoryInfo for OpenStreetMap
@@ -181,6 +183,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         simulationSaveButton.addActionListener(new SaveSimulationResultListener());
         openPollutionEnvironmentButton.addActionListener(new OpenPollutionEnvironmentListener());
         savePollutionConfigButton.addActionListener(new SavePollutionConfigurationListener());
+        configureEnvironmentButton.addActionListener(new ConfigurePollutionActionListener(this, simulationRunner));
+
 
 
         regionButton.addActionListener(e -> this.setPollutionGraphs(simulationRunner.getEnvironment()));
@@ -264,6 +268,10 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
         speedSlider.addChangeListener(
             e -> this.simulationSpeed.setValue(GUISettings.BASE_VISUALIZATION_SPEED * speedSlider.getValue())
+        );
+
+        NoiseSlider.addChangeListener(
+            e -> this.simulationRunner.getEnvironmentAPI().setNoiseRatio(NoiseSlider.getValue())
         );
     }
 
@@ -486,6 +494,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             .withMotePaths(environment)
             .withMotes(environment)
             .withGateways(environment)
+            .withSensors(environment, simulationRunner.getEnvironmentAPI())
             .build()
         );
 
@@ -759,6 +768,32 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         }
     }
 
+    private class ConfigurePollutionActionListener implements ActionListener {
+        private MainGUI gui;
+        private SimulationRunner simulationRunner;
+
+
+        ConfigurePollutionActionListener(MainGUI gui, SimulationRunner simRunner) {
+            this.gui = gui;
+            this.simulationRunner = simRunner;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (simulationRunner.getRoutingApplication() == null){
+                showNoConfigurationSelectedError();
+                return;
+            }
+            JFrame frame = new JFrame("Configure Pollution environment");
+            PollutionConfig pollutionConfigureGUI = new PollutionConfig(gui, frame, simulationRunner);
+            frame.setContentPane(pollutionConfigureGUI.getMainPanel());
+            frame.setMinimumSize(pollutionConfigureGUI.getMainPanel().getMinimumSize());
+            frame.setPreferredSize(pollutionConfigureGUI.getMainPanel().getPreferredSize());
+            frame.setVisible(true);
+
+        }
+    }
+
     private class OpenConfigurationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
@@ -834,6 +869,10 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private class SavePollutionConfigurationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
+            if (simulationRunner.getRoutingApplication() == null){
+                showNoConfigurationSelectedError();
+                return;
+            }
             JFileChooser fc = new JFileChooser();
             fc.setDialogTitle("Save PollutionConfiguration");
             fc.setFileFilter(new FileNameExtensionFilter("xml output", "xml"));
@@ -979,7 +1018,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
 
 
     private void showNoConfigurationSelectedError() {
-        JOptionPane.showMessageDialog(null, "Make sure to have a configuration loaded in before selecting an environment.",
+        JOptionPane.showMessageDialog(null, "Make sure to have a configuration loaded in before selecting/saving/configuring an environment.",
             "Warning: no configuration loaded", JOptionPane.ERROR_MESSAGE);
     }
 
@@ -1037,6 +1076,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         saveConfigurationButton.setEnabled(b);
         configureButton.setEnabled(b);
         savePollutionConfigButton.setEnabled(b);
+        configureEnvironmentButton.setEnabled(b);
+        NoiseSlider.setEnabled(b);
     }
 
     // endregion
