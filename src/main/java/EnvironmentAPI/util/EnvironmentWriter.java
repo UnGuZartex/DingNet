@@ -21,30 +21,24 @@ public class EnvironmentWriter {
             // root element
             Element rootElement = doc.createElement("Environment");
             doc.appendChild(rootElement);
-            Element sensorElement = doc.createElement("Sensors");
-            rootElement.appendChild(sensorElement);
+            Element sourceElement = doc.createElement("Sources");
+            rootElement.appendChild(sourceElement);
             for(Source source :toSaveList){
                 Element type = doc.createElement(source.getType());
-                sensorElement.appendChild(type);
+                sourceElement.appendChild(type);
                 Element Position = doc.createElement("Position");
                 Position.appendChild(doc.createTextNode(source.getPosition().toString().replace("[", "").replace("]", "")));
                 type.appendChild(Position);
-                Element MaximumValue = doc.createElement("MaximumValue");
-                MaximumValue.appendChild(doc.createTextNode(String.valueOf(source.getMaxValue())));
-                type.appendChild(MaximumValue);
                 Element TimeUnit = doc.createElement("TimeUnit");
                 TimeUnit.appendChild(doc.createTextNode(source.getTimeUnit().name()));
                 type.appendChild(TimeUnit);
-                Element NoiseRatio = doc.createElement("NoiseRatio");
-                NoiseRatio.appendChild(doc.createTextNode(String.valueOf(source.getNoiseRatio())));
-                type.appendChild(NoiseRatio);
                 switch(source.getType()){
-                    case "FunctionSensor":
+                    case "FunctionSource":
                         Element Function = doc.createElement("Function");
                         Function.appendChild(doc.createTextNode(String.valueOf(source.getDefiningFeatures())));
                         type.appendChild(Function);
                         break;
-                    case "PolynomialSensor":
+                    case "PolynomialSource":
                         System.out.println(source.getType());
                         @SuppressWarnings("unchecked")
                         List<Pair<Double,Double>> pointsKnown = (List<Pair<Double, Double>>) source.getDefiningFeatures();

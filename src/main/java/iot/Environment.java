@@ -376,5 +376,12 @@ public class Environment implements Serializable {
     public void removeConnectionFromMotes(long connectionId) {
         motes.forEach(o -> o.shortenPathFromConnection(connectionId));
     }
+
+    public boolean isWithinBounds(GeoPosition position){
+        int x = mapHelper.toMapXCoordinate(position);
+        int y = mapHelper.toMapYCoordinate(position);
+        return x < getMaxXpos() && x > 0 && y < getMaxYpos() && y > 0;
+
+    }
 }
 

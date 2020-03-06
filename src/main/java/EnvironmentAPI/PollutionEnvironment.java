@@ -209,7 +209,6 @@ public class PollutionEnvironment {
         for(Source source:sources){
 
             Point XY = geoPositionToXY(source.getPosition(), environment);
-            System.out.println(source.generateData(currentTime));
             density[getTileN(XY.x, XY.y)] += source.generateData(currentTime);
         }
 

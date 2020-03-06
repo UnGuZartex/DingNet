@@ -13,13 +13,13 @@ import java.util.List;
 
 public class SourceFactory {
     public static PolynomialSource createPolynomialSource(List<Pair<Double,Double>> Points,
-                                                          GeoPosition position, TimeUnit unit, int NoiseRatio){
+                                                          GeoPosition position, TimeUnit unit){
         Points = sortPoints(Points);
         return new PolynomialSource(Points, position, unit);
     }
 
     public static FunctionSource createFunctionSource(String function,
-                                                      GeoPosition position, TimeUnit unit, int NoiseRatio){
+                                                      GeoPosition position, TimeUnit unit){
         return new FunctionSource(position, function, unit);
     }
 

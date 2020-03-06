@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--Max Value a pollution source can reach is 255 -->
 <Environment>
-    <Sensors>
-        <FunctionSensor>
+    <Sources>
+        <FunctionSource>
             <Position>50.889058, 4.701625</Position>
             <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>1</NoiseRatio>
             <Function>255*exp(-((t)^2/30*4))</Function>
-        </FunctionSensor>
-    </Sensors>
+        </FunctionSource>
+    </Sources>
 </Environment>
+

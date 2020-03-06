@@ -46,7 +46,6 @@ public class PollutionConfig {
     private JButton addFunctionalSensorButton;
     private JButton deleteSelectedButton;
     private JFormattedTextField PositionText;
-    private JFormattedTextField MaximumValueText;
     private JFormattedTextField TimeUnitText;
     private JButton configureOtherPropertiesButton;
     private JButton saveValuesTemporaryButton;
@@ -54,7 +53,6 @@ public class PollutionConfig {
     private JPanel MapPanel;
     private JButton addPolynomialSensorButton;
     private JFormattedTextField typeText;
-    private JFormattedTextField NoiseField;
     private JPanel GraphPanel;
     private SimulationRunner simRunner;
     private List<Source> toDelete;
@@ -136,7 +134,7 @@ public class PollutionConfig {
 
 
         addFunctionalSensorButton.addActionListener(e -> {
-            Source newSource = SourceFactory.createFunctionSource("0", new GeoPosition(0,0), TimeUnit.MINUTES, 1);
+            Source newSource = SourceFactory.createFunctionSource("0", new GeoPosition(0,0), TimeUnit.MINUTES);
             toAdd.add(newSource);
             remainingList.add(newSource);
             list1.setListData(remainingList.toArray());
@@ -147,7 +145,7 @@ public class PollutionConfig {
             Pair<Double,Double> DefaultPoint = new Pair<Double,Double>(0.0,0.0);
             List<Pair<Double,Double>> points = new ArrayList<>();
             points.add(DefaultPoint);
-            Source newSource = SourceFactory.createPolynomialSource(points, new GeoPosition(0,0), TimeUnit.MINUTES, 1);
+            Source newSource = SourceFactory.createPolynomialSource(points, new GeoPosition(0,0), TimeUnit.MINUTES);
             toAdd.add(newSource);
             remainingList.add(newSource);
             list1.setListData(remainingList.toArray());
@@ -184,9 +182,7 @@ public class PollutionConfig {
             Source Chosen = remainingList.get(list1.getSelectedIndex());
             PositionText.setValue(Chosen.getPosition());
             TimeUnitText.setValue(Chosen.getTimeUnit());
-            MaximumValueText.setValue(Chosen.getMaxValue());
             typeText.setValue(Chosen.getType());
-            NoiseField.setValue(Chosen.getNoiseRatio());
             refresh();
             setSensorFunction(Chosen);
 
@@ -207,9 +203,7 @@ public class PollutionConfig {
             int currentlyChanged = list1.getSelectedIndex();
             Source toChange = simRunner.getEnvironmentAPI().getPoll().getSources().get(currentlyChanged);
             toChange.setPosition(ToGeoPos(PositionText.getText()));
-            toChange.setMaxValue(Integer.valueOf(MaximumValueText.getText()));
             toChange.setTimeUnit(ToTimeUnit(TimeUnitText.getText()));
-            toChange.setNoiseRatio(Integer.parseInt(NoiseField.getText()));
             refresh();
         }
 
@@ -256,9 +250,7 @@ public class PollutionConfig {
             int currentlyChanged = list1.getSelectedIndex();
             Source toChange = simRunner.getEnvironmentAPI().getPoll().getSources().get(currentlyChanged);
             toChange.setPosition(ToGeoPos(PositionText.getText()));
-            toChange.setMaxValue(Integer.valueOf(MaximumValueText.getText()));
             toChange.setTimeUnit(ToTimeUnit(TimeUnitText.getText()));
-            toChange.setNoiseRatio(Integer.parseInt(NoiseField.getText()));
             JFileChooser fc = new JFileChooser();
             fc.setDialogTitle("Save PollutionConfiguration");
             fc.setFileFilter(new FileNameExtensionFilter("xml output", "xml"));
@@ -340,7 +332,9 @@ public class PollutionConfig {
             if (e.getClickCount() == 1) {
                 Point p = e.getPoint();
                 GeoPosition geo = mapViewer.convertPointToGeoPosition(p);
-                PositionText.setValue(geo);
+                if(environment.isWithinBounds(geo)) {
+                    PositionText.setValue(geo);
+                }
             }
             refresh();
         }
