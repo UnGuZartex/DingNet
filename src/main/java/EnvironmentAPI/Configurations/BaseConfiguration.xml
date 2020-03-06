@@ -8,5 +8,12 @@
             <Function>255*exp(-((t)^2/30*4))</Function>
         </FunctionSource>
     </Sources>
+    <Sensors>
+        <Sensor>
+            <Position>50.889058, 4.701625</Position>
+            <MaxValue>255</MaxValue>
+            <NoiseRatio>0</NoiseRatio>
+        </Sensor>
+    </Sensors>
 </Environment>
 

@@ -108,4 +108,8 @@ public class SensorEnvironment {
     public void addSensor(Sensor sensor) {
         sensors.add(sensor);
     }
+
+    public List<Sensor> getSensors() {
+        return sensors;
+    }
 }

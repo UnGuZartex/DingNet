@@ -44,6 +44,16 @@ public class EnvironmentReader {
 
             }
 
+            Element Sensors = (Element) configuration.getElementsByTagName("Sensors").item(0);
+            for (int i = 0; i < Sensors.getElementsByTagName("Sensor").getLength(); i++) {
+                Element SensorNode = (Element) Sensors.getElementsByTagName("Sensor").item(i);
+                GeoPosition position = ToGeoPos(SensorNode.getElementsByTagName("Position").item(0).getTextContent());
+                int maxValue = Integer.parseInt(SensorNode.getElementsByTagName("MaxValue").item(0).getTextContent());
+                int noiseRatio = Integer.parseInt(SensorNode.getElementsByTagName("NoiseRatio").item(0).getTextContent());
+
+                runner.getEnvironmentAPI().addSensor(SensorFactory.createSensor(runner.getEnvironmentAPI().getPoll(), runner.getEnvironment(), position, maxValue, noiseRatio));
+            }
+
         } catch (SAXException | ParserConfigurationException | IOException e) {
             e.printStackTrace();
         }

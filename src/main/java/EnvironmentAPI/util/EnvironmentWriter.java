@@ -1,6 +1,7 @@
 package EnvironmentAPI.util;
 
 import EnvironmentAPI.GeneralSources.Source;
+import EnvironmentAPI.Sensor.Sensor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import util.Pair;
@@ -15,7 +16,7 @@ import java.io.File;
 import java.util.List;
 
 public class EnvironmentWriter {
-    public static void saveEnvironment(List<Source> toSaveList, File file){
+    public static void saveEnvironment(List<Source> toSaveList, List<Sensor> sensorToSave, File file){
         try {
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             // root element
@@ -52,6 +53,24 @@ public class EnvironmentWriter {
                         System.out.println("Invalid type: " + source.getType());
                 }
             }
+
+            Element sensorElement = doc.createElement("Sensors");
+            rootElement.appendChild(sourceElement);
+
+            for(Sensor sensor :sensorToSave) {
+                Element type = doc.createElement("Sensor");
+                sourceElement.appendChild(type);
+                Element Position = doc.createElement("Position");
+                Position.appendChild(doc.createTextNode(sensor.getPosition().toString().replace("[", "").replace("]", "")));
+                type.appendChild(Position);
+                Element MaxValue = doc.createElement("MaxValue");
+                Position.appendChild(doc.createTextNode(String.valueOf(sensor.getMaxValue())));
+                type.appendChild(MaxValue);
+                Element NoiseRatio = doc.createElement("NoiseRatio");
+                Position.appendChild(doc.createTextNode(String.valueOf(sensor.getNoiseRatio())));
+                type.appendChild(NoiseRatio);
+            }
+
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             transformerFactory.setAttribute("indent-number", 4);
             Transformer transformer = transformerFactory.newTransformer();

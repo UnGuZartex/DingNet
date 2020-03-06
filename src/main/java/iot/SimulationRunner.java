@@ -296,8 +296,6 @@ public class SimulationRunner {
     public void loadEnvironmentFromFile(File file){
 
         EnvironmentReader.loadEnvironment(file,this);
-        sensorEnvironment.addSensor(new Sensor(sensorEnvironment.getPoll(), this.getEnvironment(), new GeoPosition(50.889058, 4.701625), 255,  0));
-
     }
     /**
      * Load a configuration from a provided xml file.
@@ -333,7 +331,7 @@ public class SimulationRunner {
     }
 
     public void savePollutionConfiguration(File file) {
-        EnvironmentWriter.saveEnvironment(this.sensorEnvironment.getPoll().getSources(), file);
+        EnvironmentWriter.saveEnvironment(this.sensorEnvironment.getPoll().getSources(), this.sensorEnvironment.getSensors(), file);
     }
 
 
