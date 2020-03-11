@@ -489,6 +489,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             .withEnvironmentAPISensor(environment, simulationRunner.getEnvironmentAPI())
             //.withEnvironmentAPI(environment, simulationRunner.getEnvironmentAPI())
             //.withPollutionGrid(environment, simulationRunner.getPollutionGrid())
+            //.withSources(environment, simulationRunner.getEnvironmentAPI())
+
             .withRoutingPath(environment, simulationRunner.getRoutingApplication())
             .withMotePaths(environment)
             .withMotes(environment)

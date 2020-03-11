@@ -14,6 +14,22 @@
             <MaxValue>255</MaxValue>
             <NoiseRatio>0</NoiseRatio>
         </Sensor>
+        <Sensor>
+            <Position>50.867058, 4.701625</Position>
+            <MaxValue>255</MaxValue>
+            <NoiseRatio>0</NoiseRatio>
+        </Sensor>
+        <Sensor>
+            <Position>50.878831411546244, 4.714336395263672</Position>
+            <MaxValue>255</MaxValue>
+            <NoiseRatio>0</NoiseRatio>
+        </Sensor>
+        <Sensor>
+            <Position>50.878777255570405, 4.683952331542969</Position>
+            <MaxValue>255</MaxValue>
+            <NoiseRatio>0</NoiseRatio>
+        </Sensor>
+
     </Sensors>
 </Environment>
 

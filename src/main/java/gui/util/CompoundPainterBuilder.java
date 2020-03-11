@@ -134,6 +134,11 @@ public class CompoundPainterBuilder {
         return this;
     }
 
+    public CompoundPainterBuilder withSources(Environment environment, SensorEnvironment pollution) {
+        painters.add(new SourcePainter(environment, pollution));
+        return this;
+    }
+
     public CompoundPainterBuilder withSensors(Environment environment, SensorEnvironment pollution) {
         painters.add(new SensorPainter(environment, pollution));
         return this;
