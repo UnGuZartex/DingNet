@@ -35,7 +35,7 @@ public class Sensor {
         return NoiseRatio;
     }
 
-    public double generateData(double timeInNano){
+    public double generateData(){
         return poll.getDensity(position, environment);
     }
 }

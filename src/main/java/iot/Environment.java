@@ -380,7 +380,10 @@ public class Environment implements Serializable {
     public boolean isWithinBounds(GeoPosition position){
         int x = mapHelper.toMapXCoordinate(position);
         int y = mapHelper.toMapYCoordinate(position);
-        return x < getMaxXpos() && x > 0 && y < getMaxYpos() && y > 0;
+        GeoPosition relativePoint = this.getMapOrigin();
+        return isValidXpos(x) && isValidYpos(y) &&
+            Math.abs(relativePoint.getLatitude()) <= Math.abs(position.getLatitude()) &&
+            Math.abs(relativePoint.getLongitude()) <= Math.abs(position.getLongitude());
 
     }
 }

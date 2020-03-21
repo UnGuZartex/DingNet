@@ -15,7 +15,7 @@ public interface RoutingHeuristic {
      * @param entry The entry for the heuristic function on which the heuristic value is calculated.
      * @return A double according to the heuristic (the lower the better).
      */
-    double calculateHeuristic(HeuristicEntry entry, long timeInNano);
+    double calculateHeuristic(HeuristicEntry entry);
 
     /**
      * Data class used to store data to calculate a heuristic value associated with that data.

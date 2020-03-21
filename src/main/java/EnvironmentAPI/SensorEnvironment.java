@@ -23,10 +23,10 @@ public class SensorEnvironment {
         return poll;
     }
 
-    public double getDataBetweenPoints(GeoPosition begin, GeoPosition end, double interpollationDistance, long timeInNano) {
+    public double getDataBetweenPoints(GeoPosition begin, GeoPosition end, double interpollationDistance) {
         double totalPollution = 0;
-        totalPollution += getDataFromSensors(begin,timeInNano);
-        totalPollution += getDataFromSensors(end,timeInNano);
+        totalPollution += getDataFromSensors(begin);
+        totalPollution += getDataFromSensors(end);
         double totalDistance = MapHelper.distance(begin, end);
         int amount = (int) (totalDistance / interpollationDistance);
         double phi1 = Math.toRadians(begin.getLatitude());
@@ -43,7 +43,7 @@ public class SensorEnvironment {
             double xc = Math.toDegrees(x);
             double yc = Math.toDegrees(y);
             GeoPosition newPoint = new GeoPosition(xc, yc);
-            totalPollution += getDataFromSensors(newPoint,timeInNano);
+            totalPollution += getDataFromSensors(newPoint);
 
         }
         return totalPollution/(amount+2);
@@ -58,7 +58,7 @@ public class SensorEnvironment {
         }
         return Collections.max(maxValues);
     }
-    public double getDataFromSensors(GeoPosition position, long timeInNano ) {
+    public double getDataFromSensors(GeoPosition position ) {
         if(sensors.isEmpty()){
             return 0.0;
         }
@@ -67,9 +67,9 @@ public class SensorEnvironment {
         List<Double> allDistances = getAllDistances(position);
         for(int i = 0; i < sensors.size(); i++){
             if (allDistances.get(i) == 0.0){
-                return sensors.get(i).generateData(timeInNano)/getMaxOfSensors();
+                return sensors.get(i).generateData()/getMaxOfSensors();
             }
-            total += sensors.get(i).generateData(timeInNano)*allDistances.get(i);
+            total += sensors.get(i).generateData()*allDistances.get(i);
         }
 
         total /= getMaxOfSensors();

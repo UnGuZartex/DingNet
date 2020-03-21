@@ -9,7 +9,7 @@ import util.MapHelper;
  */
 public class DistanceHeuristic implements RoutingHeuristic {
     @Override
-    public double calculateHeuristic(HeuristicEntry entry, long timeInNano) {
+    public double calculateHeuristic(HeuristicEntry entry) {
         GeoPosition begin = entry.graph.getWayPoint(entry.connection.getFrom());
         GeoPosition end = entry.graph.getWayPoint(entry.connection.getTo());
 

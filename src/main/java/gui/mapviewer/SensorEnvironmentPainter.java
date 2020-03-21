@@ -63,7 +63,7 @@ public class SensorEnvironmentPainter extends AbstractPainter<JXMapViewer> {
                     (int) ((j+.5) * maxY / DIVISION));
 
 
-                float airQuality = (float) pollutionEnv.getDataFromSensors(middle, environment.getClock().getTime().toNanoOfDay());
+                float airQuality = (float) pollutionEnv.getDataFromSensors(middle);
                 //System.out.println(airQuality);
                 g.setColor(this.getColor(airQuality));
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, GUISettings.TRANSPARENCY_POLLUTIONGRID));

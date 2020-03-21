@@ -47,13 +47,14 @@ public class PollutionConfig {
     private JButton deleteSelectedButton;
     private JFormattedTextField PositionText;
     private JFormattedTextField TimeUnitText;
-    private JButton configureOtherPropertiesButton;
     private JButton saveValuesTemporaryButton;
     private JButton saveValuesToFileButton;
     private JPanel MapPanel;
     private JButton addPolynomialSensorButton;
     private JFormattedTextField typeText;
     private JPanel GraphPanel;
+    private JTextField maxX;
+    private JButton redrawGraphButton;
     private SimulationRunner simRunner;
     private List<Source> toDelete;
     private List<Source> toAdd;
@@ -153,20 +154,33 @@ public class PollutionConfig {
         });
         saveValuesTemporaryButton.addActionListener(new SaveTemporaryActionListener());
         saveValuesToFileButton.addActionListener(new TotalSaveActionListener());
+        redrawGraphButton.addActionListener(e -> {
+                setSourceFunction();
 
+        });
 
     }
 
-    void setSensorFunction(Source Chosen) {
-        BiConsumer<JPanel, ChartPanel> updateGraph = (p, c) -> {
-            p.removeAll();
-            p.add(c);
-            p.repaint();
-            p.revalidate();
-        };
+    void setSourceFunction() {
+        if (!list1.isSelectionEmpty()) {
+            Source Chosen = remainingList.get(list1.getSelectedIndex());
+            BiConsumer<JPanel, ChartPanel> updateGraph = (p, c) -> {
+                p.removeAll();
+                p.add(c);
+                p.repaint();
+                p.revalidate();
+            };
+            int xmax = 20;
 
-        updateGraph.accept(GraphPanel, ChartGenerator.generateSensorGraph(Chosen));
+
+            try {
+                xmax = Integer.parseInt(maxX.getText());
+            } catch (NumberFormatException n) {
+            }
+            updateGraph.accept(GraphPanel, ChartGenerator.generateSourceGraph(Chosen, xmax));
+        }
     }
+
     public JPanel getMainPanel() {
         return panel1;
     }
@@ -184,7 +198,7 @@ public class PollutionConfig {
             TimeUnitText.setValue(Chosen.getTimeUnit());
             typeText.setValue(Chosen.getType());
             refresh();
-            setSensorFunction(Chosen);
+            setSourceFunction();
 
         }
     }
@@ -300,14 +314,14 @@ public class PollutionConfig {
         if(PositionText.getText().isEmpty()){
             mapViewer.setOverlayPainter(new CompoundPainterBuilder()
                 .withBorders(environment)
-                .withSensors(environment,simRunner.getEnvironmentAPI())
+                .withSources(environment, simRunner.getEnvironmentAPI())
                 .build()
             );
         }
         else {
             mapViewer.setOverlayPainter(new CompoundPainterBuilder()
                 .withBorders(environment)
-                .withSensors(environment, simRunner.getEnvironmentAPI())
+                .withSources(environment, simRunner.getEnvironmentAPI())
                 .withSelected(environment, PositionText.getText())
                 .build()
             );

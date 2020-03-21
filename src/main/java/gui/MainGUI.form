@@ -90,7 +90,13 @@
           <component id="8b3f6" class="javax.swing.JButton" binding="configureEnvironmentButton">
             <constraints/>
             <properties>
-              <text value="Configure"/>
+              <text value="Configure Sources"/>
+            </properties>
+          </component>
+          <component id="70027" class="javax.swing.JButton" binding="configureSensorsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Configure Sensors"/>
             </properties>
           </component>
           <hspacer id="def34">
@@ -856,6 +862,16 @@
                             </properties>
                           </component>
                           <component id="61583" class="javax.swing.JToolBar$Separator">
+                            <constraints/>
+                            <properties/>
+                          </component>
+                          <component id="840ad" class="javax.swing.JLabel">
+                            <constraints/>
+                            <properties>
+                              <text value="Heatmap view"/>
+                            </properties>
+                          </component>
+                          <component id="d5ca" class="javax.swing.JComboBox" binding="environmentChoice">
                             <constraints/>
                             <properties/>
                           </component>
