@@ -1,4 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Environment>
-    <Sources/>
+    <Sources>
+        <PolynomialSource>
+
+        <Position>50.885021, 4.684924</Position>
+
+        <Point>0,76</Point>
+
+        <Point>100,92</Point>
+
+        <Point>200,112</Point>
+
+        <Point>300,124</Point>
+
+        <Point>400,153</Point>
+
+        <Point>500,186</Point>
+
+        <Point>600,194</Point>
+
+        <Point>700,222</Point>
+
+        <Point>800,253</Point>
+
+        <Point>900,228</Point>
+
+        <Point>1000,200</Point>
+
+        <Point>1100,181</Point>
+
+        <Point>1200,182</Point>
+
+        <Point>1300,164</Point>
+
+        <Point>1400,157</Point>
+
+        <Point>1500,140</Point>
+
+        <Point>1600,140</Point>
+
+        <Point>1700,150</Point>
+
+        <Point>1800,160</Point>
+
+        <Point>1900,153</Point>
+
+        <Point>2000,147</Point>
+
+        <Point>2100,137</Point>
+
+        <Point>2200,143</Point>
+
+        <Point>2300,147</Point>
+
+        <Point>2400,147</Point>
+
+        <Point>2500,155</Point>
+
+        <Point>2600,156</Point>
+
+        <Point>2700,150</Point>
+
+        <Point>2800,172</Point>
+
+        <Point>2900,184</Point>
+
+        <Point>3000,200</Point>
+
+        <Point>3100,213</Point>
+
+        <Point>3200,208</Point>
+
+        <Point>3300,208</Point>
+
+        <Point>3400,208</Point>
+
+        <Point>3500,207</Point>
+
+        <Point>3600,201</Point>
+
+        <Point>3700,185</Point>
+        <Point>3800,174</Point>
+        <Point>3900,158</Point>
+        <Point>4000,158</Point>
+        <Point>4100,153</Point>
+        <MaximumValue>255</MaximumValue>
+        <TimeUnit>SECONDS</TimeUnit>
+    </PolynomialSource>
+    </Sources>
+    <Sensors>
+    </Sensors>
 </Environment>

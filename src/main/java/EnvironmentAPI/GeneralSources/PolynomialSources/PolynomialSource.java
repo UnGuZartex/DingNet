@@ -1,6 +1,8 @@
 package EnvironmentAPI.GeneralSources.PolynomialSources;
 
 import EnvironmentAPI.GeneralSources.Source;
+import EnvironmentAPI.util.EnvSettings;
+import EnvironmentAPI.util.PairComparator;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.Pair;
@@ -27,8 +29,27 @@ public class PolynomialSource extends Source {
      */
     @Override
     public double generateData(double timeinNano) {
-        double dataAtTime =  evaluatePolynomial(timeinNano);
+        double dataAtTime;
+        if (pointsKnown.size() <= EnvSettings.MAX_POINTS_NEWTON) {
+             dataAtTime = evaluatePolynomial(timeinNano);
+        }
+        else {
+            dataAtTime = evaluateLinearly(timeinNano);
+        }
         return dataAtTime;
+    }
+
+    private double evaluateLinearly(double timeinNano) {
+        double timeToEvaluate = timeUnit.convertFromNano(timeinNano);
+        if (pointsKnown.stream().anyMatch(p -> p.getLeft() == timeToEvaluate)) {
+            return pointsKnown.stream().filter(p -> p.getLeft() == timeToEvaluate).findFirst().get().getRight();
+        }
+        PairComparator pairComp = new PairComparator();
+        Pair<Double,Double> leftPoint = pointsKnown.stream().filter(p -> p.getLeft() <= timeToEvaluate).max(pairComp).orElse(new Pair<Double,Double>(0.0,0.0));
+        Pair<Double,Double> rightPoint = pointsKnown.stream().filter(p -> p.getLeft() >= timeToEvaluate).min(pairComp).orElse(pointsKnown.stream().max(pairComp).get());
+        double rico = (rightPoint.getRight() - leftPoint.getRight()) / (rightPoint.getLeft() - leftPoint.getLeft());
+        return rico*(timeToEvaluate-leftPoint.getLeft()) + leftPoint.getRight();
+
     }
 
     @Override

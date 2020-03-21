@@ -36,6 +36,6 @@ public class Sensor {
     }
 
     public double generateData(){
-        return poll.getDensity(position, environment);
+        return poll.getDensity(position, environment, maxValue);
     }
 }

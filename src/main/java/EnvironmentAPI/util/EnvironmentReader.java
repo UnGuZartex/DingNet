@@ -31,6 +31,9 @@ public class EnvironmentReader {
                     Points.add(ToPoint(PSourceNode.getElementsByTagName("Point").item(j).getTextContent()));
                 }
                 GeoPosition position = ToGeoPos(PSourceNode.getElementsByTagName("Position").item(0).getTextContent());
+                if (!runner.getEnvironment().isWithinBounds(position)) {
+                    throw new IllegalStateException("Source @" + position + " is in an invalid position.");
+                }
                 TimeUnit unit = ToTimeUnit(PSourceNode.getElementsByTagName("TimeUnit").item(0).getTextContent());
 
                 runner.getEnvironmentAPI().getPoll().addSource(SourceFactory.createPolynomialSource(Points, position, unit));
@@ -38,6 +41,9 @@ public class EnvironmentReader {
             for (int i = 0; i < Sources.getElementsByTagName("FunctionSource").getLength(); i++) {
                 Element FSourceNode = (Element) Sources.getElementsByTagName("FunctionSource").item(i);
                 GeoPosition position = ToGeoPos(FSourceNode.getElementsByTagName("Position").item(0).getTextContent());
+                if (!runner.getEnvironment().isWithinBounds(position)) {
+                    throw new IllegalStateException("Source @" + position + " is in an invalid position.");
+                }
                 String function = FSourceNode.getElementsByTagName("Function").item(0).getTextContent();
                 TimeUnit unit = ToTimeUnit(FSourceNode.getElementsByTagName("TimeUnit").item(0).getTextContent());
 
@@ -49,6 +55,9 @@ public class EnvironmentReader {
             for (int i = 0; i < Sensors.getElementsByTagName("Sensor").getLength(); i++) {
                 Element SensorNode = (Element) Sensors.getElementsByTagName("Sensor").item(i);
                 GeoPosition position = ToGeoPos(SensorNode.getElementsByTagName("Position").item(0).getTextContent());
+                if (!runner.getEnvironment().isWithinBounds(position)) {
+                    throw new IllegalStateException("Sensor @" + position + " is in an invalid position.");
+                }
                 int maxValue = Integer.parseInt(SensorNode.getElementsByTagName("MaxValue").item(0).getTextContent());
                 int noiseRatio = Integer.parseInt(SensorNode.getElementsByTagName("NoiseRatio").item(0).getTextContent());
 

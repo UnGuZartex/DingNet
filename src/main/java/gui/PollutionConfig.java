@@ -1,5 +1,6 @@
 package gui;
 
+import EnvironmentAPI.GeneralSources.FunctionSources.FunctionSource;
 import EnvironmentAPI.GeneralSources.Source;
 
 import EnvironmentAPI.util.SourceFactory;
@@ -55,9 +56,8 @@ public class PollutionConfig {
     private JPanel GraphPanel;
     private JTextField maxX;
     private JButton redrawGraphButton;
+    private JFormattedTextField functionTextField;
     private SimulationRunner simRunner;
-    private List<Source> toDelete;
-    private List<Source> toAdd;
 
     private List<Source> remainingList;
     private JFrame frame;
@@ -105,38 +105,21 @@ public class PollutionConfig {
 
 
 
-        toDelete = new ArrayList<Source>();
-        toAdd = new ArrayList<Source>();
         this.simRunner = simRunner;
         this.frame = frame;
         remainingList = simRunner.getEnvironmentAPI().getPoll().getSources();
-        List<Source> sourceList = simRunner.getEnvironmentAPI().getPoll().getSources();
-        list1.setListData(sourceList.toArray());
+        list1.setListData(remainingList.toArray());
         list1.addListSelectionListener(new SharedListSelectionHandler());
         deleteSelectedButton.addActionListener(e -> {
             if (!list1.isSelectionEmpty()) {
-                toDelete.add(remainingList.get(list1.getSelectedIndex()));
                 remainingList.remove(list1.getSelectedIndex());
-                ListModel model = list1.getModel();
-                Source[] newList = new Source[model.getSize()-1];
-                for (int i = 0; i < model.getSize(); i++){
-                    if(i < list1.getSelectedIndex()) {
-                        Source source = (Source) model.getElementAt(i);
-                        newList[i] = source;
-                    }
-                    if(i > list1.getSelectedIndex()) {
-                        Source source = (Source) model.getElementAt(i);
-                        newList[i-1] = source;
-                    }
-                }
-                list1.setListData(newList);
+                updateList();
             }
         });
 
 
         addFunctionalSensorButton.addActionListener(e -> {
             Source newSource = SourceFactory.createFunctionSource("0", new GeoPosition(0,0), TimeUnit.MINUTES);
-            toAdd.add(newSource);
             remainingList.add(newSource);
             list1.setListData(remainingList.toArray());
 
@@ -147,7 +130,6 @@ public class PollutionConfig {
             List<Pair<Double,Double>> points = new ArrayList<>();
             points.add(DefaultPoint);
             Source newSource = SourceFactory.createPolynomialSource(points, new GeoPosition(0,0), TimeUnit.MINUTES);
-            toAdd.add(newSource);
             remainingList.add(newSource);
             list1.setListData(remainingList.toArray());
 
@@ -188,18 +170,40 @@ public class PollutionConfig {
     public void refresh(){
         loadMap(true);
         mainGUI.refresh();
+
+    }
+
+    public void updateList(){
+        if (remainingList != null) {
+            list1.setListData(remainingList.toArray());
+        }
     }
 
     private class SharedListSelectionHandler implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            Source Chosen = remainingList.get(list1.getSelectedIndex());
-            PositionText.setValue(Chosen.getPosition());
-            TimeUnitText.setValue(Chosen.getTimeUnit());
-            typeText.setValue(Chosen.getType());
-            refresh();
-            setSourceFunction();
+            try {
+                Source Chosen = remainingList.get(list1.getSelectedIndex());
+                PositionText.setValue(Chosen.getPosition());
+                TimeUnitText.setValue(Chosen.getTimeUnit());
+                typeText.setValue(Chosen.getType());
+                if (Chosen.getType() == "FunctionSource") {
+                    functionTextField.setValue(Chosen.getDefiningFeatures());
+                    functionTextField.setEnabled(true);
+                } else {
+                    functionTextField.setValue("");
+                    functionTextField.setEnabled(false);
+                }
+                refresh();
+                setSourceFunction();
 
+            }
+            catch (Exception ex) {
+                PositionText.setValue("");
+                TimeUnitText.setValue("");
+                typeText.setValue("");
+                functionTextField.setValue("");
+            }
         }
     }
 
@@ -208,46 +212,52 @@ public class PollutionConfig {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!toDelete.isEmpty()){
-                for(int i = 0; i < toDelete.size(); i++){
-                    simRunner.getEnvironmentAPI().getPoll().removeSource(toDelete.get(i));
-                }
-            }
-            toDelete.clear();
+            saveToSource();
+            setSourceFunction();
+        }
+
+
+    }
+
+    public void saveToSource() {
+        if (!list1.isSelectionEmpty()) {
             int currentlyChanged = list1.getSelectedIndex();
-            Source toChange = simRunner.getEnvironmentAPI().getPoll().getSources().get(currentlyChanged);
+            Source toChange = remainingList.get(currentlyChanged);
             toChange.setPosition(ToGeoPos(PositionText.getText()));
             toChange.setTimeUnit(ToTimeUnit(TimeUnitText.getText()));
-            refresh();
-        }
-
-        private GeoPosition ToGeoPos(String position) {
-            position = position.replace("[","");
-            position = position.replace("]","");
-            String[] longlat = position.split(",");
-            return new GeoPosition(Double.parseDouble(longlat[0]), Double.parseDouble(longlat[1]));
-        }
-
-        private TimeUnit ToTimeUnit(String timeUnit) {
-            switch (timeUnit){
-                case "NANOS":
-                    return TimeUnit.NANOS;
-                case "MICROS":
-                    return TimeUnit.MICROS;
-                case "MILLIS":
-                    return TimeUnit.MILLIS;
-                case "SECONDS":
-                    return TimeUnit.SECONDS;
-                case "MINUTES":
-                    return TimeUnit.MINUTES;
-                case "HOURS":
-                    return TimeUnit.HOURS;
-                default:
-                    throw new IllegalArgumentException("INVALID TIME UNIT: " + timeUnit);
-
+            if (toChange.getType().equals("FunctionSource")) {
+                FunctionSource source = (FunctionSource) toChange;
+                source.setFunction(functionTextField.getText());
             }
+        }
+    }
+
+    private GeoPosition ToGeoPos(String position) {
+        position = position.replace("[","");
+        position = position.replace("]","");
+        String[] longlat = position.split(",");
+        return new GeoPosition(Double.parseDouble(longlat[0]), Double.parseDouble(longlat[1]));
+    }
+
+    private TimeUnit ToTimeUnit(String timeUnit) {
+        switch (timeUnit){
+            case "NANOS":
+                return TimeUnit.NANOS;
+            case "MICROS":
+                return TimeUnit.MICROS;
+            case "MILLIS":
+                return TimeUnit.MILLIS;
+            case "SECONDS":
+                return TimeUnit.SECONDS;
+            case "MINUTES":
+                return TimeUnit.MINUTES;
+            case "HOURS":
+                return TimeUnit.HOURS;
+            default:
+                throw new IllegalArgumentException("INVALID TIME UNIT: " + timeUnit);
 
         }
+
     }
 
     class TotalSaveActionListener implements ActionListener {
@@ -255,16 +265,7 @@ public class PollutionConfig {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!toDelete.isEmpty()){
-                for(int i = 0; i < toDelete.size(); i++){
-                    simRunner.getEnvironmentAPI().getPoll().removeSource(toDelete.get(i));
-                }
-            }
-            toDelete.clear();
-            int currentlyChanged = list1.getSelectedIndex();
-            Source toChange = simRunner.getEnvironmentAPI().getPoll().getSources().get(currentlyChanged);
-            toChange.setPosition(ToGeoPos(PositionText.getText()));
-            toChange.setTimeUnit(ToTimeUnit(TimeUnitText.getText()));
+            saveToSource();
             JFileChooser fc = new JFileChooser();
             fc.setDialogTitle("Save PollutionConfiguration");
             fc.setFileFilter(new FileNameExtensionFilter("xml output", "xml"));
@@ -279,34 +280,6 @@ public class PollutionConfig {
                 simRunner.savePollutionConfiguration(file);
             }
             frame.dispose();
-        }
-
-        private GeoPosition ToGeoPos(String position) {
-            position = position.replace("[","");
-            position = position.replace("]","");
-            String[] longlat = position.split(",");
-            return new GeoPosition(Double.parseDouble(longlat[0]), Double.parseDouble(longlat[1]));
-        }
-
-        private TimeUnit ToTimeUnit(String timeUnit) {
-            switch (timeUnit){
-                case "NANOS":
-                    return TimeUnit.NANOS;
-                case "MICROS":
-                    return TimeUnit.MICROS;
-                case "MILLIS":
-                    return TimeUnit.MILLIS;
-                case "SECONDS":
-                    return TimeUnit.SECONDS;
-                case "MINUTES":
-                    return TimeUnit.MINUTES;
-                case "HOURS":
-                    return TimeUnit.HOURS;
-                default:
-                    throw new IllegalArgumentException("INVALID TIME UNIT: " + timeUnit);
-
-            }
-
         }
     }
 

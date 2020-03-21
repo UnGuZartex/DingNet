@@ -1,6 +1,7 @@
 package gui.mapviewer;
 
 import EnvironmentAPI.SensorEnvironment;
+import EnvironmentAPI.util.EnvSettings;
 import gui.util.GUISettings;
 import iot.Environment;
 import org.jxmapviewer.JXMapViewer;
@@ -64,8 +65,7 @@ public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
                     (int) ((j+.5) * maxY / DIVISION));
 
 
-                float airQuality = (float) pollutionEnv.getPoll().getDensity(middle, environment)/255;
-                //System.out.println(airQuality);
+                float airQuality = (float) pollutionEnv.getPoll().getDensity(middle, environment,EnvSettings.MAX_POLLUTION_SOURCES_VALUE)/EnvSettings.MAX_POLLUTION_SOURCES_VALUE;
                 g.setColor(this.getColor(airQuality));
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, GUISettings.TRANSPARENCY_POLLUTIONGRID));
                 g.fill(new Rectangle2D.Double(topLeft.getX(), topLeft.getY(),

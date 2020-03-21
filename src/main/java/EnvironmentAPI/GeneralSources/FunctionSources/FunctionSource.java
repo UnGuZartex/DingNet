@@ -52,4 +52,15 @@ public class FunctionSource extends Source {
     public Object getDefiningFeatures() {
         return functionString;
     }
+
+    public void setFunction(String function) {
+        Scope scope = new Scope();
+        this.t = scope.getVariable("t");
+        try {
+            this.function = Parser.parse(function, scope);
+        }
+        catch (ParseException e){
+            System.out.println("There was an error: " + e.getMessage());
+        }
+    }
 }

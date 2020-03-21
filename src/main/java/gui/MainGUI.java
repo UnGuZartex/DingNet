@@ -974,7 +974,12 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
                 frame.setMinimumSize(new Dimension(300, 300));
                 frame.setVisible(true);
 
-                simulationRunner.loadEnvironmentFromFile(fc.getSelectedFile());
+                try {
+                    simulationRunner.loadEnvironmentFromFile(fc.getSelectedFile());
+                }
+                catch (IllegalStateException e) {
+                    showNoValidFileSelectedError(e.getMessage());
+                }
 
                 frame.dispose();
                 loadMap(false);
@@ -1068,6 +1073,11 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private void showNoInputProfileSelectedError() {
         JOptionPane.showMessageDialog(null, "Make sure to have an input profile selected before running the simulator.",
             "Warning: no input profile selected", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void showNoValidFileSelectedError(String message) {
+        JOptionPane.showMessageDialog(null, message,
+            "Warning: invalid file!", JOptionPane.ERROR_MESSAGE);
     }
 
     private void updateGeneralResultsMote(Mote mote, int run) {

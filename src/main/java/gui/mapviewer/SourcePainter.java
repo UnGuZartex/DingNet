@@ -2,6 +2,7 @@ package gui.mapviewer;
 
 import EnvironmentAPI.GeneralSources.Source;
 import EnvironmentAPI.SensorEnvironment;
+import EnvironmentAPI.util.EnvSettings;
 import gui.util.GUISettings;
 import iot.Environment;
 import org.jxmapviewer.JXMapViewer;
@@ -31,9 +32,8 @@ public class SourcePainter extends AbstractPainter<JXMapViewer> {
         g.translate(-rect.x, -rect.y);
         List<Source> sourceList = pollutionEnv.getPoll().getSources();
         for(Source source : sourceList){
-            float airQuality = (float) (source.generateData(environment.getClock().getTime().toNanoOfDay())/255);
+            float airQuality = (float) (source.generateData(environment.getClock().getTime().toNanoOfDay())/ EnvSettings.MAX_POLLUTION_SOURCES_VALUE);
             g.setColor(getColor(airQuality));
-
             Point2D point = jxMapViewer.getTileFactory().geoToPixel(source.getPosition(), jxMapViewer.getZoom());
 
             int x = (int) (point.getX()-5);

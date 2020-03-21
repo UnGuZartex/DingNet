@@ -55,7 +55,7 @@ public class EnvironmentWriter {
             }
 
             Element sensorElement = doc.createElement("Sensors");
-            rootElement.appendChild(sourceElement);
+            rootElement.appendChild(sensorElement);
 
             for(Sensor sensor :sensorToSave) {
                 Element type = doc.createElement("Sensor");

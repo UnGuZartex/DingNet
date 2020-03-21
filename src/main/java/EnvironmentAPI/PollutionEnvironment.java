@@ -50,11 +50,11 @@ public class PollutionEnvironment {
     public void addSource(Source source){
         sources.add(source);
     }
-    public double getDensity(GeoPosition position, Environment environment){
+    public double getDensity(GeoPosition position, Environment environment, double MaxValue){
         Point XY = geoPositionToXY(position, environment);
         double thisDensity = density[getTileN(XY.x, XY.y)];
-        if (thisDensity > 255) {
-            return 255;
+        if (thisDensity > MaxValue) {
+            return MaxValue;
         }
         else if (thisDensity < 0) {
             return 0;
@@ -207,7 +207,6 @@ public class PollutionEnvironment {
     private void addSources(double currentTime, Environment environment) {
 
         for(Source source:sources){
-
             Point XY = geoPositionToXY(source.getPosition(), environment);
             density[getTileN(XY.x, XY.y)] += source.generateData(currentTime);
         }
@@ -231,9 +230,6 @@ public class PollutionEnvironment {
         densityOld = new double[totalNumberTiles];
         velocXOld = new double[totalNumberTiles];
         velocYOld = new double[totalNumberTiles];
-    }
-    public void removeSource(Source source) {
-            this.sources.remove(source);
     }
 }
 

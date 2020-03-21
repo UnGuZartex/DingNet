@@ -868,12 +868,14 @@
                           <component id="840ad" class="javax.swing.JLabel">
                             <constraints/>
                             <properties>
-                              <text value="Heatmap view"/>
+                              <text value="Heatmap view: "/>
                             </properties>
                           </component>
                           <component id="d5ca" class="javax.swing.JComboBox" binding="environmentChoice">
                             <constraints/>
-                            <properties/>
+                            <properties>
+                              <model/>
+                            </properties>
                           </component>
                           <hspacer id="4122d">
                             <constraints/>
