@@ -34,6 +34,11 @@
             <TimeUnit>MINUTES</TimeUnit>
             <Function>log(t)</Function>
         </FunctionSource>
+        <FunctionSource>
+            <Position>50.889058, 4.701625</Position>
+            <TimeUnit>MINUTES</TimeUnit>
+            <Function>gauss(5,4)</Function>
+        </FunctionSource>
     </Sources>
     <Sensors>
         <Sensor>
