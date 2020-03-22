@@ -227,6 +227,8 @@ public class PollutionConfig {
                     addToList.setEnabled(false);
 
                 } else if (Chosen.getType().equals("PolynomialSource")) {
+                    functionTextField.setValue("");
+                    functionTextField.setEnabled(false);
                     data.clear();
                     list2.setEnabled(true);
                     deleteButton.setEnabled(true);
@@ -235,7 +237,6 @@ public class PollutionConfig {
                     for (Pair<Double,Double> point : newData) {
                         data.add(new Pair<Double,Double>(point.getLeft(),point.getRight()));
                     }
-                    System.out.println(data);
                     list2.setListData(data.toArray());
 
                 }

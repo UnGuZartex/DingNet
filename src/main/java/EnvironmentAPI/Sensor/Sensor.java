@@ -7,6 +7,11 @@ import org.jxmapviewer.viewer.GeoPosition;
 
 import java.util.Random;
 
+/**
+ * Class defining a sensor to measure from the pollution environment.
+ *
+ * @author Yentl.kinoo@student.kuleuven.be
+ */
 public class Sensor {
 
     private GeoPosition position;
@@ -43,7 +48,32 @@ public class Sensor {
 
     public Environment getEnvironment() { return environment;}
 
+
+    public void setPosition(GeoPosition position) {
+        this.position = position;
+    }
+
+    public void setMaxValue(double maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public void setNoiseRatio(int noiseRatio) {
+        this.NoiseRatio = noiseRatio;
+    }
+
+
+    /**
+     * Get data from the pollutionenvironment "As If measured at the current time"
+     * @return pollution at the sensors position affected by noise
+     */
     public double generateData(){
         return NoiseRatio*noise.noise3_XYBeforeZ(position.getLatitude(), position.getLongitude(), environment.getClock().getTime().toSecondOfDay()) + poll.getDensity(position, environment, maxValue);
     }
+
+
+    @Override
+    public String toString() {
+        return  "Sensor @" + getPosition();
+    }
+
 }

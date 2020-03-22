@@ -15,6 +15,11 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Class to write an environment file
+ *
+ * @author Yentl.kinoo@student.kuleuven.be
+ */
 public class EnvironmentWriter {
     public static void saveEnvironment(List<Source> toSaveList, List<Sensor> sensorToSave, File file){
         try {
@@ -59,15 +64,15 @@ public class EnvironmentWriter {
 
             for(Sensor sensor :sensorToSave) {
                 Element type = doc.createElement("Sensor");
-                sourceElement.appendChild(type);
+                sensorElement.appendChild(type);
                 Element Position = doc.createElement("Position");
                 Position.appendChild(doc.createTextNode(sensor.getPosition().toString().replace("[", "").replace("]", "")));
                 type.appendChild(Position);
                 Element MaxValue = doc.createElement("MaxValue");
-                Position.appendChild(doc.createTextNode(String.valueOf(sensor.getMaxValue())));
+                MaxValue.appendChild(doc.createTextNode(String.valueOf(sensor.getMaxValue())));
                 type.appendChild(MaxValue);
                 Element NoiseRatio = doc.createElement("NoiseRatio");
-                Position.appendChild(doc.createTextNode(String.valueOf(sensor.getNoiseRatio())));
+                NoiseRatio.appendChild(doc.createTextNode(String.valueOf(sensor.getNoiseRatio())));
                 type.appendChild(NoiseRatio);
             }
 

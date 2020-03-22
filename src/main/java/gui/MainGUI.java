@@ -273,8 +273,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             e -> this.simulationSpeed.setValue(GUISettings.BASE_VISUALIZATION_SPEED * speedSlider.getValue())
         );
 
-        environmentChoice.addItem("Pollution sources view");
         environmentChoice.addItem("Pollution sensor view");
+        environmentChoice.addItem("Pollution sources view");
 
         environmentChoice.addActionListener((ActionEvent e) -> loadMap(true));
 
@@ -1130,6 +1130,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         configureButton.setEnabled(b);
         savePollutionConfigButton.setEnabled(b);
         configureEnvironmentButton.setEnabled(b);
+        configureSensorsButton.setEnabled(b);
     }
 
     // endregion

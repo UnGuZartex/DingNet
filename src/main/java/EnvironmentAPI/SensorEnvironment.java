@@ -1,9 +1,8 @@
 package EnvironmentAPI;
 
-
-
 import EnvironmentAPI.GeneralSources.Source;
 import EnvironmentAPI.Sensor.Sensor;
+import EnvironmentAPI.util.EnvSettings;
 import EnvironmentAPI.util.SensorFactory;
 import gui.util.GUISettings;
 import org.jxmapviewer.viewer.GeoPosition;
@@ -13,15 +12,41 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class representing a SensorEnvironment, this is a environment that is defined by the values the
+ * sensors measure, this is an estimate the sensors can make by working together.
+ *
+ * @author Yentl.kinoo@student.kuleuven.be
+ */
 public class SensorEnvironment {
     private List<Sensor> sensors = new ArrayList<>();
 
-    private PollutionEnvironment poll =  new PollutionEnvironment(GUISettings.POLLUTION_GRID_SQUARES, (float) 0.1, 1);
+    private PollutionEnvironment poll =  new PollutionEnvironment(GUISettings.POLLUTION_GRID_SQUARES, EnvSettings.DIFFUSION_FACTOR, 1);
 
     public PollutionEnvironment getPoll() {
         return poll;
     }
 
+    public void reset() {
+        this.sensors.clear();
+
+    }
+
+    public void addSensor(Sensor sensor) {
+        sensors.add(sensor);
+    }
+
+    public List<Sensor> getSensors() {
+        return sensors;
+    }
+
+    /**
+     * Gets the average pollution between 2 points on the map, with a given interpollation value.
+     * @param begin first point
+     * @param end second point
+     * @param interpollationDistance distance between segments to calculate pollution from
+     * @return an average value of the pollution between the two points.
+     */
     public double getDataBetweenPoints(GeoPosition begin, GeoPosition end, double interpollationDistance) {
         double totalPollution = 0;
         totalPollution += getDataFromSensors(begin);
@@ -54,6 +79,7 @@ public class SensorEnvironment {
      * @param timeInMs The time of which the pollution needs to be found
      * @return the pollution at the given time and position.
      */
+    @Deprecated
     public double getDataFromSensors(GeoPosition position, long timeInMs) {
         SensorEnvironment environment = new SensorEnvironment();
         for (Source source : this.getPoll().getSources()){
@@ -71,7 +97,11 @@ public class SensorEnvironment {
         return environment.getDataFromSensors(position);
     }
 
-
+    /**
+     * Return the maximum value of all sensors, the guessed pollution is determined by the max of these
+     * sensors.
+     * @return the maximum of all sensors.
+     */
     public double getMaxOfSensors(){
         List<Double> maxValues = new ArrayList<>();
         for(Sensor source : sensors){
@@ -79,6 +109,12 @@ public class SensorEnvironment {
         }
         return Collections.max(maxValues);
     }
+
+    /**
+     * Gets the data at a given position at the current time (read current instance of pollutionenv)
+     * @param position the position to get the pollution from
+     * @return pollution at the current time.
+     */
     public double getDataFromSensors(GeoPosition position ) {
         if(sensors.isEmpty()){
             return 0.0;
@@ -97,6 +133,11 @@ public class SensorEnvironment {
         return total ;
     }
 
+    /**
+     * Get all distances to this point of sensors in this env
+     * @param position position to determine the distance to
+     * @return A list of distances to this position
+     */
     private List<Double> getAllDistances(GeoPosition position) {
         List<Double> AllDistances = new ArrayList<>();
         double total = 0;
@@ -113,21 +154,15 @@ public class SensorEnvironment {
         return AllDistances;
     }
 
+    /**
+     * Calculate the distance to a sensor
+     * @param sensor the sensor to determine its distance to
+     * @param position position to determine the distance from
+     * @return the distance between sensor and position
+     */
     private double getDistanceToSensor(Sensor sensor, GeoPosition position) {
         return MapHelper.distance(position, sensor.getPosition());
     }
 
-    public void reset() {
-       this.sensors.clear();
 
-    }
-
-
-    public void addSensor(Sensor sensor) {
-        sensors.add(sensor);
-    }
-
-    public List<Sensor> getSensors() {
-        return sensors;
-    }
 }

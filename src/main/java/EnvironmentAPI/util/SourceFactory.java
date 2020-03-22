@@ -11,6 +11,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Class representing a factory for all the types of sources, sorts all points for polynomial sources and creates the correct source
+ *
+ * @author Yentl.kinoo@student.kuleuven.be
+ */
 public class SourceFactory {
     public static PolynomialSource createPolynomialSource(List<Pair<Double,Double>> Points,
                                                           GeoPosition position, TimeUnit unit){

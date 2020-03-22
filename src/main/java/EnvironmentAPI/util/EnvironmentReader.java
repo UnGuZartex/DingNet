@@ -15,6 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to read an environmentfile
+ *
+ * @author Yentl Kinoo
+ */
 public class EnvironmentReader {
 
     public static void loadEnvironment(File file, SimulationRunner runner) {
@@ -58,7 +63,7 @@ public class EnvironmentReader {
                 if (!runner.getEnvironment().isWithinBounds(position)) {
                     throw new IllegalStateException("Sensor @" + position + " is in an invalid position.");
                 }
-                int maxValue = Integer.parseInt(SensorNode.getElementsByTagName("MaxValue").item(0).getTextContent());
+                double maxValue = Double.parseDouble(SensorNode.getElementsByTagName("MaxValue").item(0).getTextContent());
                 int noiseRatio = Integer.parseInt(SensorNode.getElementsByTagName("NoiseRatio").item(0).getTextContent());
 
                 runner.getEnvironmentAPI().addSensor(SensorFactory.createSensor(runner.getEnvironmentAPI().getPoll(), runner.getEnvironment(), position, maxValue, noiseRatio));

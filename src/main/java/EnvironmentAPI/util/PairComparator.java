@@ -4,6 +4,11 @@ import util.Pair;
 
 import java.util.Comparator;
 
+/**
+ * Class to compare a pair of points
+ *
+ * @author Yentl.kinoo@student.kuleuven.be
+ */
 public class PairComparator implements Comparator<Pair<Double, Double>> {
 
     @Override

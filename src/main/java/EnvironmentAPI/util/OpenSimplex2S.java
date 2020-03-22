@@ -1,6 +1,7 @@
 package EnvironmentAPI.util;
 
 /**
+ *
  * K.jpg's OpenSimplex 2, smooth variant ("SuperSimplex")
  *
  * - 2D is standard simplex, modified to support larger kernels.
@@ -10,6 +11,10 @@ package EnvironmentAPI.util;
  *
  * Multiple versions of each function are provided. See the
  * documentation above each, for more info.
+ *
+ * See: https://github.com/KdotJPG/OpenSimplex2
+ *
+ * All credits to KdotJPG
  */
 public class OpenSimplex2S {
 

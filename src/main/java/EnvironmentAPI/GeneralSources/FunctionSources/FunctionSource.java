@@ -9,7 +9,11 @@ import parsii.eval.Scope;
 import parsii.eval.Variable;
 import parsii.tokenizer.ParseException;
 
-
+/**
+ * This class describes a FunctionSource, this is a source of pollution that follows a given function
+ *
+ * @author Yentl.kinoo@student.kuleuven.be
+ */
 
 public class FunctionSource extends Source {
 
@@ -23,6 +27,11 @@ public class FunctionSource extends Source {
         setFunction(function);
     }
 
+    /**
+     * Generate data from the function of this source given some time in nanoseconds
+     * @param timeinNano the time to evaluate the function of
+     * @return the correct value of the function at this time, if negative: 0
+     */
     @Override
     public double generateData(double timeinNano) {
         double timeToEvaluate = timeUnit.convertFromNano(timeinNano);

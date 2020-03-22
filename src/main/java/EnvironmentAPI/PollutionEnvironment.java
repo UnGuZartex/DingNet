@@ -48,9 +48,21 @@ public class PollutionEnvironment {
     }
 
 
+    /**
+     * Add a source to the list of sources of this pollution environment
+     * @param source the source to add.
+     */
     public void addSource(Source source){
         sources.add(source);
     }
+
+    /**
+     * Returns the current pollution at this spot.
+     * @param position position to search the pollution from
+     * @param environment environment where the position is situated in
+     * @param MaxValue MaxValue to return
+     * @return The pollution if it doesn't exceed the maxvalue
+     */
     public double getDensity(GeoPosition position, Environment environment, double MaxValue){
         Point XY = geoPositionToXY(position, environment);
         double thisDensity = density[getTileN(XY.x, XY.y)];
@@ -63,6 +75,11 @@ public class PollutionEnvironment {
         return thisDensity;
     }
 
+    /**
+     * Updates the environment every x calls to this function (can be changed if more precision is wanted)
+     * @param currentTime Time to add pollution at.
+     * @param environment Environment where the pollution is situated
+     */
     public void doStep(double currentTime, Environment environment){
         if (counter % 500 == 0) {
             fluidUpdate(timeStep, currentTime, environment);
@@ -71,11 +88,13 @@ public class PollutionEnvironment {
         counter++;
     }
 
-    public Number provide(int i, int j) {
-        double num = density[getTileN(i, j)];
-        return (byte) ((num > 255) ? 255 : num);
-    }
-
+    /**
+     * Update the environment following the Navier-Stokes equation. First add all pollution at this
+     * time, then let it spread.
+     * @param dt    Timesteps to simulate
+     * @param currentTime   Time to get pollution value from
+     * @param environment   Environment where the pollution is situated
+     */
     private void fluidUpdate(double dt, double currentTime, Environment environment) {
         // Add inflow of density
         addSources(currentTime, environment);
@@ -100,10 +119,20 @@ public class PollutionEnvironment {
     }
 
 
+    /**
+     * Macro for flipping, hard to do otherwise, based on:
+     * https://github.com/NathanMacLeod/Fluid-Simulation/blob/master/src/fluidsimulation/FluidSimulation.java
+     */
     private static <T> T flip(T a, @SuppressWarnings("unused") T b) {
         return a;
     }
 
+    /**
+     * Given a i and j in matrix form, return the correct index in the array of this environment
+     * @param i an index
+     * @param j an index
+     * @return correct value of index in array
+     */
     private int getTileN(int i, int j) {
         if (i >= nTiles || j >= nTiles || i < 0 || j < 0)
             throw new IllegalArgumentException("Tile outside bounds: (" + i + ", " + j + ")");
@@ -111,6 +140,13 @@ public class PollutionEnvironment {
     }
 
 
+    /**
+     * Simulate the diffusion of pollution coming from a source
+     * @param src the source the pollution is coming from
+     * @param dst the old sources
+     * @param dt timestep to simulate
+     * @param b bounds to simulate
+     */
     private void diffuseField(double[] src, double[] dst, double dt, int b) {
         double diffuseRate = diffuseFactor * dt;
 
@@ -149,8 +185,10 @@ public class PollutionEnvironment {
         setBounds(b, dst);
     }
 
+    /**
+     * adjusts velocty field to make sure that the flow into a tile equals the flow out
+     */
     private void project() {
-        //adjusts velocty field to make sure that the flow into a tile equals the flow out
         double[] divergance = new double[totalNumberTiles];
         double[] pressure = new double[totalNumberTiles];
         for (int i = 1; i < nTiles - 1; i++) {
@@ -180,6 +218,9 @@ public class PollutionEnvironment {
         setBounds(2, velocY);
     }
 
+    /**
+     * Simulate correct behaviour near the boundaries of the grid
+     */
     private void setBounds(int b, double[] arr) {
         for (int i = 1; i < nTiles - 1; i++) {
             arr[getTileN(0, i)] = (b == 1) ? -arr[getTileN(1, i)] : arr[getTileN(1, i)];
@@ -194,6 +235,12 @@ public class PollutionEnvironment {
         arr[getTileN(nTiles - 1, nTiles - 1)] =  (0.5 * (arr[getTileN(nTiles - 2, nTiles - 1)] + arr[getTileN(nTiles - 1, nTiles - 2)]));
     }
 
+    /**
+     * Converts geoposition to the correct x and y in the grid.
+     * @param position position to convert
+     * @param environment environment the pollution is situated in
+     * @return correct coordinates in the grid
+     */
     private Point geoPositionToXY(GeoPosition position, Environment environment){
         MapHelper mapHelper = environment.getMapHelper();
         int sourceX = mapHelper.toMapXCoordinate(position);
@@ -203,12 +250,14 @@ public class PollutionEnvironment {
         sourceX = sourceX*nTiles / maxX;
         sourceY = sourceY*nTiles / maxY;
 
-
-
-
         return new Point(Math.abs(sourceX), Math.abs(sourceY));
     }
 
+    /**
+     * Add pollution from all sources in this environment!
+     * @param currentTime time to add pollution from
+     * @param environment environment the pollution is situated in
+     */
     private void addSources(double currentTime, Environment environment) {
 
         for(Source source:sources){
@@ -223,11 +272,17 @@ public class PollutionEnvironment {
     }
 
 
+    /**
+     * Resets the environment
+     */
     public void reset(){
         clear();
         sources = new ArrayList<>();
     }
 
+    /**
+     * Clears all values!
+     */
     public void clear(){
         velocX = new double[totalNumberTiles];
         velocY = new double[totalNumberTiles];

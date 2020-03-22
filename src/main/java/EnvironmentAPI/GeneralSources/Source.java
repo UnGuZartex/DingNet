@@ -4,10 +4,13 @@ package EnvironmentAPI.GeneralSources;
 import datagenerator.iaqsensor.TimeUnit;
 import org.jxmapviewer.viewer.GeoPosition;
 
-
+/**
+ * Abstract class defining a source.
+ *
+ * @author Yentl.kinoo@student.kuleuven.be
+ */
 public abstract class Source {
     private GeoPosition position;
-
 
     protected TimeUnit timeUnit;
 
@@ -26,8 +29,6 @@ public abstract class Source {
     }
 
 
-    public abstract double generateData(double timeinNano) ;
-
     public GeoPosition getPosition(){
         return position;
     }
@@ -40,6 +41,8 @@ public abstract class Source {
     }
 
     public abstract Object getDefiningFeatures();
+
+    public abstract double generateData(double timeinNano) ;
 
     @Override
     public String toString() {
