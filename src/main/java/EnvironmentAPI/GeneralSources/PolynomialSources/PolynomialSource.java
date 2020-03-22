@@ -21,6 +21,15 @@ public class PolynomialSource extends Source {
         }
     }
 
+    public void clear(Set<Pair<Double,Double>> points) {
+        pointsKnown.clear();
+        newtonCoefficients.clear();
+
+        for(Pair<Double,Double> point:points){
+            addPoint(point);
+        }
+    }
+
     /**
      * Generate data given the polynomial of the sensor. This is determined using Newton
      * interpolation. This function returns a byte (value in range [0,255])
@@ -59,7 +68,7 @@ public class PolynomialSource extends Source {
 
 
     @Override
-    public Object getDefiningFeatures() {
+    public List<Pair<Double,Double>> getDefiningFeatures() {
         return this.pointsKnown;
     }
 

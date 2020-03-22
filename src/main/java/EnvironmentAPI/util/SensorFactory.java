@@ -7,7 +7,7 @@ import org.jxmapviewer.viewer.GeoPosition;
 
 
 public class SensorFactory {
-    public static Sensor createSensor(PollutionEnvironment poll, Environment environment, GeoPosition position, int maxValue, int NoiseRatio){
+    public static Sensor createSensor(PollutionEnvironment poll, Environment environment, GeoPosition position, double maxValue, int NoiseRatio){
         return new Sensor(poll, environment, position, maxValue, NoiseRatio);
     }
 }

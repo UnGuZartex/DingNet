@@ -25,7 +25,6 @@ public class Simulation {
      */
     private InputProfile inputProfile;
 
-    private int counter = 0;
     /**
      * The Environment used in th simulation.
      */
@@ -172,11 +171,7 @@ public class Simulation {
                     this.getEnvironment().moveMote(mote, mote.getPath().getWayPoints().get(wayPointMap.get(mote)));
                 } else {wayPointMap.put(mote, wayPointMap.get(mote) + 1);}
             });
-        if(counter % 500 == 0) {
-            Pollenvironment.doStep(this.getEnvironment().getClock().getTime().toNanoOfDay(), this.getEnvironment());
-        }
-        counter++;
-
+        Pollenvironment.doStep(this.getEnvironment().getClock().getTime().toNanoOfDay(), this.getEnvironment());
         this.getEnvironment().getClock().tick(1);
     }
 

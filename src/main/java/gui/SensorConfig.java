@@ -11,6 +11,7 @@ public class SensorConfig {
     private final SimulationRunner simRunner;
     private final JFrame frame;
     private JPanel main;
+    private JPanel panel1;
 
     public SensorConfig(MainGUI parent, JFrame frame, SimulationRunner simRunner) {
         this.mainGUI = parent;

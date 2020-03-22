@@ -234,6 +234,7 @@ public class SimulationRunner {
             // Restore the initial positions after the run
             listener.update();
             listener.onEnd();
+
         }).start();
     }
 

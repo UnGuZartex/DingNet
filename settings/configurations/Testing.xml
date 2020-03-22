@@ -23,92 +23,6 @@
         <row>City-City-City-City-City-City-City</row>
     </characteristics>
     <motes>
-        <mote>
-            <devEUI>2974222889443647631</devEUI>
-            <location>
-                <waypoint id="55"/>
-            </location>
-            <transmissionPower>14</transmissionPower>
-            <spreadingFactor>11</spreadingFactor>
-            <energyLevel>20</energyLevel>
-            <movementSpeed>1.0</movementSpeed>
-            <startMovementOffset>0</startMovementOffset>
-            <periodSendingPacket>30</periodSendingPacket>
-            <startSendingOffset>10</startSendingOffset>
-            <sensors>
-                <sensor SensorType="IAQ"/>
-            </sensors>
-            <path/>
-        </mote>
-        <mote>
-            <devEUI>4537036368447151375</devEUI>
-            <location>
-                <waypoint id="56"/>
-            </location>
-            <transmissionPower>14</transmissionPower>
-            <spreadingFactor>11</spreadingFactor>
-            <energyLevel>20</energyLevel>
-            <movementSpeed>1.0</movementSpeed>
-            <startMovementOffset>0</startMovementOffset>
-            <periodSendingPacket>30</periodSendingPacket>
-            <startSendingOffset>2</startSendingOffset>
-            <sensors>
-                <sensor SensorType="IAQ"/>
-            </sensors>
-            <path/>
-        </mote>
-        <mote>
-            <devEUI>12468807477143478427</devEUI>
-            <location>
-                <waypoint id="58"/>
-            </location>
-            <transmissionPower>14</transmissionPower>
-            <spreadingFactor>11</spreadingFactor>
-            <energyLevel>20</energyLevel>
-            <movementSpeed>1.0</movementSpeed>
-            <startMovementOffset>0</startMovementOffset>
-            <periodSendingPacket>30</periodSendingPacket>
-            <startSendingOffset>13</startSendingOffset>
-            <sensors>
-                <sensor SensorType="IAQ"/>
-            </sensors>
-            <path/>
-        </mote>
-        <mote>
-            <devEUI>14084896803802132140</devEUI>
-            <location>
-                <waypoint id="620"/>
-            </location>
-            <transmissionPower>14</transmissionPower>
-            <spreadingFactor>12</spreadingFactor>
-            <energyLevel>20</energyLevel>
-            <movementSpeed>3.0</movementSpeed>
-            <startMovementOffset>0</startMovementOffset>
-            <periodSendingPacket>30</periodSendingPacket>
-            <startSendingOffset>3</startSendingOffset>
-            <sensors>
-                <sensor SensorType="IAQ"/>
-            </sensors>
-            <path>
-            </path>
-        </mote>
-        <mote>
-            <devEUI>4971753318158117358</devEUI>
-            <location>
-                <waypoint id="152"/>
-            </location>
-            <transmissionPower>14</transmissionPower>
-            <spreadingFactor>10</spreadingFactor>
-            <energyLevel>20</energyLevel>
-            <movementSpeed>1.0</movementSpeed>
-            <startMovementOffset>0</startMovementOffset>
-            <periodSendingPacket>30</periodSendingPacket>
-            <startSendingOffset>20</startSendingOffset>
-            <sensors>
-                <sensor SensorType="IAQ"/>
-            </sensors>
-            <path/>
-        </mote>
         <userMote>
             <devEUI>8450821791487460777</devEUI>
             <location>
@@ -144,7 +58,7 @@
                 <sensor SensorType="GPS"/>
             </sensors>
             <path/>
-            <userMoteState>false</userMoteState>
+            <userMoteState>true</userMoteState>
             <destination id="1"/>
         </userMote>
         <userMote>
@@ -163,7 +77,7 @@
                 <sensor SensorType="GPS"/>
             </sensors>
             <path/>
-            <userMoteState>false</userMoteState>
+            <userMoteState>true</userMoteState>
             <destination id="188"/>
         </userMote>
     </motes>

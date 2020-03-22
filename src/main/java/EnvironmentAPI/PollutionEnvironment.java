@@ -29,6 +29,7 @@ public class PollutionEnvironment {
     private int totalNumberTiles;
     private double diffuseFactor;
     private List<Source> sources;
+    private int counter = 0;
 
 
     PollutionEnvironment(int nTiles, double diffuseFactor, double timeStep) {
@@ -63,7 +64,11 @@ public class PollutionEnvironment {
     }
 
     public void doStep(double currentTime, Environment environment){
-        fluidUpdate(timeStep, currentTime, environment);
+        if (counter % 500 == 0) {
+            fluidUpdate(timeStep, currentTime, environment);
+            counter = 0;
+        }
+        counter++;
     }
 
     public Number provide(int i, int j) {

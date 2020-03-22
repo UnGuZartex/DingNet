@@ -1,8 +1,11 @@
 package EnvironmentAPI.Sensor;
 
 import EnvironmentAPI.PollutionEnvironment;
+import EnvironmentAPI.util.OpenSimplex2S;
 import iot.Environment;
 import org.jxmapviewer.viewer.GeoPosition;
+
+import java.util.Random;
 
 public class Sensor {
 
@@ -11,6 +14,7 @@ public class Sensor {
     private int NoiseRatio;
     private PollutionEnvironment poll;
     private Environment environment;
+    private OpenSimplex2S noise;
 
 
 
@@ -20,6 +24,8 @@ public class Sensor {
         this.NoiseRatio = NoiseRatio;
         this.poll = poll;
         this.environment = environment;
+        Random rand = new Random();
+        this.noise = new OpenSimplex2S(rand.nextLong());
     }
 
 
@@ -35,7 +41,9 @@ public class Sensor {
         return NoiseRatio;
     }
 
+    public Environment getEnvironment() { return environment;}
+
     public double generateData(){
-        return poll.getDensity(position, environment, maxValue);
+        return NoiseRatio*noise.noise3_XYBeforeZ(position.getLatitude(), position.getLongitude(), environment.getClock().getTime().toSecondOfDay()) + poll.getDensity(position, environment, maxValue);
     }
 }

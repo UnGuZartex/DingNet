@@ -1,6 +1,7 @@
 package gui;
 
 import EnvironmentAPI.GeneralSources.FunctionSources.FunctionSource;
+import EnvironmentAPI.GeneralSources.PolynomialSources.PolynomialSource;
 import EnvironmentAPI.GeneralSources.Source;
 
 import EnvironmentAPI.util.SourceFactory;
@@ -12,6 +13,7 @@ import gui.util.GUIUtil;
 import iot.Environment;
 import iot.SimulationRunner;
 
+import org.apache.commons.collections4.list.SetUniqueList;
 import org.jfree.chart.ChartPanel;
 
 import org.jxmapviewer.JXMapViewer;
@@ -37,6 +39,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -57,6 +60,13 @@ public class PollutionConfig {
     private JTextField maxX;
     private JButton redrawGraphButton;
     private JFormattedTextField functionTextField;
+    private JList list2;
+    private JFormattedTextField pollTextField;
+    private JButton addToList;
+    private JFormattedTextField timeField;
+    private JLabel pollutionField;
+    private JButton deleteButton;
+
     private SimulationRunner simRunner;
 
     private List<Source> remainingList;
@@ -68,6 +78,8 @@ public class PollutionConfig {
     protected JXMapViewer mapViewer = new JXMapViewer();
     protected TileFactoryInfo info = new OSMTileFactoryInfo();
     protected DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+
+    private List<Pair<Double,Double>> data = SetUniqueList.setUniqueList(new ArrayList<Pair<Double,Double>>());
 
     public PollutionConfig(MainGUI parent, JFrame frame, SimulationRunner simRunner) {
         this.mainGUI = parent;
@@ -117,9 +129,27 @@ public class PollutionConfig {
             }
         });
 
+        deleteButton.addActionListener(e -> {
+            if (!list2.isSelectionEmpty()) {
+                data.remove(list2.getSelectedIndex());
+                list2.setListData(data.toArray());
+            }
+        });
+
+        addToList.addActionListener(e -> {
+            try {
+                data.add(new Pair<Double, Double>(Double.parseDouble(timeField.getText()), Double.parseDouble(pollTextField.getText())));
+                list2.setListData(data.toArray());
+            }
+            catch (Exception error) {
+                JOptionPane.showMessageDialog(null, "Invalid input " + error.getMessage().toLowerCase(),
+                    "Warning: invalid input", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
 
         addFunctionalSensorButton.addActionListener(e -> {
-            Source newSource = SourceFactory.createFunctionSource("0", new GeoPosition(0,0), TimeUnit.MINUTES);
+            Source newSource = SourceFactory.createFunctionSource("0",  environment.getMapCenter(), TimeUnit.MINUTES);
             remainingList.add(newSource);
             list1.setListData(remainingList.toArray());
 
@@ -129,7 +159,7 @@ public class PollutionConfig {
             Pair<Double,Double> DefaultPoint = new Pair<Double,Double>(0.0,0.0);
             List<Pair<Double,Double>> points = new ArrayList<>();
             points.add(DefaultPoint);
-            Source newSource = SourceFactory.createPolynomialSource(points, new GeoPosition(0,0), TimeUnit.MINUTES);
+            Source newSource = SourceFactory.createPolynomialSource(points, environment.getMapCenter(), TimeUnit.MINUTES);
             remainingList.add(newSource);
             list1.setListData(remainingList.toArray());
 
@@ -179,6 +209,7 @@ public class PollutionConfig {
         }
     }
 
+
     private class SharedListSelectionHandler implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
@@ -187,12 +218,26 @@ public class PollutionConfig {
                 PositionText.setValue(Chosen.getPosition());
                 TimeUnitText.setValue(Chosen.getTimeUnit());
                 typeText.setValue(Chosen.getType());
-                if (Chosen.getType() == "FunctionSource") {
+                if (Chosen.getType().equals("FunctionSource")) {
                     functionTextField.setValue(Chosen.getDefiningFeatures());
                     functionTextField.setEnabled(true);
-                } else {
-                    functionTextField.setValue("");
-                    functionTextField.setEnabled(false);
+                    list2.setListData(new Object[]{});
+                    list2.setEnabled(false);
+                    deleteButton.setEnabled(false);
+                    addToList.setEnabled(false);
+
+                } else if (Chosen.getType().equals("PolynomialSource")) {
+                    data.clear();
+                    list2.setEnabled(true);
+                    deleteButton.setEnabled(true);
+                    addToList.setEnabled(true);
+                    List<Pair<Double,Double>> newData = (List<Pair<Double, Double>>) Chosen.getDefiningFeatures();
+                    for (Pair<Double,Double> point : newData) {
+                        data.add(new Pair<Double,Double>(point.getLeft(),point.getRight()));
+                    }
+                    System.out.println(data);
+                    list2.setListData(data.toArray());
+
                 }
                 refresh();
                 setSourceFunction();
@@ -228,6 +273,12 @@ public class PollutionConfig {
             if (toChange.getType().equals("FunctionSource")) {
                 FunctionSource source = (FunctionSource) toChange;
                 source.setFunction(functionTextField.getText());
+            }
+            else if (toChange.getType().equals("PolynomialSource")) {
+                PolynomialSource source = (PolynomialSource) toChange;
+                HashSet resulting = new HashSet();
+                resulting.addAll(data);
+                source.clear(resulting);
             }
         }
     }
