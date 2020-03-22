@@ -145,13 +145,18 @@ public class SensorConfig {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             try {
-                Sensor Chosen = remainingList.get(list1.getSelectedIndex());
-                positionText.setValue(Chosen.getPosition());
-                MaxValueText.setValue(Chosen.getMaxValue());
-                NoiseRatioText.setValue(Chosen.getNoiseRatio());
+                if (!list1.isSelectionEmpty()) {
+                    Sensor Chosen = remainingList.get(list1.getSelectedIndex());
+                    positionText.setValue(Chosen.getPosition());
+                    MaxValueText.setValue(Chosen.getMaxValue());
+                    NoiseRatioText.setValue(Chosen.getNoiseRatio());
+                }
+                else {
+                    positionText.setValue("");
+                    MaxValueText.setValue("");
+                    NoiseRatioText.setValue("");
+                }
                 refresh();
-
-
             }
             catch (Exception ex) {
                 positionText.setValue("");

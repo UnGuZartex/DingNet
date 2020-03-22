@@ -64,7 +64,6 @@ public class SensorEnvironmentPainter extends AbstractPainter<JXMapViewer> {
 
 
                 float airQuality = (float) pollutionEnv.getDataFromSensors(middle);
-                //System.out.println(airQuality);
                 g.setColor(this.getColor(airQuality));
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, GUISettings.TRANSPARENCY_POLLUTIONGRID));
                 g.fill(new Rectangle2D.Double(topLeft.getX(), topLeft.getY(),

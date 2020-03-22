@@ -30,12 +30,12 @@ public class SensorPainter extends AbstractPainter<JXMapViewer> {
         g = (Graphics2D) g.create();
         Rectangle rect = jxMapViewer.getViewportBounds();
         g.translate(-rect.x, -rect.y);
-        List<Sensor> sourceList = pollutionEnv.getSensors();
-        for(Sensor source : sourceList){
-            float airQuality = (float) (source.generateData()/255);
+        List<Sensor> sensorList = pollutionEnv.getSensors();
+        for(Sensor sensor : sensorList){
+            float airQuality = (float) (sensor.generateData()/pollutionEnv.getMaxOfSensors());
             g.setColor(getColor(airQuality));
 
-            Point2D point = jxMapViewer.getTileFactory().geoToPixel(source.getPosition(), jxMapViewer.getZoom());
+            Point2D point = jxMapViewer.getTileFactory().geoToPixel(sensor.getPosition(), jxMapViewer.getZoom());
 
             int x = (int) (point.getX()-5);
             int y = (int) (point.getY()-5);

@@ -67,7 +67,14 @@ public class Sensor {
      * @return pollution at the sensors position affected by noise
      */
     public double generateData(){
-        return NoiseRatio*noise.noise3_XYBeforeZ(position.getLatitude(), position.getLongitude(), environment.getClock().getTime().toSecondOfDay()) + poll.getDensity(position, environment, maxValue);
+        double value = NoiseRatio*noise.noise3_XYBeforeZ(position.getLatitude(), position.getLongitude(), environment.getClock().getTime().toSecondOfDay()) + poll.getDensity(position, environment, maxValue);
+        if (value >= maxValue) {
+            return maxValue;
+        }
+        if (value < 0) {
+            return 0;
+        }
+       return value;
     }
 
 
