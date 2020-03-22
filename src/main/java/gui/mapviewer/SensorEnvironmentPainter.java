@@ -1,7 +1,6 @@
 package gui.mapviewer;
 
 import EnvironmentAPI.SensorEnvironment;
-import EnvironmentAPI.util.EnvSettings;
 import gui.util.GUISettings;
 import iot.Environment;
 import org.jxmapviewer.JXMapViewer;
@@ -14,13 +13,12 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
+public class SensorEnvironmentPainter extends AbstractPainter<JXMapViewer> {
     private SensorEnvironment pollutionEnv;
     private Environment environment;
-    private int counter = 0;
 
 
-    public PollutionEnvironmentPainter(Environment environment, SensorEnvironment pollutionEnv) {
+    public SensorEnvironmentPainter(Environment environment, SensorEnvironment pollutionEnv) {
         this.setAntialiasing(GUISettings.USE_ANTIALIASING);
         this.setCacheable(true);
 
@@ -65,7 +63,7 @@ public class PollutionEnvironmentPainter extends AbstractPainter<JXMapViewer> {
                     (int) ((j+.5) * maxY / DIVISION));
 
 
-                float airQuality = (float) pollutionEnv.getPoll().getDensity(middle, environment,EnvSettings.MAX_POLLUTION_SOURCES_VALUE)/EnvSettings.MAX_POLLUTION_SOURCES_VALUE;
+                float airQuality = (float) pollutionEnv.getDataFromSensors(middle);
                 g.setColor(this.getColor(airQuality));
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, GUISettings.TRANSPARENCY_POLLUTIONGRID));
                 g.fill(new Rectangle2D.Double(topLeft.getX(), topLeft.getY(),

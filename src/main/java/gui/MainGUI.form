@@ -90,7 +90,13 @@
           <component id="8b3f6" class="javax.swing.JButton" binding="configureEnvironmentButton">
             <constraints/>
             <properties>
-              <text value="Configure"/>
+              <text value="Configure Sources"/>
+            </properties>
+          </component>
+          <component id="70027" class="javax.swing.JButton" binding="configureSensorsButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Configure Sensors"/>
             </properties>
           </component>
           <hspacer id="def34">
@@ -859,22 +865,16 @@
                             <constraints/>
                             <properties/>
                           </component>
-                          <component id="97ff1" class="javax.swing.JLabel">
+                          <component id="840ad" class="javax.swing.JLabel">
                             <constraints/>
                             <properties>
-                              <text value="Noise Ratio"/>
+                              <text value="Heatmap view: "/>
                             </properties>
                           </component>
-                          <component id="5c3ed" class="javax.swing.JSlider" binding="NoiseSlider">
+                          <component id="d5ca" class="javax.swing.JComboBox" binding="environmentChoice">
                             <constraints/>
                             <properties>
-                              <majorTickSpacing value="1"/>
-                              <maximum value="20"/>
-                              <minorTickSpacing value="1"/>
-                              <paintLabels value="true"/>
-                              <paintTicks value="true"/>
-                              <snapToTicks value="true"/>
-                              <value value="1"/>
+                              <model/>
                             </properties>
                           </component>
                           <hspacer id="4122d">

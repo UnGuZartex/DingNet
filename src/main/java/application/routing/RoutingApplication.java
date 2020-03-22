@@ -78,7 +78,7 @@ public class RoutingApplication extends Application {
         }
 
         // Use the routing algorithm to calculate the path for the mote
-        List<GeoPosition> routeMote = this.pathFinder.retrievePath(graph, motePosition, destinationPosition, clock);
+        List<GeoPosition> routeMote = this.pathFinder.retrievePath(graph, motePosition, destinationPosition);
         this.routes.put(deviceEUI, routeMote);
 
         // Compose the reply packet: up to 24 bytes for now, which can store 3 geopositions (in float)

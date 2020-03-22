@@ -30,7 +30,7 @@ public class AStarRouter implements PathFinder {
 
 
     @Override
-    public List<GeoPosition> retrievePath(GraphStructure graph, GeoPosition begin, GeoPosition end, GlobalClock clock) {
+    public List<GeoPosition> retrievePath(GraphStructure graph, GeoPosition begin, GeoPosition end) {
         long beginWaypointId = graph.getClosestWayPointWithinRange(begin, DISTANCE_THRESHOLD_POSITIONS)
             .orElseThrow(() -> new IllegalStateException("The mote position retrieved from the message is not located at a waypoint."));
         long endWaypointId = graph.getClosestWayPointWithinRange(end, DISTANCE_THRESHOLD_POSITIONS)
@@ -45,7 +45,7 @@ public class AStarRouter implements PathFinder {
             .forEach(entry -> {
                 fringe.add(new FringeEntry(
                     List.of(entry.getKey()),
-                    this.heuristic.calculateHeuristic(new HeuristicEntry(graph, entry.getValue(), end), clock.getTime().toNanoOfDay())
+                    this.heuristic.calculateHeuristic(new HeuristicEntry(graph, entry.getValue(), end))
                 ));
                 visitedConnections.add(entry.getKey());
             });
@@ -71,7 +71,7 @@ public class AStarRouter implements PathFinder {
                     extendedPath.add(connId);
 
                     double newHeuristicValue = current.heuristicValue
-                        + this.heuristic.calculateHeuristic(new HeuristicEntry(graph, graph.getConnection(connId), end), clock.getTime().toNanoOfDay());
+                        + this.heuristic.calculateHeuristic(new HeuristicEntry(graph, graph.getConnection(connId), end));
 
                     fringe.add(new FringeEntry(extendedPath, newHeuristicValue));
                     visitedConnections.add(connId);

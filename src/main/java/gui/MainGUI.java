@@ -37,6 +37,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
@@ -105,7 +106,8 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
     private JButton openPollutionEnvironmentButton;
     private JButton savePollutionConfigButton;
     private JButton configureEnvironmentButton;
-    private JSlider NoiseSlider;
+    private JComboBox environmentChoice;
+    private JButton configureSensorsButton;
 
     private static JXMapViewer mapViewer = new JXMapViewer();
     // Create a TileFactoryInfo for OpenStreetMap
@@ -184,6 +186,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         openPollutionEnvironmentButton.addActionListener(new OpenPollutionEnvironmentListener());
         savePollutionConfigButton.addActionListener(new SavePollutionConfigurationListener());
         configureEnvironmentButton.addActionListener(new ConfigurePollutionActionListener(this, simulationRunner));
+        configureSensorsButton.addActionListener(new ConfigureSensorActionListener(this, simulationRunner));
 
 
 
@@ -270,9 +273,12 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             e -> this.simulationSpeed.setValue(GUISettings.BASE_VISUALIZATION_SPEED * speedSlider.getValue())
         );
 
-        NoiseSlider.addChangeListener(
-            e -> this.simulationRunner.getEnvironmentAPI().setNoiseRatio(NoiseSlider.getValue())
-        );
+        environmentChoice.addItem("Pollution sensor view");
+        environmentChoice.addItem("Pollution sources view");
+
+        environmentChoice.addActionListener((ActionEvent e) -> loadMap(true));
+
+
     }
 
 
@@ -486,17 +492,28 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             mapViewer.setAddressLocation(environment.getMapCenter());
             mapViewer.setZoom(5);
         }
-
-        mapViewer.setOverlayPainter(new CompoundPainterBuilder()
-            .withEnvironmentAPI(environment, simulationRunner.getEnvironmentAPI())
-            //.withPollutionGrid(environment, simulationRunner.getPollutionGrid())
-            .withRoutingPath(environment, simulationRunner.getRoutingApplication())
-            .withMotePaths(environment)
-            .withMotes(environment)
-            .withGateways(environment)
-            .withSensors(environment, simulationRunner.getEnvironmentAPI())
-            .build()
-        );
+        if (Objects.requireNonNull(environmentChoice.getSelectedItem()).toString().equals("Pollution sources view")) {
+            mapViewer.setOverlayPainter(new CompoundPainterBuilder()
+                .withEnvironmentAPI(environment, simulationRunner.getEnvironmentAPI())
+                .withSources(environment, simulationRunner.getEnvironmentAPI())
+                .withRoutingPath(environment, simulationRunner.getRoutingApplication())
+                .withMotePaths(environment)
+                .withMotes(environment)
+                .withGateways(environment)
+                .build()
+            );
+        }
+        else {
+            mapViewer.setOverlayPainter(new CompoundPainterBuilder()
+                .withEnvironmentAPISensor(environment, simulationRunner.getEnvironmentAPI())
+                .withRoutingPath(environment, simulationRunner.getRoutingApplication())
+                .withMotePaths(environment)
+                .withMotes(environment)
+                .withGateways(environment)
+                .withSensors(environment, simulationRunner.getEnvironmentAPI())
+                .build()
+            );
+        }
 
         map.add(mapViewer);
 
@@ -794,6 +811,32 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         }
     }
 
+    private class ConfigureSensorActionListener implements ActionListener {
+        private MainGUI gui;
+        private SimulationRunner simulationRunner;
+
+
+        ConfigureSensorActionListener(MainGUI gui, SimulationRunner simRunner) {
+            this.gui = gui;
+            this.simulationRunner = simRunner;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (simulationRunner.getRoutingApplication() == null){
+                showNoConfigurationSelectedError();
+                return;
+            }
+            JFrame frame = new JFrame("Configure Sensors");
+            SensorConfig sensorConfig = new SensorConfig(gui, frame, simulationRunner);
+            frame.setContentPane(sensorConfig.getMainPanel());
+            frame.setMinimumSize(sensorConfig.getMainPanel().getMinimumSize());
+            frame.setPreferredSize(sensorConfig.getMainPanel().getPreferredSize());
+            frame.setVisible(true);
+
+        }
+    }
+
     private class OpenConfigurationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
@@ -931,7 +974,12 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
                 frame.setMinimumSize(new Dimension(300, 300));
                 frame.setVisible(true);
 
-                simulationRunner.loadEnvironmentFromFile(fc.getSelectedFile());
+                try {
+                    simulationRunner.loadEnvironmentFromFile(fc.getSelectedFile());
+                }
+                catch (IllegalStateException e) {
+                    showNoValidFileSelectedError(e.getMessage());
+                }
 
                 frame.dispose();
                 loadMap(false);
@@ -1027,6 +1075,11 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
             "Warning: no input profile selected", JOptionPane.ERROR_MESSAGE);
     }
 
+    private void showNoValidFileSelectedError(String message) {
+        JOptionPane.showMessageDialog(null, message,
+            "Warning: invalid file!", JOptionPane.ERROR_MESSAGE);
+    }
+
     private void updateGeneralResultsMote(Mote mote, int run) {
         this.usedEnergy = 0;
         this.packetsLost = 0;
@@ -1077,7 +1130,7 @@ public class MainGUI extends JFrame implements SimulationUpdateListener, Refresh
         configureButton.setEnabled(b);
         savePollutionConfigButton.setEnabled(b);
         configureEnvironmentButton.setEnabled(b);
-        NoiseSlider.setEnabled(b);
+        configureSensorsButton.setEnabled(b);
     }
 
     // endregion

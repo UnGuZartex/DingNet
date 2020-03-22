@@ -1,6 +1,6 @@
 package application.routing.heuristic;
 
-import EnvironmentAPI.PollutionEnvironment;
+import EnvironmentAPI.SensorEnvironment;
 import application.pollution.PollutionGrid;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.MapHelper;
@@ -11,20 +11,20 @@ import util.MapHelper;
  */
 public class SimplePollutionHeuristic implements RoutingHeuristic {
     private final PollutionGrid pollutionGrid;
-    private final PollutionEnvironment env;
+    private final SensorEnvironment env;
 
-    public SimplePollutionHeuristic(PollutionGrid pollutionGrid, PollutionEnvironment env) {
+    public SimplePollutionHeuristic(PollutionGrid pollutionGrid, SensorEnvironment env) {
         this.pollutionGrid = pollutionGrid;
         this.env = env;
     }
 
     @Override
-    public double calculateHeuristic(HeuristicEntry entry, long timeInNano) {
+    public double calculateHeuristic(HeuristicEntry entry) {
         GeoPosition begin = entry.graph.getWayPoint(entry.connection.getFrom());
         GeoPosition end = entry.graph.getWayPoint(entry.connection.getTo());
 
       //  double pollutionValue = this.pollutionGrid.getPollutionLevel(MapHelper.meanPosition(begin, end)).getPollutionFactor();
-        double pollutionValue = this.env.getDataBetweenPoints(begin,end, 0.1, timeInNano);
+        double pollutionValue = this.env.getDataBetweenPoints(begin,end, 0.1);
 
         double factor = (0.0 <= pollutionValue && pollutionValue < 0.2) ? 1 :
                         (0.2 <= pollutionValue && pollutionValue < 0.4) ? 2 :

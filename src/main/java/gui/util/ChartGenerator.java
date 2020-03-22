@@ -1,6 +1,6 @@
 package gui.util;
 
-import EnvironmentAPI.GeneralSensor.Sensor;
+import EnvironmentAPI.GeneralSources.Source;
 import gui.mapviewer.SensorDataPainter;
 import iot.Environment;
 import iot.SimulationRunner;
@@ -38,7 +38,6 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -468,18 +467,17 @@ public class ChartGenerator {
         return new ChartPanel(chart);
     }
 
-    public static ChartPanel generateSensorGraph(Sensor chosen) {
+    public static ChartPanel generateSourceGraph(Source chosen, int xmax) {
 
-        int MaxTime = GUISettings.MAX_GRAPH_TIME;
         int SAMPLERATE = GUISettings.SAMPLERATE;
         DefaultXYDataset ds = new DefaultXYDataset();
 
 
         double SampleLength = 1.0/SAMPLERATE;
 
-        double[][] data = new double[2][MaxTime*SAMPLERATE];
+        double[][] data = new double[2][(xmax)*SAMPLERATE];
         int index = 0;
-        for(double i = 0; i <= MaxTime-SampleLength; i += SampleLength){
+        for(double i = 0; i <= xmax-SampleLength; i += SampleLength){
             double time = chosen.getTimeUnit().convertToNano(i);
             data[1][index] = chosen.generateData(time);
             data[0][index] = i;

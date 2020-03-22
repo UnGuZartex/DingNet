@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Environment>
-    <Sensors>
-        <PolynomialSensor>
+    <Sources>
+        <PolynomialSource>
             <Position>50.873566, 4.696793</Position>
-            <MaximumValue>255.0</MaximumValue>
             <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>1</NoiseRatio>
             <Point>1.0 ,122.0</Point>
             <Point>2.0 ,255.0</Point>
-        </PolynomialSensor>
-        <PolynomialSensor>
+        </PolynomialSource>
+        <PolynomialSource>
             <Position>50.8735, 4.696793</Position>
-            <MaximumValue>255.0</MaximumValue>
             <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>1</NoiseRatio>
             <Point>1.0 ,122.0</Point>
             <Point>2.0 ,2.0</Point>
             <Point>4.0 ,205.0</Point>
-        </PolynomialSensor>
-        <FunctionSensor>
+        </PolynomialSource>
+        <FunctionSource>
             <Position>50.885021, 4.684924</Position>
-            <MaximumValue>255.0</MaximumValue>
             <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>1</NoiseRatio>
             <Function>255*sin(t)</Function>
-        </FunctionSensor>
-        <FunctionSensor>
+        </FunctionSource>
+        <FunctionSource>
             <Position>50.878599, 4.715854</Position>
-            <MaximumValue>255.0</MaximumValue>
             <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>5</NoiseRatio>
             <Function>50*sin(t*3)</Function>
-        </FunctionSensor>
-        <FunctionSensor>
+        </FunctionSource>
+        <FunctionSource>
             <Position>50.889058, 4.701625</Position>
-            <MaximumValue>255.0</MaximumValue>
             <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>1</NoiseRatio>
             <Function>20*exp(-((t-5)^2/2*4))</Function>
-        </FunctionSensor>
-        <FunctionSensor>
+        </FunctionSource>
+        <FunctionSource>
             <Position>50.889058, 4.701625</Position>
-            <MaximumValue>255.0</MaximumValue>
             <TimeUnit>MINUTES</TimeUnit>
-            <NoiseRatio>1</NoiseRatio>
             <Function>log(t)</Function>
-        </FunctionSensor>
+        </FunctionSource>
+        <FunctionSource>
+            <Position>50.889058, 4.701625</Position>
+            <TimeUnit>MINUTES</TimeUnit>
+            <Function>gauss(5,4)</Function>
+        </FunctionSource>
+    </Sources>
+    <Sensors>
+        <Sensor>
+            <Position>50.889058, 4.701625</Position>
+            <MaxValue>255.0</MaxValue>
+            <NoiseRatio>0</NoiseRatio>
+        </Sensor>
+        <Sensor>
+            <Position>50.867058, 4.701625</Position>
+            <MaxValue>255.0</MaxValue>
+            <NoiseRatio>0</NoiseRatio>
+        </Sensor>
+        <Sensor>
+            <Position>50.878831411546244, 4.714336395263672</Position>
+            <MaxValue>255.0</MaxValue>
+            <NoiseRatio>0</NoiseRatio>
+        </Sensor>
+        <Sensor>
+            <Position>50.878777255570405, 4.683952331542969</Position>
+            <MaxValue>255.0</MaxValue>
+            <NoiseRatio>5</NoiseRatio>
+        </Sensor>
     </Sensors>
 </Environment>

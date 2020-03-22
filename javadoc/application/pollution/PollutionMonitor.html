@@ -228,7 +228,7 @@ extends <a href="../Application.html" title="class in application">Application</
 <td class="colFirst"><code>private double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#determinePollutionLevelFromIAQData(java.util.Map)">determinePollutionLevelFromIAQData</a></span>&#8203;(java.util.Map&lt;<a href="../../iot/networkentity/MoteSensor.html" title="enum in iot.networkentity">MoteSensor</a>,&#8203;java.lang.Byte[]&gt;&nbsp;sensorData)</code></th>
 <td class="colLast">
-<div class="block">Determine the pollution level from a byte array, solely using the data from an IAQ sensor.</div>
+<div class="block">Determine the pollution level from a byte array, solely using the data from an IAQ source.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -324,12 +324,12 @@ extends <a href="../Application.html" title="class in application">Application</
 <li class="blockList">
 <h4>determinePollutionLevelFromIAQData</h4>
 <pre class="methodSignature">private&nbsp;double&nbsp;determinePollutionLevelFromIAQData&#8203;(java.util.Map&lt;<a href="../../iot/networkentity/MoteSensor.html" title="enum in iot.networkentity">MoteSensor</a>,&#8203;java.lang.Byte[]&gt;&nbsp;sensorData)</pre>
-<div class="block">Determine the pollution level from a byte array, solely using the data from an IAQ sensor.</div>
+<div class="block">Determine the pollution level from a byte array, solely using the data from an IAQ source.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>sensorData</code> - The considered data.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>A pollution level according to the IAQ sensor reading (or 0.0 if no IAQ sensor data is present).</dd>
+<dd>A pollution level according to the IAQ source reading (or 0.0 if no IAQ source data is present).</dd>
 </dl>
 </li>
 </ul>

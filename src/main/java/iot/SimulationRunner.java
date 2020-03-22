@@ -1,6 +1,7 @@
 package iot;
 
-import EnvironmentAPI.PollutionEnvironment;
+import EnvironmentAPI.Sensor.Sensor;
+import EnvironmentAPI.SensorEnvironment;
 import EnvironmentAPI.util.EnvironmentReader;
 import EnvironmentAPI.util.EnvironmentWriter;
 import application.pollution.PollutionGrid;
@@ -9,12 +10,12 @@ import application.routing.AStarRouter;
 import application.routing.RoutingApplication;
 import application.routing.heuristic.SimplePollutionHeuristic;
 import gui.MainGUI;
-import gui.util.GUISettings;
 import iot.mqtt.MQTTClientFactory;
 import iot.networkentity.Gateway;
 import iot.networkentity.Mote;
 import iot.networkentity.NetworkServer;
 import org.jetbrains.annotations.NotNull;
+import org.jxmapviewer.viewer.GeoPosition;
 import selfadaptation.adaptationgoals.IntervalAdaptationGoal;
 import selfadaptation.adaptationgoals.ThresholdAdaptationGoal;
 import selfadaptation.feedbackloop.GenericFeedbackLoop;
@@ -51,7 +52,7 @@ public class SimulationRunner {
     private PollutionMonitor pollutionMonitor;
     private NetworkServer networkServer;
 
-    private PollutionEnvironment pollutionEnvironment;
+    private SensorEnvironment sensorEnvironment;
 
 
 
@@ -71,7 +72,7 @@ public class SimulationRunner {
 
         simulation = new Simulation();
         inputProfiles = loadInputProfiles();
-        this.pollutionEnvironment = new PollutionEnvironment();
+        this.sensorEnvironment = new SensorEnvironment();
 
         // Loading all the algorithms
         GenericFeedbackLoop noAdaptation = new GenericFeedbackLoop("No Adaptation") {
@@ -191,6 +192,8 @@ public class SimulationRunner {
      * Setup of applications/servers/clients before each run.
      */
     private void setupSimulationRunner() {
+        getEnvironmentAPI().getPoll().clear();
+
         // Remove previous pollution measurements
         pollutionGrid.clean();
         routingApplication.clean();
@@ -221,7 +224,7 @@ public class SimulationRunner {
         new Thread(() -> {
             long simulationStep = 0;
             while (!this.isSimulationFinished()) {
-                this.simulation.simulateStep();
+                this.simulation.simulateStep(getEnvironmentAPI().getPoll());
                 // Visualize every x seconds
                 if (simulationStep++ % (updateFrequency.intValue() * 1000) == 0) {
                     listener.update();
@@ -231,6 +234,7 @@ public class SimulationRunner {
             // Restore the initial positions after the run
             listener.update();
             listener.onEnd();
+
         }).start();
     }
 
@@ -245,6 +249,7 @@ public class SimulationRunner {
      * @param fn A callback function which is invoked after every executed single run.
      */
     public void totalRun(@NotNull Consumer<Pair<Integer, Integer>> fn) {
+
         int nrOfRuns = simulation.getInputProfile()
             .orElseThrow(() -> new IllegalStateException("No input profile selected before running the simulation"))
             .getNumberOfRuns();
@@ -256,7 +261,7 @@ public class SimulationRunner {
 
             for (int i = 0; i < nrOfRuns; i++) {
                 while (!simulation.isFinished()) {
-                    this.simulation.simulateStep();
+                    this.simulation.simulateStep(sensorEnvironment.getPoll());
                 }
 
                 fn.accept(new Pair<>(i+1, nrOfRuns));
@@ -327,7 +332,7 @@ public class SimulationRunner {
     }
 
     public void savePollutionConfiguration(File file) {
-        EnvironmentWriter.saveEnvironment(this.pollutionEnvironment.getSensors(), file);
+        EnvironmentWriter.saveEnvironment(this.sensorEnvironment.getPoll().getSources(), this.sensorEnvironment.getSensors(), file);
     }
 
 
@@ -353,16 +358,16 @@ public class SimulationRunner {
     private void setupApplications() {
         this.pollutionMonitor = new PollutionMonitor(this.getEnvironment(), this.pollutionGrid);
         this.routingApplication = new RoutingApplication(
-            new AStarRouter(new SimplePollutionHeuristic(pollutionGrid,pollutionEnvironment)), getEnvironment().getGraph()
+            new AStarRouter(new SimplePollutionHeuristic(pollutionGrid, sensorEnvironment)), getEnvironment().getGraph()
         , this.environment.getClock());
     }
 
-    public PollutionEnvironment getEnvironmentAPI() {
-        return this.pollutionEnvironment;
+    public SensorEnvironment getEnvironmentAPI() {
+        return this.sensorEnvironment;
     }
 
-    public void setPollutionEnvironment(PollutionEnvironment env) {
-        this.pollutionEnvironment = env;
+    public void setSensorEnvironment(SensorEnvironment env) {
+        this.sensorEnvironment = env;
     }
 
     // endregion

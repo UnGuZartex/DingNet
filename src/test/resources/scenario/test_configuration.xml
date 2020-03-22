@@ -36,7 +36,7 @@
             <periodSendingPacket>20</periodSendingPacket>
             <startSendingOffset>1</startSendingOffset>
             <sensors>
-                <sensor SensorType="CARBON_DIOXIDE"/>
+                <source SensorType="CARBON_DIOXIDE"/>
             </sensors>
             <path>
                 <connection id="1"/>
