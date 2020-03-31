@@ -476,14 +476,14 @@ public class ChartGenerator {
         double SampleLength = 1.0/SAMPLERATE;
 
         double[][] data = new double[2][(xmax)*SAMPLERATE];
-        int index = 0;
-        for(double i = 0; i <= xmax-SampleLength; i += SampleLength){
-            double time = chosen.getTimeUnit().convertToNano(i);
-            data[1][index] = chosen.generateData(time);
-            data[0][index] = i;
-            index++;
-        }
 
+        double time = 0;
+        for (int i = 0; i < data[0].length; i++) {
+            double convertedTime = chosen.getTimeUnit().convertToNano(time);
+            data[1][i] = chosen.generateData(convertedTime);
+            data[0][i] = time;
+            time += SampleLength;
+        }
 
 
         ds.addSeries("Pollution", data);

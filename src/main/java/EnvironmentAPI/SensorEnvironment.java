@@ -5,6 +5,7 @@ import EnvironmentAPI.Sensor.Sensor;
 import EnvironmentAPI.util.EnvSettings;
 import EnvironmentAPI.util.SensorFactory;
 import gui.util.GUISettings;
+import iot.Environment;
 import org.jxmapviewer.viewer.GeoPosition;
 import util.MapHelper;
 
@@ -164,5 +165,11 @@ public class SensorEnvironment {
         return MapHelper.distance(position, sensor.getPosition());
     }
 
+    public void setEnvironment(Environment environment) {
+        for (Sensor sensor:sensors) {
+            sensor.setEnvironment(environment);
+        }
+
+    }
 
 }

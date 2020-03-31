@@ -360,6 +360,7 @@ public class SimulationRunner {
         this.routingApplication = new RoutingApplication(
             new AStarRouter(new SimplePollutionHeuristic(pollutionGrid, sensorEnvironment)), getEnvironment().getGraph()
         , this.environment.getClock());
+        this.getEnvironmentAPI().setEnvironment(this.environment);
     }
 
     public SensorEnvironment getEnvironmentAPI() {

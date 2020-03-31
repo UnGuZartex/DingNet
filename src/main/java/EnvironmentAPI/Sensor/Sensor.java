@@ -83,4 +83,7 @@ public class Sensor {
         return  "Sensor @" + getPosition();
     }
 
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
 }
