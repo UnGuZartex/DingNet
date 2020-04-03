@@ -28,6 +28,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.MouseInputListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +37,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +69,14 @@ public class SensorConfig {
         this.environment = mainGUI.getEnvironment();
         this.simRunner = simRunner;
         this.frame = frame;
+        NumberFormatter numberFormatter = new NumberFormatter();
+        NumberFormat doubleFieldFormatter = DecimalFormat.getInstance();
+        doubleFieldFormatter.setGroupingUsed(false);
+        numberFormatter.setFormat(doubleFieldFormatter);
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(
+            numberFormatter, numberFormatter, numberFormatter);
+        MaxValueText.setFormatterFactory(factory);
+
         remainingList = simRunner.getEnvironmentAPI().getSensors();
         list1.setListData(remainingList.toArray());
         MapPanel.setLayout(new BorderLayout(0, 0));
@@ -254,7 +266,8 @@ public class SensorConfig {
             int currentlyChanged = list1.getSelectedIndex();
             Sensor toChange = remainingList.get(currentlyChanged);
             toChange.setPosition(ToGeoPos(positionText.getText()));
-            toChange.setMaxValue(Double.parseDouble(MaxValueText.getText()));
+            String maxValue = MaxValueText.getText().replace(",", ".");
+            toChange.setMaxValue(Double.parseDouble(maxValue));
             toChange.setNoiseRatio(Integer.parseInt(NoiseRatioText.getText()));
             System.out.println(toChange.getMaxValue());
         }
