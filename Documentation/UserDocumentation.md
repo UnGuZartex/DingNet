@@ -109,6 +109,14 @@ This will add a blank sensor that can be modified by selecting it and changing t
 
 To delete a sensor, select the sensor you want to delete from the list and press the Delete Sensor-button.
 
+### Saving the current environment
+
+If the current environment of this runtime is an environment you want to keep, press Save at the top of the main screen:
+
+  ![Save](Images/SaveImage.png) 
+  
+This will give you the options to overwrite a file/create a new file with the current environment.
+
 ### Source restrictions
 
 !!!Only by following these restrictions correct workings of the simulator are guaranteed!!!
