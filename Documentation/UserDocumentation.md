@@ -27,7 +27,12 @@ DingNet uses the following libraries:
 
 ## How to setup/load a simulation configuration.
 
-To set up the environment refer to: 
+Because the simulator is build up using Dingnet, refer to the its userdocumentation to set up a configuration
+To set up the environment refer to: [DingNetSetup](https://people.cs.kuleuven.be/~danny.weyns/software/DingNet/resources/index.html)
+To add a cyclist, add a mote with the GPS type.
+
+TODO Marlon explain how the other aspects of the GUI work
+
 ## How to setup a Pollutionenvironment.
 
 First of all, a simulation configuration has to be loaded in, otherwise an error message will pop up.
