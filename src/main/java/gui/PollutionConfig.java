@@ -156,9 +156,7 @@ public class PollutionConfig {
         });
 
         addPolynomialSensorButton.addActionListener(e -> {
-            Pair<Double, Double> DefaultPoint = new Pair<Double, Double>(0.0, 0.0);
             List<Pair<Double, Double>> points = new ArrayList<>();
-            points.add(DefaultPoint);
             Source newSource = SourceFactory.createPolynomialSource(points, environment.getMapCenter(), TimeUnit.MINUTES);
             remainingList.add(newSource);
             list1.setListData(remainingList.toArray());

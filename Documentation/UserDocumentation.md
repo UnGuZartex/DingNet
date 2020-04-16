@@ -1,9 +1,33 @@
-# DingNet User Documentation
+# HeyCitI User Documentation
 
-In this file you'll find all the information needed to set up a simulation.
+## Building the simulator
+
+To build the simulator, simply run the command `mvn compile`. The generated source are placed in the `target` folder.
+The simulator can then be run with the following command: `mvn exec:java`.
+
+Alternatively, run the command `mvn package`. This will generate a jar file under the target directory: `HeyCitI-{version}-jar-with-dependencies.jar`.
+
+Similarly to the previously listed commands, `mvn test` runs the tests for the project.
+
+## Running the simulator
+
+Either run the jar file generated from the previous step, or use the maven exec plugin.
+<!-- A jar file is exported to the folder HeyCitIExe which also contains the correct file structure. Run the jar file to run the simulator.
+The simulator can also be started from the main method in the MainGUI class. -->
+
+
+
+## Libraries
+
+DingNet uses the following libraries:
+- AnnotationsDoclets (included in the lib folder, since it is not available online (yet))
+- jfreechart-1.5.0
+- jxmapviewer2-2.4
+- apache-commons-collection-4.4
+
 ## How to setup/load a simulation configuration.
-TODO
 
+To set up the environment refer to: 
 ## How to setup a Pollutionenvironment.
 
 First of all, a simulation configuration has to be loaded in, otherwise an error message will pop up.

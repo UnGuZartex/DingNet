@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class PolynomialSource extends Source {
     private List<List<Double>> newtonCoefficients  = new ArrayList<>();
-    private List<Pair<Double,Double>> pointsKnown;
+    private List<Pair<Double,Double>> pointsKnown = new ArrayList<>();
 
 
     public PolynomialSource(List<Pair<Double,Double>>points, GeoPosition position, TimeUnit unit) {
@@ -61,13 +61,13 @@ public class PolynomialSource extends Source {
     public double generateData(double timeinNano) {
         double dataAtTime;
         if (pointsKnown.size() <= EnvSettings.MAX_POINTS_NEWTON) {
-             dataAtTime = evaluatePolynomial(timeinNano);
-        }
-        else {
+            dataAtTime = evaluatePolynomial(timeinNano);
+        } else {
             dataAtTime = evaluateLinearly(timeinNano);
         }
         return dataAtTime;
     }
+
 
 
     /**
@@ -121,11 +121,14 @@ public class PolynomialSource extends Source {
      */
     private double evaluatePolynomial(double timeinNano) {
         double timeToEvaluate = timeUnit.convertFromNano(timeinNano);
+
         double totalValue = 0;
         for (int i = 0; i < newtonCoefficients.size(); i++)
         {
             totalValue += newtonCoefficients.get(i).get(0) * getPointsFromOrder(i, timeToEvaluate);
+
         }
+
         if (totalValue <= 0){
             totalValue = 0;
         }
@@ -139,8 +142,8 @@ public class PolynomialSource extends Source {
      * @return the pollution at that time
      */
     private Double getPointsFromOrder(int order, double timeToEvaluate) {
-        Double totalValue = pointsKnown.get(0).getLeft();
-        for(int i = 0; i < order; i++){
+        Double totalValue = timeToEvaluate - pointsKnown.get(0).getLeft();
+        for(int i = 1; i < order; i++){
             totalValue *= timeToEvaluate-pointsKnown.get(i).getLeft();
         }
         return totalValue;
